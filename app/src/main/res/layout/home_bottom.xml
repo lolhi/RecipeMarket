@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/recommend_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="InvalidId">
+
+    <ImageView
+        android:id="@+id/recommend_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/straw" />
+
+    <TextView
+        android:id="@+id/recommend_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_gravity="right"
+        android:text="딸기요리" />
+
+        <TextView
+            android:id="@+id/recommend_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:layout_gravity="right"
+            android:text="부제목" />
+        <ImageView
+            android:id="@+id/recommend_level"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="right"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_dashboard_black_24dp"/>
+
+</LinearLayout>
+</RelativeLayout>
