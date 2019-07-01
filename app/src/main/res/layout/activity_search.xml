@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:endColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:hint="검색어를 입력해주세요"
+            android:inputType="textPersonName"
+            android:startColor="#dce3d1"
+            android:state_enabled="false" />
+
+        <ImageView
+            android:id="@+id/search_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+
+       </RelativeLayout>
+</LinearLayout>
