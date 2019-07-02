@@ -30,6 +30,7 @@
         </activity>
         <activity android:name=".RecipeActivity_detail"/>
         <activity android:name=".SearchRayout"/>
+        <activity android:name=".Search_Detail_Layout"/>
     </application>
 
 </manifest>

@@ -104,7 +104,6 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
 
-                    ((Home_Recycle_Bottom)viewHolder).subtitle.setText("클릭성공");
 
 
                     Intent intent = new Intent(mContext, RecipeActivity_detail.class);
