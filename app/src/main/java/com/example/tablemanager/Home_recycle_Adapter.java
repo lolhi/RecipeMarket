@@ -107,6 +107,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
 
                     Intent intent = new Intent(mContext, RecipeActivity_detail.class);
+                    intent.putExtra("recipeTitle",item.getTitle() );
                     mContext.startActivity(intent);
                 }
             });

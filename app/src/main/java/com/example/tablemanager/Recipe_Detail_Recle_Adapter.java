@@ -27,8 +27,11 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter{
     private final int BODY = 2;
     private final int END =3;
 
-    public Recipe_Detail_Recle_Adapter(Context mContext){
+    String title;
+
+    public Recipe_Detail_Recle_Adapter(Context mContext,String title){
         this.mContext = mContext;
+        this.title = title;
       //  this.items = Arrays.asList(item);
 
     }
@@ -88,7 +91,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter{
 //
             ((Recipe_Recycle_Header)viewHolder).image.setImageResource(R.drawable.chick);
             ((Recipe_Recycle_Header)viewHolder).level.setImageResource(R.drawable.ic_home_black_24dp);
-            ((Recipe_Recycle_Header)viewHolder).title.setText("치킨");
+            ((Recipe_Recycle_Header)viewHolder).title.setText(title);
             ((Recipe_Recycle_Header)viewHolder).hash1.setText("#마시쪙");
             ((Recipe_Recycle_Header)viewHolder).hash2.setText("#사줘성현아");
             ((Recipe_Recycle_Header)viewHolder).calorie.setText("550cal");

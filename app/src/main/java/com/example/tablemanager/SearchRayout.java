@@ -7,11 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SearchRayout extends AppCompatActivity {
-
+    EditText search_edit;
         ImageView search_button;//오른쪽 상단 서치버튼
     static final String[] LIST_MENU_POPULAR = {"감자", "양파", "사랑아","그리운","내사랑아"} ; //두번째tap 배열
     static final String[] LIST_MENU_RECENT = {"아이야","그놈의","정들먹","이며","한건하려"} ; // 세번째tap 배열
@@ -35,9 +37,10 @@ public class SearchRayout extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
 
-            ListView listview ;
-            search_listview_adapter adapter;
 
+            ListView listview ;//요리별 어뎁터
+            search_listview_adapter adapter;
+            search_edit = findViewById(R.id.search_edit);
             // Adapter 생성
             adapter = new search_listview_adapter() ;
 
@@ -96,6 +99,21 @@ public class SearchRayout extends AppCompatActivity {
 
 
 
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // 코드 계속 ...
+
+                @Override
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+
+                    // get TextView's Text.
+                    String temp = "위치값" + position;
+                    Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+                    intent.putExtra("editText",temp);
+                    mContext.startActivity(intent);
+                    // TODO : use strText
+                }
+            }) ;
+
 
             listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 // 코드 계속 ...
@@ -117,8 +135,10 @@ public class SearchRayout extends AppCompatActivity {
                 public void onItemClick(AdapterView parent, View v, int position, long id) {
 
                     // get TextView's Text.
-                    String strText = (String) parent.getItemAtPosition(position) ;
-
+                    String temp = "위치값" + position;
+                    Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+                    intent.putExtra("editText",temp);
+                    mContext.startActivity(intent);
                     // TODO : use strText
                 }
             }) ;
@@ -130,7 +150,9 @@ public class SearchRayout extends AppCompatActivity {
 
                 public void onClick(View v) { //클릭 했을경우
 
+                    search_edit.getText();
                     Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+                    intent.putExtra("editText", search_edit.getText().toString());
                     mContext.startActivity(intent);
 
                 }
