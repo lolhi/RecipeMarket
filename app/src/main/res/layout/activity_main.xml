@@ -10,6 +10,26 @@
     tools:context=".MainActivity">
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+
+              <ImageView
+                  android:id="@+id/search_button"
+                  android:layout_width="50dp"
+                  android:layout_height="50dp"
+                  android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+    </RelativeLayout>
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

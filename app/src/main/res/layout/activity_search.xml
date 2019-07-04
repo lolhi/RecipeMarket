@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:endColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:hint="검색어를 입력해주세요"
+            android:inputType="textPersonName"
+            android:startColor="#ffffff"
+            android:state_enabled="false" />
+
+        <ImageView
+            android:id="@+id/search_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
+
+        </RelativeLayout>
+
+    <TabHost
+        android:id="@+id/tabHost1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- TabWidget의 id값이 반드시 "tabs"로 지정되어야 함. -->
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- 첫 번째 페이지. content1 -->
+                <LinearLayout
+                    android:id="@+id/content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="나라별"
+                        android:textSize="40dp"
+                        android:textStyle="bold"/>
+
+                  <ListView
+                      android:id="@+id/world_list"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <!-- 두 번째 페이지. content2 -->
+                <LinearLayout
+                    android:id="@+id/content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/search_list_popular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+
+                <!-- 세 번째 페이지. content3 -->
+                <LinearLayout
+                    android:id="@+id/content3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/search_list_recent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
