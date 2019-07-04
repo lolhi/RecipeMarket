@@ -13,6 +13,7 @@ package com.example.tablemanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import  androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -36,15 +38,14 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
 
 
-    private final int HEADER = 0;
-    private final int MIDDLE = 1;
-    private final int BODY = 2;
+    private final int HEADER = 1;
+    private final int BOTTOM = 2;
 
     List<RecommendItem> items;
+
     public Home_recycle_Adapter(Context mContext, RecommendItem[] item){
         this.mContext = mContext;
         this.items = Arrays.asList(item);
-
     }
 
     @Override
@@ -52,24 +53,16 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
         if(position == 0)
             return HEADER;
-        else if (position==1)
-            return MIDDLE;
         else
-            return BODY;
-
+            return BOTTOM;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == HEADER){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_header, null);
-            return new Home_Recycle_Header(v);
-        }
-        else if (viewType == MIDDLE)
-        {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_middle, null);
-            return new Home_Recycle_Middle(v);
+            return new Home_Recycle_Header(v);
         }
         else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_bottom, null);
@@ -80,8 +73,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
 
-        if(viewHolder instanceof Home_Recycle_Bottom) {
-
+        if(viewHolder instanceof Home_Recycle_Header) {
         }
 
         /*
@@ -91,7 +83,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 */
 
         if(viewHolder instanceof Home_Recycle_Bottom) {
-            final RecommendItem item = items.get(position - 2);
+            final RecommendItem item = items.get(position - 1);
 
 //            Drawable drawable=mContext.getResources().getDrawable(item.getImage());
             //((KnowledgeViewHolder)viewHolder).imgImage.setImageResource(item.getImage());
@@ -120,24 +112,14 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     }
 
     class Home_Recycle_Header extends RecyclerView.ViewHolder{
-
+        ViewPager viewPager;
 
         public Home_Recycle_Header(View itemView) {
             super(itemView);
-
+            viewPager = itemView.findViewById(R.id.viewPager);
         }
     }
 
-
-    class Home_Recycle_Middle extends RecyclerView.ViewHolder{
-
-
-        public Home_Recycle_Middle(View itemView) {
-            super(itemView);
-
-
-        }
-    }
 
     class Home_Recycle_Bottom extends RecyclerView.ViewHolder {
 
