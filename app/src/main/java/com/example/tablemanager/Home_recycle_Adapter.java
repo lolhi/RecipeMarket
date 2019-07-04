@@ -38,14 +38,19 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
 
 
-    private final int HEADER = 1;
+    private final int HEADER = 0;
+    private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
     List<RecommendItem> items;
+    ArrayList<Integer> listItem;
+    FragmentAdapter fragmentAdapter;
 
-    public Home_recycle_Adapter(Context mContext, RecommendItem[] item){
+    public Home_recycle_Adapter(Context mContext, RecommendItem[] item, ArrayList<Integer> listItem,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
         this.items = Arrays.asList(item);
+        this.listItem = listItem;
+        this.fragmentAdapter = fragmentAdapter;
     }
 
     @Override
@@ -53,6 +58,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
         if(position == 0)
             return HEADER;
+        else if(position == 1)
+            return MIDDLE;
         else
             return BOTTOM;
     }
@@ -61,10 +68,14 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == HEADER){
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_middle, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_header, null);
             return new Home_Recycle_Header(v);
         }
-        else {
+        else if(viewType == MIDDLE){
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_middle, null);
+            return new Home_Recycle_Middle(v);
+        }
+        else{
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_bottom, null);
             return new Home_Recycle_Bottom(v);
         }
@@ -74,6 +85,18 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
 
         if(viewHolder instanceof Home_Recycle_Header) {
+            // ViewPager와  FragmentAdapter 연결
+            ((Home_Recycle_Header)viewHolder).viewPager.setAdapter(fragmentAdapter);
+
+            // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
+            for (int i = 0; i < listItem.size(); i++) {
+                ViewPagerFragment ViewPager = new ViewPagerFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("imgRes", listItem.get(i));
+                ViewPager.setArguments(bundle);
+                fragmentAdapter.addItem(ViewPager);
+            }
+            fragmentAdapter.notifyDataSetChanged();
         }
 
         /*
@@ -83,7 +106,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 */
 
         if(viewHolder instanceof Home_Recycle_Bottom) {
-            final RecommendItem item = items.get(position - 1);
+            final RecommendItem item = items.get(position - 2);
 
 //            Drawable drawable=mContext.getResources().getDrawable(item.getImage());
             //((KnowledgeViewHolder)viewHolder).imgImage.setImageResource(item.getImage());
@@ -120,6 +143,11 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         }
     }
 
+    class Home_Recycle_Middle extends RecyclerView.ViewHolder{
+        public Home_Recycle_Middle(View itemView) {
+            super(itemView);
+        }
+    }
 
     class Home_Recycle_Bottom extends RecyclerView.ViewHolder {
 
@@ -133,8 +161,6 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             level = itemView.findViewById(R.id.recommend_level);
             title = itemView.findViewById(R.id.recommend_title);
             subtitle = itemView.findViewById(R.id.recommend_subtitle);
-
-
         }
     }
 }

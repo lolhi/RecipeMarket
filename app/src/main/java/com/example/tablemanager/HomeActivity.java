@@ -48,6 +48,14 @@ public class HomeActivity extends Fragment{
 
         View view=inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
 
+        // Fragment로 넘길 Image Resource
+        ArrayList<Integer> listImage = new ArrayList<>();
+        listImage.add(R.drawable.mando);
+        listImage.add(R.drawable.podong);
+        listImage.add(R.drawable.straw);
+        listImage.add(R.drawable.tomato);
+
+        FragmentAdapter fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
 
         item[0] = new RecommendItem(R.drawable.straw,"딸기요리",R.drawable.ic_dashboard_black_24dp,"디저트");
         item[1] = new RecommendItem(R.drawable.mando,"만두요리",R.drawable.ic_dashboard_black_24dp,"야식쓰");
@@ -57,32 +65,10 @@ public class HomeActivity extends Fragment{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(),item));
+        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(),item, listImage, fragmentAdapter));
         home_recycle.setItemAnimator(new DefaultItemAnimator());
         Log.e("Frag", "Coffee");
 
-
-        // Fragment로 넘길 Image Resource
-        ArrayList<Integer> listImage = new ArrayList<>();
-        listImage.add(R.drawable.mando);
-        listImage.add(R.drawable.podong);
-        listImage.add(R.drawable.straw);
-        listImage.add(R.drawable.tomato);
-
-        ViewPager viewPager = view.findViewById(R.id.viewPager);
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        // ViewPager와  FragmentAdapter 연결
-        viewPager.setAdapter(fragmentAdapter);
-
-        // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
-        for (int i = 0; i < listImage.size(); i++) {
-            ViewPagerFragment ViewPager = new ViewPagerFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("imgRes", listImage.get(i));
-            ViewPager.setArguments(bundle);
-            fragmentAdapter.addItem(ViewPager);
-        }
-        fragmentAdapter.notifyDataSetChanged();
 
         return view;
     }
