@@ -28,9 +28,8 @@ import java.util.concurrent.ExecutionException;
 public class HomeActivity extends Fragment{
     static int Max_item=4;
 
-    LinearLayout test;
+
     RecyclerView home_recycle;
-    List<RecommendItem> items = new ArrayList<>();
 
     RecommendItem[] item = new RecommendItem[Max_item];
     JSONArray jsonArr;
