@@ -21,8 +21,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class SearchRayout extends AppCompatActivity {
     EditText search_edit;
@@ -36,33 +40,23 @@ public class SearchRayout extends AppCompatActivity {
             mContext = this;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
-
-
-            ListView listview ;//요리별 어뎁터
-            search_listview_adapter adapter;
-            search_edit = findViewById(R.id.search_edit);
-            // Adapter 생성
-            adapter = new search_listview_adapter() ;
-
-            // 리스트뷰 참조 및 Adapter달기
-            listview = (ListView) findViewById(R.id.world_list);
-            listview.setAdapter(adapter);
-
-
             search_button=(ImageView) findViewById(R.id.search_btn);
-            ///////////////////////////////////////////////////////////////////////////  listview_search_item 클래스 배열에 추가후 어뎁터에서 사용
-            // 첫 번째 아이템 추가.
-            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_dashboard_black_24dp),
-                    "Box") ;
-            // 두 번째 아이템 추가.
-            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_home_black_24dp),
-                    "Circle") ;
-            // 세 번째 아이템 추가.
-            adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher_foreground),
-                    "Ind") ;
 
-            /////////////////////////////////////////////////////////////////////////
+            RecyclerView recyclerView = findViewById(R.id.search_list_category);
+            RecyclerView.LayoutManager mLayoutManager;
+            recyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(mLayoutManager);
 
+            final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
+            arrList.add(new SearchCategoryItem("한국","한식",R.drawable.mando));
+            arrList.add(new SearchCategoryItem("중국",R.drawable.mando));
+            arrList.add(new SearchCategoryItem("일본",R.drawable.mando));
+            arrList.add(new SearchCategoryItem("서양",R.drawable.mando));
+            arrList.add(new SearchCategoryItem("동남아시아",R.drawable.mando));
+
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrList);
+            recyclerView.setAdapter(adapter);
 
             ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU_RECENT) ;
             ListView listview_resent = (ListView) findViewById(R.id.search_list_recent) ;
@@ -97,23 +91,17 @@ public class SearchRayout extends AppCompatActivity {
             ts3.setIndicator("최근검색") ;
             tabHost1.addTab(ts3) ;
 
-
-
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                // 코드 계속 ...
-
+            ItemClickSupport.addTo(recyclerView,R.id.search_list_category).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView parent, View v, int position, long id) {
-
-                    // get TextView's Text.
-                    String temp = "위치값" + position;
+                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                     Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                    intent.putExtra("editText",temp);
+                    if(arrList.get(position).getRealName().equals(""))
+                        intent.putExtra("SearchString",arrList.get(position).getCategoryName());
+                    else
+                        intent.putExtra("SearchString",arrList.get(position).getRealName());
                     mContext.startActivity(intent);
-                    // TODO : use strText
                 }
-            }) ;
-
+            });
 
             listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 // 코드 계속 ...
@@ -137,7 +125,7 @@ public class SearchRayout extends AppCompatActivity {
                     // get TextView's Text.
                     String temp = "위치값" + position;
                     Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                    intent.putExtra("editText",temp);
+                    intent.putExtra("SearchString",temp);
                     mContext.startActivity(intent);
                     // TODO : use strText
                 }
