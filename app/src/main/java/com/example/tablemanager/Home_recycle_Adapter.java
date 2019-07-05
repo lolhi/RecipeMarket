@@ -116,9 +116,9 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
 //            Drawable drawable=mContext.getResources().getDrawable(item.getImage());
             //((KnowledgeViewHolder)viewHolder).imgImage.setImageResource(item.getImage());
-            ((Home_Recycle_Bottom)viewHolder).image.setImageResource(item.getImage());
+            ((Home_Recycle_Bottom)viewHolder).image.setImageResource(Integer.parseInt(item.getImage()));
             ((Home_Recycle_Bottom)viewHolder).title.setText(item.getTitle());
-            ((Home_Recycle_Bottom)viewHolder).level.setImageResource(item.getLevel());
+            ((Home_Recycle_Bottom)viewHolder).level.setImageResource(Integer.parseInt(item.getLevel()));
             ((Home_Recycle_Bottom)viewHolder).subtitle.setText(item.getSubtitle());
 
            ((Home_Recycle_Bottom)viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {

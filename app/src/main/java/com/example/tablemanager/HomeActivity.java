@@ -66,10 +66,10 @@ public class HomeActivity extends Fragment{
 
 
 
-        item[0] = new RecommendItem(R.drawable.straw,"딸기요리",R.drawable.ic_dashboard_black_24dp,"디저트");
-        item[1] = new RecommendItem(R.drawable.mando,"만두요리",R.drawable.ic_dashboard_black_24dp,"야식쓰");
-        item[2] = new RecommendItem(R.drawable.podong,"포도요리",R.drawable.ic_launcher_foreground,"주식쓰");
-        item[3] = new RecommendItem(R.drawable.tomato,"토마토요리",R.drawable.ic_dashboard_black_24dp,"토메이");
+        item[0] = new RecommendItem(new Integer(R.drawable.straw).toString(),"딸기요리",new Integer(R.drawable.ic_dashboard_black_24dp).toString(),"디저트");
+        item[1] = new RecommendItem(new Integer(R.drawable.mando).toString(),"만두요리",new Integer(R.drawable.ic_dashboard_black_24dp).toString(),"야식쓰");
+        item[2] = new RecommendItem(new Integer(R.drawable.podong).toString(),"포도요리",new Integer(R.drawable.ic_launcher_foreground).toString(),"주식쓰");
+        item[3] = new RecommendItem(new Integer(R.drawable.tomato).toString(),"토마토요리",new Integer(R.drawable.ic_dashboard_black_24dp).toString(),"토메이");
         home_recycle = view.findViewById(R.id.home_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
