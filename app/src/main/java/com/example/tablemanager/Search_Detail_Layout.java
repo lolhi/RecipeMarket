@@ -37,11 +37,11 @@ public class Search_Detail_Layout extends AppCompatActivity {
     };
 
 
-    String[] subtitle = {
-            "디저트",
-            "밥",
-            "국",
-            "양식",
+            String[] subtitle = {
+        "디저트",
+                "밥",
+                "국",
+                "양식",
 
 
     } ;
@@ -86,19 +86,19 @@ public class Search_Detail_Layout extends AppCompatActivity {
 
         //GridView Adapter 구성및 OnClick method 구성
         CustomGrid adapter = new CustomGrid(Search_Detail_Layout.this, title, imageId,level,subtitle,time);
-        grid=(GridView)findViewById(R.id.grid);
-        grid.setAdapter(adapter);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                grid=(GridView)findViewById(R.id.grid);
+                grid.setAdapter(adapter);
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(Search_Detail_Layout.this, "You Clicked at " +title[+ position], Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        Toast.makeText(Search_Detail_Layout.this, "You Clicked at " +title[+ position], Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                intent.putExtra("recipeTitle",title[+ position]);
-                mContext.startActivity(intent);
-                // TODO : use strText
+                        Intent intent = new Intent(mContext, RecipeActivity_detail.class);
+                        intent.putExtra("recipeTitle",title[+ position]);
+                        mContext.startActivity(intent);
+                        // TODO : use strText
             }
         });
 
