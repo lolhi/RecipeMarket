@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
-
-
-
+import java.util.concurrent.ExecutionException;
 
 
 public class HomeActivity extends Fragment{
@@ -31,16 +33,30 @@ public class HomeActivity extends Fragment{
     List<RecommendItem> items = new ArrayList<>();
 
     RecommendItem[] item = new RecommendItem[Max_item];
+    JSONArray jsonArr;
+    FragmentAdapter fragmentAdapter;
 
     public static HomeActivity newInstance() {
         return new HomeActivity();
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        String jsonData;
 
+        super.onCreate(savedInstanceState);
+        HttpConnection http = new HttpConnection(getActivity(),UrlClass.Url + "TodaySpecialPrice");
+        try {
+            jsonData = http.execute().get();
+            jsonArr = new JSONArray(jsonData);
+            fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -48,14 +64,7 @@ public class HomeActivity extends Fragment{
 
         View view=inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
 
-        // Fragment로 넘길 Image Resource
-        ArrayList<Integer> listImage = new ArrayList<>();
-        listImage.add(R.drawable.mando);
-        listImage.add(R.drawable.podong);
-        listImage.add(R.drawable.straw);
-        listImage.add(R.drawable.tomato);
 
-        FragmentAdapter fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
 
         item[0] = new RecommendItem(R.drawable.straw,"딸기요리",R.drawable.ic_dashboard_black_24dp,"디저트");
         item[1] = new RecommendItem(R.drawable.mando,"만두요리",R.drawable.ic_dashboard_black_24dp,"야식쓰");
@@ -65,7 +74,7 @@ public class HomeActivity extends Fragment{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(),item, listImage, fragmentAdapter));
+        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(),item, jsonArr, fragmentAdapter));
         home_recycle.setItemAnimator(new DefaultItemAnimator());
         Log.e("Frag", "Coffee");
 

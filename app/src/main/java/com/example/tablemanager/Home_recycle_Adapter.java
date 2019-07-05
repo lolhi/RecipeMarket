@@ -30,6 +30,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,19 +40,18 @@ import java.util.List;
 public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
 
-
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
     List<RecommendItem> items;
-    ArrayList<Integer> listItem;
+    JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
 
-    public Home_recycle_Adapter(Context mContext, RecommendItem[] item, ArrayList<Integer> listItem,  FragmentAdapter fragmentAdapter){
+    public Home_recycle_Adapter(Context mContext, RecommendItem[] item, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
         this.items = Arrays.asList(item);
-        this.listItem = listItem;
+        this.jsonArr = jsonArr;
         this.fragmentAdapter = fragmentAdapter;
     }
 
@@ -89,10 +91,14 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             ((Home_Recycle_Header)viewHolder).viewPager.setAdapter(fragmentAdapter);
 
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
-            for (int i = 0; i < listItem.size(); i++) {
+            for (int i = 0; i < jsonArr.length(); i++) {
                 ViewPagerFragment ViewPager = new ViewPagerFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("imgRes", listItem.get(i));
+                try {
+                    bundle.putString("imgurl", jsonArr.getJSONObject(i).getString("IMG_URL"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 ViewPager.setArguments(bundle);
                 fragmentAdapter.addItem(ViewPager);
             }
@@ -118,9 +124,6 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
            ((Home_Recycle_Bottom)viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-
                     Intent intent = new Intent(mContext, RecipeActivity_detail.class);
                     intent.putExtra("recipeTitle",item.getTitle() );
                     mContext.startActivity(intent);
