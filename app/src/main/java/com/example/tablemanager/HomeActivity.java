@@ -26,14 +26,11 @@ import java.util.concurrent.ExecutionException;
 
 
 public class HomeActivity extends Fragment{
-    static int Max_item=4;
-
-
     RecyclerView home_recycle;
 
-    RecommendItem[] item = new RecommendItem[Max_item];
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
+    final ArrayList<RecommendItem> arrList = new ArrayList<>();
 
     public static HomeActivity newInstance() {
         return new HomeActivity();
@@ -49,6 +46,15 @@ public class HomeActivity extends Fragment{
             jsonData = http.execute().get();
             jsonArr = new JSONArray(jsonData);
             fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
+            for(int i = 0; i < jsonArr.length(); i++){
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                arrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
+                        jsonObj.getString("TY_NM"),
+                        jsonObj.getString("COOKING_TIME"),
+                        jsonObj.getString("IMG_URL"),
+                        jsonObj.getString("LEVEL_NM")));
+            }
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -63,17 +69,11 @@ public class HomeActivity extends Fragment{
 
         View view=inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
 
-
-
-        item[0] = new RecommendItem(new Integer(R.drawable.straw).toString(),"딸기요리",new Integer(R.drawable.level_hight).toString(),"디저트");
-        item[1] = new RecommendItem(new Integer(R.drawable.mando).toString(),"만두요리",new Integer(R.drawable.level_low).toString(),"야식쓰");
-        item[2] = new RecommendItem(new Integer(R.drawable.podong).toString(),"포도요리",new Integer(R.drawable.level_middle).toString(),"주식쓰");
-        item[3] = new RecommendItem(new Integer(R.drawable.tomato).toString(),"토마토요리",new Integer(R.drawable.level_hight).toString(),"토메이");
         home_recycle = view.findViewById(R.id.home_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(),item, jsonArr, fragmentAdapter));
+        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(), arrList, jsonArr, fragmentAdapter));
         home_recycle.setItemAnimator(new DefaultItemAnimator());
         Log.e("Frag", "Coffee");
 

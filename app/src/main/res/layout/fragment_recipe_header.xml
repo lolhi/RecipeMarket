@@ -4,10 +4,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/imageView3"
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/recipe_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/podong" />
+        android:layout_height="300dp"/>
 </LinearLayout>

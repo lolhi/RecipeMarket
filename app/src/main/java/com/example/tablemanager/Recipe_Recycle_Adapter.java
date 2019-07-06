@@ -1,6 +1,7 @@
 package com.example.tablemanager;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,11 +30,14 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
     private final int BODY = 2;
 
     List<RecommendItem> items;
+    JSONArray jsonArr;
+    FragmentAdapter fragmentAdapter;
 
-    public Recipe_Recycle_Adapter(Context mContext, RecommendItem[] item){
+    public Recipe_Recycle_Adapter(Context mContext, RecommendItem[] item, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
         this.items = Arrays.asList(item);
-
+        this.jsonArr = jsonArr;
+        this.fragmentAdapter = fragmentAdapter;
     }
 
     @Override
@@ -65,21 +73,37 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if(holder instanceof Recipe_Recycle_Adapter.Recipe_Recycle_Header) {
+            // ViewPager와  FragmentAdapter 연결
+            ((Recipe_Recycle_Adapter.Recipe_Recycle_Header)holder).viewPager.setAdapter(fragmentAdapter);
 
+            // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
+            for (int i = 0; i < jsonArr.length(); i++) {
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview);
+                Bundle bundle = new Bundle();
+                try {
+                    bundle.putString("imgurl", jsonArr.getJSONObject(i).getString("IMG_URL"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ViewPager.setArguments(bundle);
+                fragmentAdapter.addItem(ViewPager);
+            }
+            fragmentAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public int getItemCount()
-        { return  3;
-//                items.size()+2;
-        }
+    public int getItemCount() {
+            return items.size() + 2;
+    }
 
     class Recipe_Recycle_Header extends RecyclerView.ViewHolder{
-
+        ViewPager viewPager;
 
         public Recipe_Recycle_Header(View itemView) {
             super(itemView);
-
+            viewPager = itemView.findViewById(R.id.recipe_viewpager);
         }
     }
 
@@ -89,24 +113,16 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
 
         public Recipe_Recycle_Middle(View itemView) {
             super(itemView);
-
-
         }
     }
 
     class Recipe_Recycle_Bottom extends RecyclerView.ViewHolder {
-
-
-        GridView grid ;
+        GridView grid;
 
         public Recipe_Recycle_Bottom(View itemView) {
             super(itemView);
             grid = itemView.findViewById(R.id.grid);
 //            CustomGrid adapter = new CustomGrid(mContext, title, imageId,level,subtitle,time);
-
-
-
-
         }
     }
 }

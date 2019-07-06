@@ -61,7 +61,7 @@ public class CustomGrid extends BaseAdapter {
 
             //받아온 parametar를 xml id에 연동
             subtitle.setText(arrList.get(position).getSubtitle());
-            levelImg = arrList.get(position).getLevel().equals("초보환영") ? R.drawable.mando : arrList.get(position).getLevel().equals("보통") ? R.drawable.podong : R.drawable.straw;
+            levelImg = arrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : arrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
             level.setImageResource(levelImg);
             title.setText(arrList.get(position).getTitle());
             Glide.with(mContext).load(arrList.get(position).getImage()).into(image);

@@ -30,6 +30,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -44,13 +46,13 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
-    List<RecommendItem> items;
+    ArrayList<RecommendItem> arrList;
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
 
-    public Home_recycle_Adapter(Context mContext, RecommendItem[] item, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
+    public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
-        this.items = Arrays.asList(item);
+        this.arrList = arrList;
         this.jsonArr = jsonArr;
         this.fragmentAdapter = fragmentAdapter;
     }
@@ -92,7 +94,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < jsonArr.length(); i++) {
-                ViewPagerFragment ViewPager = new ViewPagerFragment();
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_image, R.id.imageView);
                 Bundle bundle = new Bundle();
                 try {
                     bundle.putString("imgurl", jsonArr.getJSONObject(i).getString("IMG_URL"));
@@ -112,20 +114,20 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 */
 
         if(viewHolder instanceof Home_Recycle_Bottom) {
-            final RecommendItem item = items.get(position - 2);
+            final RecommendItem item = arrList.get(position - 2);
 
-//            Drawable drawable=mContext.getResources().getDrawable(item.getImage());
-            //((KnowledgeViewHolder)viewHolder).imgImage.setImageResource(item.getImage());
-            ((Home_Recycle_Bottom)viewHolder).image.setImageResource(Integer.parseInt(item.getImage()));
+            Glide.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom)viewHolder).image);
             ((Home_Recycle_Bottom)viewHolder).title.setText(item.getTitle());
-            ((Home_Recycle_Bottom)viewHolder).level.setImageResource(Integer.parseInt(item.getLevel()));
+            int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+            ((Home_Recycle_Bottom)viewHolder).level.setImageResource(levelImg);
             ((Home_Recycle_Bottom)viewHolder).subtitle.setText(item.getSubtitle());
+            ((Home_Recycle_Bottom)viewHolder).time.setText(item.getTime());
 
            ((Home_Recycle_Bottom)viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                            intent.putExtra("recipeTitle",item.getTitle() );
+                            intent.putExtra("recipeTitle",item.getTitle());
                             mContext.startActivity(intent);
                 }
             });
@@ -134,7 +136,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return items.size()+2;
+        return arrList.size()+2;
     }
 
     class Home_Recycle_Header extends RecyclerView.ViewHolder{
@@ -156,7 +158,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
         LinearLayout Recommend_Layout;
         ImageView image,level;
-        TextView title,subtitle;
+        TextView title,subtitle,time;
         public Home_Recycle_Bottom(View itemView) {
             super(itemView);
             Recommend_Layout = itemView.findViewById(R.id.recommend_layout);
@@ -164,6 +166,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             level = itemView.findViewById(R.id.recommend_level);
             title = itemView.findViewById(R.id.recommend_title);
             subtitle = itemView.findViewById(R.id.recommend_subtitle);
+            time = itemView.findViewById(R.id.recommend_time);
         }
     }
 }

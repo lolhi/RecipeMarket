@@ -32,15 +32,15 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
 
     public HttpConnection(Context context, String sUrl) {
             this.context = context;
-        progressDialog = new ProgressDialog(context);
+        //progressDialog = new ProgressDialog(context);
         this.sUrl = sUrl;
     }
 
     @Override
     protected void onPreExecute() {
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setMessage("test...");
-        progressDialog.show();
+        //progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //progressDialog.setMessage("test...");
+        //progressDialog.show();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String jsonData) {
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         super.onPostExecute(jsonData);
     }
 }

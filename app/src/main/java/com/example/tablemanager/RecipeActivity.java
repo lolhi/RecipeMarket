@@ -6,22 +6,46 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.concurrent.ExecutionException;
+
 public class RecipeActivity extends Fragment {
 
     static int Max_item=4;
-
-
     RecyclerView recipe_recycle;
-
     RecommendItem[] recipe_item= new RecommendItem[Max_item];
+    JSONArray jsonArr;
+    FragmentAdapter fragmentAdapter;
 
     public static RecipeActivity newInstance() {
         return new RecipeActivity();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        String jsonData;
+
+        super.onCreate(savedInstanceState);
+        HttpConnection http = new HttpConnection(getActivity(),UrlClass.Url + "TodaySpecialPrice");
+        try {
+            jsonData = http.execute().get();
+            jsonArr = new JSONArray(jsonData);
+            fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -41,7 +65,7 @@ public class RecipeActivity extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recipe_recycle.setHasFixedSize(true);
         recipe_recycle.setLayoutManager(layoutManager);
-        recipe_recycle.setAdapter(new Recipe_Recycle_Adapter(getActivity(),recipe_item));
+        recipe_recycle.setAdapter(new Recipe_Recycle_Adapter(getActivity(),recipe_item, jsonArr, fragmentAdapter));
         recipe_recycle.setItemAnimator(new DefaultItemAnimator());
         Log.e("Frag", "Coffee");
 
