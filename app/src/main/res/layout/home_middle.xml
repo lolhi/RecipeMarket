@@ -11,6 +11,6 @@
         android:layout_marginLeft="5dp"
 
 
-        app:srcCompat="@drawable/recommand_recipe2" />
+        app:srcCompat="@drawable/recommend_recipe2" />
 
 </RelativeLayout>

@@ -13,6 +13,7 @@ package com.example.tablemanager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -163,6 +164,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             super(itemView);
             Recommend_Layout = itemView.findViewById(R.id.recommend_layout);
             image = itemView.findViewById(R.id.recommend_image);
+
+
             level = itemView.findViewById(R.id.recommend_level);
             title = itemView.findViewById(R.id.recommend_title);
             subtitle = itemView.findViewById(R.id.recommend_subtitle);

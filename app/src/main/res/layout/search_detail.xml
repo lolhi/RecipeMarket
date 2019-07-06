@@ -40,7 +40,13 @@
 
     </RelativeLayout>
 
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
     <GridView
+
         android:numColumns="2"
         android:gravity="center"
         android:stretchMode="columnWidth"
@@ -48,4 +54,5 @@
         android:layout_height="fill_parent"
         android:id="@+id/grid"
         />
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
