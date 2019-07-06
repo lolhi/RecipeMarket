@@ -50,6 +50,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     ArrayList<RecommendItem> arrList;
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
+    private CircleAnimIndicator circleAnimIndicator;
 
     public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
@@ -92,6 +93,9 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         if(viewHolder instanceof Home_Recycle_Header) {
             // ViewPager와  FragmentAdapter 연결
             ((Home_Recycle_Header)viewHolder).viewPager.setAdapter(fragmentAdapter);
+            ((Home_Recycle_Header)viewHolder).viewPager.addOnPageChangeListener(mOnPageChangeListener);
+            //Indicator 초기화
+            this.initIndicaotor();
 
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < jsonArr.length(); i++) {
@@ -146,6 +150,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         public Home_Recycle_Header(View itemView) {
             super(itemView);
             viewPager = itemView.findViewById(R.id.viewPager);
+            circleAnimIndicator = itemView.findViewById(R.id.circleAnimIndicator);
         }
     }
 
@@ -172,4 +177,29 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             time = itemView.findViewById(R.id.recommend_time);
         }
     }
+
+    private void initIndicaotor(){
+
+        //원사이의 간격
+        circleAnimIndicator.setItemMargin(15);
+        //애니메이션 속도
+        circleAnimIndicator.setAnimDuration(300);
+        //indecator 생성
+        circleAnimIndicator.createDotPanel(arrList.size(), R.drawable.dot_no , R.drawable.dot_color);
+    }
+
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            circleAnimIndicator.selectDot(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 }

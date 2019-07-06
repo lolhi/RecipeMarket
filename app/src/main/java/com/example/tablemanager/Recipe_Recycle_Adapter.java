@@ -32,6 +32,7 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
     List<RecommendItem> items;
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
+    private CircleAnimIndicator circleAnimIndicator;
 
     public Recipe_Recycle_Adapter(Context mContext, RecommendItem[] item, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
         this.mContext = mContext;
@@ -76,7 +77,9 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
         if(holder instanceof Recipe_Recycle_Adapter.Recipe_Recycle_Header) {
             // ViewPager와  FragmentAdapter 연결
             ((Recipe_Recycle_Adapter.Recipe_Recycle_Header)holder).viewPager.setAdapter(fragmentAdapter);
-
+            ((Recipe_Recycle_Adapter.Recipe_Recycle_Header)holder).viewPager.addOnPageChangeListener(mOnPageChangeListener);
+            //Indicator 초기화
+            this.initIndicaotor();
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < jsonArr.length(); i++) {
                 ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview);
@@ -104,6 +107,7 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
         public Recipe_Recycle_Header(View itemView) {
             super(itemView);
             viewPager = itemView.findViewById(R.id.recipe_viewpager);
+            circleAnimIndicator = itemView.findViewById(R.id.circleAnimIndicator2);
         }
     }
 
@@ -125,4 +129,29 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
 //            CustomGrid adapter = new CustomGrid(mContext, title, imageId,level,subtitle,time);
         }
     }
+
+    private void initIndicaotor(){
+
+        //원사이의 간격
+        circleAnimIndicator.setItemMargin(15);
+        //애니메이션 속도
+        circleAnimIndicator.setAnimDuration(300);
+        //indecator 생성
+        circleAnimIndicator.createDotPanel(jsonArr.length(), R.drawable.dot_no , R.drawable.dot_color);
+    }
+
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageSelected(int position) {
+            circleAnimIndicator.selectDot(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 }
