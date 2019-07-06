@@ -31,7 +31,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
     private String sUrl;
 
     public HttpConnection(Context context, String sUrl) {
-        this.context = context;
+            this.context = context;
         progressDialog = new ProgressDialog(context);
         this.sUrl = sUrl;
     }

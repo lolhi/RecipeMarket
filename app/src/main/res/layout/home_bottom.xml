@@ -1,46 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+   android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/recommend_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:ignore="InvalidId">
-
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        >
+<LinearLayout
+    android:layout_weight="1"
+    android:layout_width="0dp"
+    android:layout_margin="5dp"
+    android:layout_height="match_parent">
     <ImageView
+
         android:id="@+id/recommend_image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="150dp"
         android:scaleType="fitXY"
+
         app:srcCompat="@drawable/straw" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_margin="5dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/recommend_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_gravity="right"
-        android:text="딸기요리" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/recommend_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/nanum_bold"
+                    android:textColor="@color/colorRed"
+
+                    android:text="딸기요리"
+                    android:textSize="30dp" />
+
+                <ImageView
+                    android:id="@+id/recommend_level"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/level_middle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
         <TextView
             android:id="@+id/recommend_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:layout_gravity="right"
-            android:text="부제목" />
-        <ImageView
-            android:id="@+id/recommend_level"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="right"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_dashboard_black_24dp"/>
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="65dp"
+            android:textSize="12dp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/nanum_normal"
+
+            android:layout_marginLeft="15dp"
+            android:textColor="@color/colorModernBlack"
+            android:text="동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세" />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center"
+                    android:layout_height="50dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/arrow"/>
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal">
+            <ImageView
+
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="1dp"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/clock" />
+                <TextView
+                    android:id="@+id/recommend_time"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10분"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>
-</RelativeLayout>
+</com.google.android.material.circularreveal.CircularRevealFrameLayout>

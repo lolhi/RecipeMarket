@@ -122,11 +122,11 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             ((Home_Recycle_Bottom)viewHolder).subtitle.setText(item.getSubtitle());
 
            ((Home_Recycle_Bottom)viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                    intent.putExtra("recipeTitle",item.getTitle() );
-                    mContext.startActivity(intent);
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(mContext, RecipeActivity_detail.class);
+                            intent.putExtra("recipeTitle",item.getTitle() );
+                            mContext.startActivity(intent);
                 }
             });
         }
