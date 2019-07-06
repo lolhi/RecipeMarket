@@ -40,7 +40,7 @@ public class SearchRayout extends AppCompatActivity {
             mContext = this;
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_search);
-            search_button=(ImageView) findViewById(R.id.search_btn);
+            search_button=(ImageView) findViewById(R.id.search_button);
 
             RecyclerView recyclerView = findViewById(R.id.search_list_category);
             RecyclerView.LayoutManager mLayoutManager;
@@ -49,11 +49,13 @@ public class SearchRayout extends AppCompatActivity {
             recyclerView.setLayoutManager(mLayoutManager);
 
             final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
-            arrList.add(new SearchCategoryItem("한국","한식",R.drawable.mando));
-            arrList.add(new SearchCategoryItem("중국",R.drawable.mando));
-            arrList.add(new SearchCategoryItem("일본",R.drawable.mando));
-            arrList.add(new SearchCategoryItem("서양",R.drawable.mando));
-            arrList.add(new SearchCategoryItem("동남아시아",R.drawable.mando));
+            arrList.add(new SearchCategoryItem("한국","한식",R.drawable.nationkorea));
+            arrList.add(new SearchCategoryItem("중국",R.drawable.nationchina));
+            arrList.add(new SearchCategoryItem("일본",R.drawable.nationjapan));
+            arrList.add(new SearchCategoryItem("서양",R.drawable.nationwest));
+            arrList.add(new SearchCategoryItem("이탈리아",R.drawable.nationitalia));
+            arrList.add(new SearchCategoryItem("퓨전",R.drawable.nationfusion));
+            arrList.add(new SearchCategoryItem("동남아시아",R.drawable.nationdongnam));
 
             RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrList);
             recyclerView.setAdapter(adapter);

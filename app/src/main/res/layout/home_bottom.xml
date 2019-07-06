@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="2dp">
     <LinearLayout
         android:id="@+id/recommend_layout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         android:orientation="horizontal"
         >
 <LinearLayout
@@ -20,7 +23,7 @@
 
         android:id="@+id/recommend_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="130dp"
         android:scaleType="fitXY"
 
         app:srcCompat="@drawable/straw" />
@@ -50,7 +53,7 @@
                     android:textColor="@color/colorRed"
 
                     android:text="딸기요리"
-                    android:textSize="30dp" />
+                    android:textSize="20dp" />
 
                 <ImageView
                     android:id="@+id/recommend_level"
@@ -72,7 +75,7 @@
             android:id="@+id/recommend_subtitle"
             android:layout_width="0dp"
             android:layout_weight="5"
-            android:layout_height="65dp"
+            android:layout_height="45dp"
             android:textSize="12dp"
             android:gravity="center_vertical"
             android:fontFamily="@font/nanum_normal"
@@ -118,4 +121,5 @@
 
 
 </LinearLayout>
+</androidx.cardview.widget.CardView>
 </com.google.android.material.circularreveal.CircularRevealFrameLayout>
