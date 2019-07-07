@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,46 +35,22 @@ public class MypageActivity extends Fragment{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        String jsonData;
-
         super.onCreate(savedInstanceState);
-        HttpConnection http = new HttpConnection(getActivity(),UrlClass.Url + "TodaySpecialPrice");
-        try {
-            jsonData = http.execute().get();
-            jsonArr = new JSONArray(jsonData);
-            fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-            for(int i = 0; i < jsonArr.length(); i++){
-                JSONObject jsonObj = jsonArr.getJSONObject(i);
-
-                arrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                        jsonObj.getString("TY_NM"),
-                        jsonObj.getString("COOKING_TIME"),
-                        jsonObj.getString("IMG_URL"),
-                        jsonObj.getString("LEVEL_NM")));
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
+        View view=inflater.inflate(R.layout.fragment_mypage, container, false); // 여기서 UI를 생성해서 View를 return
         mypage_recycle = view.findViewById(R.id.mypage_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         mypage_recycle.setHasFixedSize(true);
         mypage_recycle.setLayoutManager(layoutManager);
-        mypage_recycle.setAdapter(new Mypage_Recycle_Adaper(getActivity(),arrList, jsonArr, fragmentAdapter));
-        mypage_recycle.setItemAnimator(new DefaultItemAnimator());
-
+        MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(),"TodaySpecialPrice", new AppCompatDialog(getActivity()),mypage_recycle);
+        http.execute();
         return view;
     }
 
