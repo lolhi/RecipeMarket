@@ -135,6 +135,7 @@ public class SearchRayout extends AppCompatActivity {
                         intent.putExtra("SearchString",arrList.get(position).getCategoryName());
                     else
                         intent.putExtra("SearchString",arrList.get(position).getRealName());
+                    intent.putExtra("Category", "NATION_NM");
                     mContext.startActivity(intent);
 
                     // TODO : use strText
@@ -153,7 +154,7 @@ public class SearchRayout extends AppCompatActivity {
                     else
                         intent.putExtra("SearchString",arrList2.get(position).getRealName());
                     mContext.startActivity(intent);
-
+                    intent.putExtra("Category", "TY_NM");
                     // TODO : use strText
                 }
             });

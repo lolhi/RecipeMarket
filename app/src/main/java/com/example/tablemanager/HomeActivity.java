@@ -1,5 +1,6 @@
 package com.example.tablemanager;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -28,40 +30,13 @@ import java.util.concurrent.ExecutionException;
 public class HomeActivity extends Fragment{
     RecyclerView home_recycle;
 
-    JSONArray jsonArr;
-    FragmentAdapter fragmentAdapter;
-    final ArrayList<RecommendItem> arrList = new ArrayList<>();
-
     public static HomeActivity newInstance() {
         return new HomeActivity();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        String jsonData;
-
         super.onCreate(savedInstanceState);
-        HttpConnection http = new HttpConnection(getActivity(),UrlClass.Url + "TodaySpecialPrice");
-        try {
-            jsonData = http.execute().get();
-            jsonArr = new JSONArray(jsonData);
-            fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-            for(int i = 0; i < jsonArr.length(); i++){
-                JSONObject jsonObj = jsonArr.getJSONObject(i);
-
-                arrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                        jsonObj.getString("TY_NM"),
-                        jsonObj.getString("COOKING_TIME"),
-                        jsonObj.getString("IMG_URL"),
-                        jsonObj.getString("LEVEL_NM")));
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -73,11 +48,8 @@ public class HomeActivity extends Fragment{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        home_recycle.setAdapter(new Home_recycle_Adapter(getActivity(), arrList, jsonArr, fragmentAdapter));
-        home_recycle.setItemAnimator(new DefaultItemAnimator());
-        Log.e("Frag", "Coffee");
-
-
+        HomeActivityHttpConn http = new HomeActivityHttpConn(getActivity(),"TodaySpecialPrice",getChildFragmentManager(), home_recycle, new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()));
+        http.execute();
         return view;
     }
 }

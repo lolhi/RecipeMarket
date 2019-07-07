@@ -28,6 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:text="딸기 디저트"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:padding="10dp"
             android:textColor="@color/colorModernBlack"
             android:fontFamily="@font/nanum_bold"
             android:textSize="20dp"></TextView>
@@ -36,10 +39,12 @@
                 android:id="@+id/grid_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
                 android:text="딸기 디저트"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="@font/nanum_normal"
-
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/colorModernBlack"
                 android:textSize="15dp"></TextView>
 
@@ -52,6 +57,7 @@
                     android:id="@+id/grid_level"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/level_hight"
                     />
@@ -63,14 +69,15 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
                         app:srcCompat="@drawable/clock"/>
                 <TextView
                     android:id="@+id/grid_time"
-
+                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="2dp"
                     android:fontFamily="@font/nanum_normal"
                     android:text="30분"
                     android:gravity="center_vertical"

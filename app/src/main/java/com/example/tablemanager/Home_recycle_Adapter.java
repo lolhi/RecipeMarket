@@ -22,23 +22,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import  androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
@@ -46,17 +36,19 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
+    private AppCompatDialog progressDialog;
 
     ArrayList<RecommendItem> arrList;
-    JSONArray jsonArr;
+    ArrayList<NoticeItem> NoticeArrList;
     FragmentAdapter fragmentAdapter;
     private CircleAnimIndicator circleAnimIndicator;
 
-    public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, JSONArray jsonArr,  FragmentAdapter fragmentAdapter){
+    public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, ArrayList<NoticeItem> NoticeArrList,  FragmentAdapter fragmentAdapter, AppCompatDialog progressDialog){
         this.mContext = mContext;
         this.arrList = arrList;
-        this.jsonArr = jsonArr;
+        this.NoticeArrList = NoticeArrList;
         this.fragmentAdapter = fragmentAdapter;
+        this.progressDialog = progressDialog;
     }
 
     @Override
@@ -98,14 +90,11 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             this.initIndicaotor();
 
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
-            for (int i = 0; i < jsonArr.length(); i++) {
-                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_image, R.id.imageView);
+            for (int i = 0; i < NoticeArrList.size(); i++) {
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_image, R.id.imageView, progressDialog);
                 Bundle bundle = new Bundle();
-                try {
-                    bundle.putString("imgurl", jsonArr.getJSONObject(i).getString("IMG_URL"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+                bundle.putString("imgurl", NoticeArrList.get(i).getImg());
                 ViewPager.setArguments(bundle);
                 fragmentAdapter.addItem(ViewPager);
             }
@@ -121,7 +110,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         if(viewHolder instanceof Home_Recycle_Bottom) {
             final RecommendItem item = arrList.get(position - 2);
 
-            Glide.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom)viewHolder).image);
+            GlideApp.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom)viewHolder).image);
             ((Home_Recycle_Bottom)viewHolder).title.setText(item.getTitle());
             int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
             ((Home_Recycle_Bottom)viewHolder).level.setImageResource(levelImg);
@@ -185,7 +174,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         //애니메이션 속도
         circleAnimIndicator.setAnimDuration(300);
         //indecator 생성
-        circleAnimIndicator.createDotPanel(arrList.size(), R.drawable.dot_no , R.drawable.dot_color);
+        circleAnimIndicator.createDotPanel(NoticeArrList.size(), R.drawable.dot_no , R.drawable.dot_color);
     }
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {

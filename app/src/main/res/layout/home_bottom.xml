@@ -46,7 +46,7 @@
                 <TextView
                     android:id="@+id/recommend_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/nanum_normal"
@@ -75,14 +75,16 @@
             android:id="@+id/recommend_subtitle"
             android:layout_width="0dp"
             android:layout_weight="5"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:textSize="12dp"
             android:gravity="center_vertical"
             android:fontFamily="@font/nanum_normal"
 
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/colorModernBlack"
-            android:text="동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세" />
+            android:text="동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세"
+            android:maxLines="2"
+            android:ellipsize="end"/>
                 <ImageView
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -111,6 +113,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="1dp"
                     android:textSize="15dp"
                     android:text="10분"/>
 
