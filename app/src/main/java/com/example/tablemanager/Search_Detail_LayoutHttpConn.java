@@ -1,42 +1,54 @@
 package com.example.tablemanager;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
-* HttpConnection.java
+* Search_Detail_LayoutHttpConn.java
 * @author Yongju Jang
 * @version 1.0.0
 * @since 2019-07-05
 **/
 
-public class HttpConnection extends AsyncTask<String, Void, String> {
+public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String> {
     private Context context;
     private Exception e;
+    private AppCompatDialog progressDialog;
     private String sUrl;
+    private ArrayList<RecommendItem> CategoryArrList= new ArrayList<>();
+    private JSONArray jsonArr;
+    private GridView grid;
 
-    public HttpConnection(Context context, String sUrl) {
+    public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid) {
         this.context = context;
         this.sUrl = sUrl;
+        this.progressDialog = progressDialog;
+        this.grid = grid;
     }
 
     @Override
     protected void onPreExecute() {
+        progressON(context);
     }
 
     @Override
@@ -44,7 +56,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
         String str, receiveMsg = "";
         URL url = null;
         try {
-            url = new URL(sUrl);
+            url = new URL(UrlClass.Url + sUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
@@ -90,6 +102,46 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String jsonData) {
 
+        try {
+            jsonArr = new JSONArray(jsonData);
+
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                CategoryArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
+                        jsonObj.getString("SUMRY"),
+                        jsonObj.getString("COOKING_TIME"),
+                        jsonObj.getString("IMG_URL"),
+                        jsonObj.getString("LEVEL_NM")));
+            }
+
+            CustomGrid adapter = new CustomGrid(context,CategoryArrList, progressDialog);
+            grid.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         super.onPostExecute(jsonData);
+    }
+
+    public void progressON(Context mContext) {
+        if (((Activity)mContext).isFinishing()) {
+            return;
+        }
+
+        progressDialog.setCancelable(false);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_layout);
+        progressDialog.show();
+
+        final ImageView img_loading_frame = (ImageView) progressDialog.findViewById(R.id.iv_frame_loading);
+        final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
+        img_loading_frame.post(new Runnable() {
+            @Override
+            public void run() {
+                frameAnimation.start();
+            }
+        });
     }
 }

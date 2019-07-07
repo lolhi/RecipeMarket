@@ -71,7 +71,7 @@ public class MypageActivity extends Fragment{
 
         mypage_recycle.setHasFixedSize(true);
         mypage_recycle.setLayoutManager(layoutManager);
-        mypage_recycle.setAdapter(new Home_recycle_Adapter(getActivity(), arrList, jsonArr, fragmentAdapter));
+        //mypage_recycle.setAdapter(new Home_recycle_Adapter(getActivity(), arrList, jsonArr, fragmentAdapter));
         mypage_recycle.setItemAnimator(new DefaultItemAnimator());
         Log.e("Frag", "Coffee");
         return view;

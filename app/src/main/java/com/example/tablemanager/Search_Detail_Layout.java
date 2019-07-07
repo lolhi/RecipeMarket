@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,8 +25,6 @@ public class Search_Detail_Layout extends AppCompatActivity {
     TextView search_top;
     Context mContext;
     GridView grid;
-    JSONArray jsonArr;
-    String jsonData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +32,7 @@ public class Search_Detail_Layout extends AppCompatActivity {
         setContentView(R.layout.search_detail);
         mContext = this;
         String search_text; //검색 변수 저장하는 스트링 자료형
+        String cateroty;
         back_arrow = (ImageView)findViewById(R.id.search_detail_back_button);
         final ArrayList<RecommendItem> arrList = new ArrayList<>();
 
@@ -40,48 +40,24 @@ public class Search_Detail_Layout extends AppCompatActivity {
         Intent intent;
         intent = getIntent();
         search_text  = intent.getStringExtra("SearchString");
+        cateroty = intent.getStringExtra("Category");
         search_top = findViewById(R.id.search_food_inf);
         search_top.setText(search_text);
 
-        HttpConnection httpconn = new HttpConnection(mContext, UrlClass.Url + "SearchRecipe/" + search_text);
-        try {
-            jsonData = httpconn.execute().get();
-            jsonArr = new JSONArray(jsonData);
-            for(int i = 0; i < jsonArr.length(); i++){
-                JSONObject jsonObj = jsonArr.getJSONObject(i);
-                arrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                        jsonObj.getString("TY_NM"),
-                        jsonObj.getString("COOKING_TIME"),
-                        jsonObj.getString("IMG_URL"),
-                        jsonObj.getString("LEVEL_NM")));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //GridView Adapter 구성및 OnClick method 구성
-        CustomGrid adapter = new CustomGrid(Search_Detail_Layout.this, arrList);
         grid = (GridView)findViewById(R.id.grid);
-        grid.setAdapter(adapter);
+        Search_Detail_LayoutHttpConn httpconn = new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" +  cateroty + "/" + search_text, new AppCompatDialog(mContext), grid);
+        httpconn.execute();
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
                 Intent intent = new Intent(mContext, RecipeActivity_detail.class);
                 intent.putExtra("recipeTitle",arrList.get(+ position).getTitle());
                 mContext.startActivity(intent);
                 // TODO : use strText
             }
         });
-
-
-
 
         back_arrow.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
             @Override

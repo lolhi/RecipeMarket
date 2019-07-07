@@ -1,6 +1,7 @@
 package com.example.tablemanager;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
+
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
 
@@ -16,13 +24,13 @@ public class CustomGrid extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<RecommendItem> arrList;
+    private AppCompatDialog progressDialog;
 
-    public CustomGrid(Context mContext, ArrayList<RecommendItem> arrList) {
+    public CustomGrid(Context mContext, ArrayList<RecommendItem> arrList, AppCompatDialog progressDialog) {
         this.mContext = mContext;
         this.arrList = arrList;
+        this.progressDialog = progressDialog;
     }
-
-
 
     @Override
     public int getCount() {
@@ -32,13 +40,13 @@ public class CustomGrid extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return null;
+        return arrList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         // TODO Auto-generated method stub
-        return 0;
+        return position;
     }
 
     @Override
@@ -50,28 +58,10 @@ public class CustomGrid extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-
-            grid = new View(mContext);
-
-            //xml id 연동
-            grid = inflater.inflate(R.layout.search_grid, null);
-            TextView subtitle = (TextView) grid.findViewById(R.id.grid_subtitle);
-            TextView title = (TextView) grid.findViewById(R.id.grid_title);
-            ImageView image = (ImageView)grid.findViewById(R.id.grid_image);
-            ImageView level = (ImageView)grid.findViewById(R.id.grid_level);
-            TextView time = (TextView)grid.findViewById(R.id.grid_time);
-
-            //받아온 parametar를 xml id에 연동
-            subtitle.setText(arrList.get(position).getSubtitle());
-            levelImg = arrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : arrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            level.setImageResource(levelImg);
-            title.setText(arrList.get(position).getTitle());
-            Glide.with(mContext).load(arrList.get(position).getImage()).into(image);
-            time.setText(arrList.get(position).getTime());
-        } else {
-            grid = (View) convertView;
+            convertView = new GridItem(mContext,progressDialog);
         }
+        ((GridItem)convertView).setData(arrList.get(position));
 
-        return grid;
+        return convertView;
     }
 }

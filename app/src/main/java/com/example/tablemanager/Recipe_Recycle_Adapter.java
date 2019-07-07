@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
@@ -82,7 +83,7 @@ public class Recipe_Recycle_Adapter  extends RecyclerView.Adapter{
             this.initIndicaotor();
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < jsonArr.length(); i++) {
-                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview);
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview, new AppCompatDialog(mContext));
                 Bundle bundle = new Bundle();
                 try {
                     bundle.putString("imgurl", jsonArr.getJSONObject(i).getString("IMG_URL"));
