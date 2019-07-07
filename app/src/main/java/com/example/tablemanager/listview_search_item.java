@@ -6,6 +6,11 @@ public class  listview_search_item {
     private Drawable iconDrawable ;
     private String titleStr ;
 
+    public  listview_search_item(Drawable iconDrawable, String titleStr)
+    {
+        this.iconDrawable = iconDrawable;
+        this.titleStr = titleStr;
+    }
     public void setIcon(Drawable icon) {
         iconDrawable = icon ;
     }

@@ -12,17 +12,15 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class CustomGrid extends BaseAdapter {
-
+public class CustomGridsubject extends BaseAdapter {
     private Context mContext;
-    private ArrayList<RecommendItem> arrList;
-
-    public CustomGrid(Context mContext, ArrayList<RecommendItem> arrList) {
+    ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
+  ;
+    public CustomGridsubject(Context mContext,  ArrayList<SearchCategoryItem> arrList) {
         this.mContext = mContext;
         this.arrList = arrList;
+
     }
-
-
 
     @Override
     public int getCount() {
@@ -52,22 +50,17 @@ public class CustomGrid extends BaseAdapter {
         if (convertView == null) {
 
             grid = new View(mContext);
+                //xml id 연동
+                grid = inflater.inflate(R.layout.search_listview_item, null);
+                TextView title = (TextView) grid.findViewById(R.id.tv_category_name);
+                ImageView image = (ImageView)grid.findViewById(R.id.imageview_icon);
+                //받아온 parametar를 xml id에 연동
+                title.setText(arrList.get(position).getCategoryName());
+                image.setImageResource(arrList.get(position).getImgIcon());
 
-            //xml id 연동
-            grid = inflater.inflate(R.layout.search_grid, null);
-            TextView subtitle = (TextView) grid.findViewById(R.id.grid_subtitle);
-            TextView title = (TextView) grid.findViewById(R.id.grid_title);
-            ImageView image = (ImageView)grid.findViewById(R.id.grid_image);
-            ImageView level = (ImageView)grid.findViewById(R.id.grid_level);
-            TextView time = (TextView)grid.findViewById(R.id.grid_time);
 
-            //받아온 parametar를 xml id에 연동
-            subtitle.setText(arrList.get(position).getSubtitle());
-            levelImg = arrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : arrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            level.setImageResource(levelImg);
-            title.setText(arrList.get(position).getTitle());
-            Glide.with(mContext).load(arrList.get(position).getImage()).into(image);
-            time.setText(arrList.get(position).getTime());
+
+
         } else {
             grid = (View) convertView;
         }

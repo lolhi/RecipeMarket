@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+//여기 detail
 public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter{
     private Context mContext;
 

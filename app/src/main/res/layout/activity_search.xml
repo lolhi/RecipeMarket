@@ -71,12 +71,13 @@
                 <LinearLayout
                     android:id="@+id/content1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
                         android:orientation="horizontal"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="5dp">
@@ -92,18 +93,74 @@
                         android:layout_height="wrap_content"
 
                         android:text="국가별"
+                            android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:layout_gravity="center_vertical"
                         android:textSize="25dp"
 
                         />
                     </LinearLayout>
-                  <androidx.recyclerview.widget.RecyclerView
-                      android:id="@+id/search_list_category"
-                      android:layout_width="match_parent"
-                      android:layout_marginTop="5dp"
-                      android:layout_height="wrap_content"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.0">
+                    <GridView
 
+                        android:numColumns="2"
+                        android:gravity="center"
+                        android:stretchMode="columnWidth"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:padding="3dp"
+                        android:id="@+id/grid_subject"
+                        />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.0"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="30dp"
+
+                            app:srcCompat="@drawable/earth"/>/
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorModernBlack"
+                            android:text="요리별"
+                            android:fontFamily="@font/nanum_normal"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="25dp"
+
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.0">
+                    <GridView
+                        android:padding="3dp"
+                        android:numColumns="2"
+                        android:gravity="center"
+                        android:stretchMode="columnWidth"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:id="@+id/grid_cook"
+                        />
+
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.5">
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <!-- 두 번째 페이지. content2 -->

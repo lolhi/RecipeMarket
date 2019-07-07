@@ -8,7 +8,7 @@
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:layout_margin="1dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,8 +17,8 @@
     <ImageView
         android:layout_gravity="center_vertical"
         android:layout_margin="3dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/imageview_icon"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/earth"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/tv_category_name"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textColor="@color/colorModernBlack"
             android:fontFamily="@font/nanum_normal"
             android:gravity="center_vertical"

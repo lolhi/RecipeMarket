@@ -9,5 +9,5 @@
         android:layout_height="350dp"
         android:src="@drawable/mando"
         android:scaleType="centerCrop"
-        android:layout_marginTop="16dp"/>
+       />
 </LinearLayout>

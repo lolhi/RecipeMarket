@@ -72,7 +72,6 @@ public class Search_Detail_Layout extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(Search_Detail_Layout.this, "You Clicked at " + arrList.get(+ position).getTitle(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, RecipeActivity_detail.class);
                 intent.putExtra("recipeTitle",arrList.get(+ position).getTitle());

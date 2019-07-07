@@ -7,8 +7,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/colorLightOrange">
     <ImageView
         android:id="@+id/detail_image"
         android:layout_width="match_parent"
@@ -21,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="10dp"
         >
 
 
@@ -30,11 +36,13 @@
             android:layout_weight="8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center_vertical"
             android:gravity="left|center_vertical"
-            android:text="Title"
-            android:textSize="40dp"
-            android:textStyle="bold" />
+            android:text="똥꾹 씨발 똥꾹그만"
+            android:fontFamily="@font/nanum_bold"
+            android:textColor="@color/colorModernBlack"
+            android:textSize="28dp"
+            />
         <ImageView
             android:id="@+id/detail_level"
             android:layout_weight="1"
@@ -51,39 +59,96 @@
     </LinearLayout>
 
         <TextView
-        android:id="@+id/detail_subtile"
-        android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/detail_subtile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorModernBlack"
+            android:text="동해물과 백두산이 마르고 닳도록 하느님이 보우하서 우리나라 만세"/>
+
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Subtitle"/>
-
-
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:textColor="@color/colorModernBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_normal"
+            android:text="칼로리"/>
     <TextView
+        android:textColor="@color/colorModernBlack"
+        android:fontFamily="@font/nanum_normal"
+        android:layout_marginStart="30dp"
         android:id="@+id/detail_calorie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="칼로리"/>
+        android:text="10kcal"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="20dp">
+        <TextView
+        android:textColor="@color/colorModernBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanum_normal"
+        android:text="소요시간"/>
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            app:srcCompat="@drawable/clock"
+            android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
+            />
     <TextView
+        android:layout_marginLeft="1dp"
         android:id="@+id/detail_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="time"/>
-    <TextView
-        android:id="@+id/detail_hash1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hash1"/>
-    <TextView
-        android:id="@+id/detail_hash2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hash2"/>
+        android:fontFamily="@font/nanum_normal"
+        android:textColor="@color/colorModernBlack"
+        android:text="30분"/>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="쇼핑정보"
-        android:textStyle="bold"
-        android:textSize="50dp"
-        android:gravity="center"/>
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/detail_hash1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/nanum_normal"
+                android:visibility="gone"
+                android:text="#밥/국"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/detail_hash2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/nanum_normal"
+                android:text="#한식"/>
+
+        </LinearLayout>
+
+
     </LinearLayout>
 </RelativeLayout>
