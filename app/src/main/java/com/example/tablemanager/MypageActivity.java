@@ -65,15 +65,15 @@ public class MypageActivity extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
-        mypage_recycle = view.findViewById(R.id.home_recycle);
+        mypage_recycle = view.findViewById(R.id.mypage_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
         mypage_recycle.setHasFixedSize(true);
         mypage_recycle.setLayoutManager(layoutManager);
-        mypage_recycle.setAdapter(new Home_recycle_Adapter(getActivity(), arrList, jsonArr, fragmentAdapter));
+        mypage_recycle.setAdapter(new Mypage_Recycle_Adaper(getActivity(),arrList, jsonArr, fragmentAdapter));
         mypage_recycle.setItemAnimator(new DefaultItemAnimator());
-        Log.e("Frag", "Coffee");
+
         return view;
     }
 

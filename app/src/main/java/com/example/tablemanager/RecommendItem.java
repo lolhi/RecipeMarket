@@ -15,7 +15,7 @@ public class RecommendItem {
         return time;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
