@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(HomeActivity.newInstance());
                     return true;
                 case R.id.navigation_recipe:
-                    replaceFragment(RecipeActivity.newInstance());
+                    replaceFragment(RecipeActivity2.newInstance());
                     return true;
                 case R.id.navigation_shopping:
                     replaceFragment(ShoppingActivity.newInstance());
