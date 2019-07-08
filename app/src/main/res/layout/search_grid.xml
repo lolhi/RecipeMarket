@@ -6,10 +6,12 @@
     android:layout_height="match_parent">
 
 
+
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,21 +21,20 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            android:padding="10dp"
+            android:padding="5dp"
             app:srcCompat="@drawable/straw"></ImageView>
 
         <TextView
             android:id="@+id/grid_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
             android:text="딸기 디저트"
             android:maxLines="1"
             android:ellipsize="end"
             android:padding="10dp"
             android:textColor="@color/colorModernBlack"
             android:fontFamily="@font/nanum_bold"
-            android:textSize="20dp"></TextView>
+            android:textSize="15dp"></TextView>
 
             <TextView
                 android:id="@+id/grid_subtitle"
@@ -46,7 +47,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/colorModernBlack"
-                android:textSize="15dp"></TextView>
+                android:textSize="10dp"></TextView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -81,7 +82,7 @@
                     android:fontFamily="@font/nanum_normal"
                     android:text="30분"
                     android:gravity="center_vertical"
-                    android:textSize="15dp"/>
+                    android:textSize="10dp"/>
 
                 </LinearLayout>
             </LinearLayout>

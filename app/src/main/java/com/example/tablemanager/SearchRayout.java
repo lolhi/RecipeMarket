@@ -33,8 +33,9 @@ public class SearchRayout extends AppCompatActivity {
     EditText search_edit;
     GridView grid1,grid2;
         ImageView search_button;//오른쪽 상단 서치버튼
-    static final String[] LIST_MENU_POPULAR = {"감자", "양파", "사랑아","그리운","내사랑아"} ; //두번째tap 배열
-    static final String[] LIST_MENU_RECENT = {"아이야","그놈의","정들먹","이며","한건하려"} ; // 세번째tap 배열
+    static final String[] LIST_MENU_POPULAR = {"감자", "양파", "버섯","카레","오징어"} ; //두번째tap 배열
+    static final String[] LIST_MENU_RECENT = {"감자","양파","버섯","카레","오징어"} ; // 세번째tap 배열
+
     Context mContext;
         @Override
         protected void onCreate(Bundle savedInstanceState) {

@@ -11,7 +11,8 @@
     android:icon="@drawable/bottom_recipe"
     android:title="레시피" />
 
-<item
+
+    <item
     android:id="@+id/navigation_shopping"
     android:icon="@drawable/bottom_shopping"
     android:title="쇼핑" />
@@ -20,6 +21,7 @@
     android:id="@+id/navigation_mypage"
     android:icon="@drawable/bottom_user"
     android:title="내정보" />
+
 
 
 </menu>

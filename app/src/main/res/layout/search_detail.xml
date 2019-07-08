@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/search_food_inf"
             android:text="요리이름"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -29,9 +29,9 @@
 
         <ImageView
             android:id="@+id/search_detail_back_button"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="6dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="13dp"
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             app:srcCompat="@drawable/back_arr" />
