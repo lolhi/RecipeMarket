@@ -5,10 +5,120 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
+
+    <TextView
+        android:id="@+id/recipe_text1"
+        android:layout_margin="3dp"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="10dp"
+            />
+    <ImageView
+        android:id="@+id/recipe_image1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/podong" />
+         />
+    <TextView
+        android:id="@+id/recipe_text2"
+        android:layout_margin="3dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        />
+    <ImageView
+        android:id="@+id/recipe_image2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text3"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text4"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text5"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text6"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text7"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        /> <TextView
+    android:id="@+id/recipe_text8"
+    android:layout_margin="3dp"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="10dp"
+    />
+    <ImageView
+        android:id="@+id/recipe_image8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
+        />
+
 </LinearLayout>
