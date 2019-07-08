@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recommend_detail_recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:padding="4dp"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:padding="4dp">
+
         <ImageView
             android:id="@+id/srcap"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
             android:layout_marginTop="4dp"
+            android:layout_marginRight="6dp"
             android:layout_marginBottom="4dp"
             android:layout_weight="8"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/scrap"/>
+            app:srcCompat="@drawable/scrap" />
+
         <ImageView
             android:id="@+id/comment"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:scaleType="fitXY"
             android:layout_width="0dp"
             android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="4dp"
             android:layout_weight="1.5"
-            app:srcCompat="@drawable/command"/>
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/command" />
     </LinearLayout>
 </LinearLayout>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:columnCount="2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="205dp"
@@ -28,7 +28,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title0"
@@ -41,7 +41,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle0"
@@ -54,7 +54,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title1"
@@ -132,7 +132,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle1"
@@ -145,7 +145,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -210,7 +210,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title2"
@@ -223,7 +223,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle2"
@@ -236,7 +236,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -301,7 +301,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title3"
@@ -314,7 +314,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle3"
@@ -327,7 +327,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -392,7 +392,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title4"
@@ -405,7 +405,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle4"
@@ -418,7 +418,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -482,7 +482,7 @@
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/straw"/>
+                    app:srcCompat="@drawable/straw" />
 
                 <TextView
                     android:id="@+id/grid_title5"
@@ -495,7 +495,7 @@
                     android:padding="10dp"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="15dp"/>
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/grid_subtitle5"
@@ -508,7 +508,7 @@
                     android:maxLines="1"
                     android:text="딸기 디저트"
                     android:textColor="@color/colorModernBlack"
-                    android:textSize="10dp"/>
+                    android:textSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -550,12 +550,13 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
     <ImageView
         android:id="@+id/spon"
         android:layout_width="match_parent"
         android:layout_height="170dp"
+        android:layout_columnSpan="2"
         android:padding="10dp"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/banner1"
-        android:layout_columnSpan="2"/>
+        app:srcCompat="@drawable/banner1" />
 </GridLayout>

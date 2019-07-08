@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -14,40 +14,39 @@
         >
 
 
-
         <EditText
             android:id="@+id/search_edit"
             android:layout_width="250dp"
             android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search_bar"
             android:ems="10"
             android:endColor="#ffffff"
-            android:layout_centerInParent="true"
-            android:hint="검색어를 입력해주세요."
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:fontFamily="@font/nanum_normal"
+            android:gravity="center"
+            android:hint="검색어를 입력해주세요."
             android:inputType="textPersonName"
             android:startColor="#ffffff"
-            android:background="@drawable/search_bar"
             android:state_enabled="false" />
 
         <ImageView
             android:id="@+id/search_button"
-            android:layout_marginTop="10dp"
             android:layout_width="30dp"
-            android:layout_marginRight="10dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             app:srcCompat="@drawable/search" />
 
-        </RelativeLayout>
+    </RelativeLayout>
 
     <TabHost
         android:id="@+id/tabHost1"
-        android:background="@color/colorWhite"
         android:layout_width="match_parent"
-        android:fontFamily="@font/nanum_normal"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:fontFamily="@font/nanum_normal">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,84 +76,90 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1.0"
-                        android:orientation="horizontal"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp">
+                        android:layout_weight="1.0"
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="30dp"
-                            android:layout_gravity="center_vertical"
                             android:layout_height="30dp"
-
-                        app:srcCompat="@drawable/earth"/>/
-
-                        <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-
-                        android:text="국가별"
-                            android:textColor="@color/colorModernBlack"
-                        android:fontFamily="@font/nanum_normal"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="25dp"
-
-                        />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="3.0">
-                    <GridView
-
-                        android:numColumns="2"
-                        android:gravity="center"
-                        android:stretchMode="columnWidth"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:padding="3dp"
-                        android:id="@+id/grid_subject"
-                        />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.0"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp">
-                        <ImageView
-                            android:layout_width="30dp"
                             android:layout_gravity="center_vertical"
-                            android:layout_height="30dp"
 
-                            app:srcCompat="@drawable/earth"/>/
+                            app:srcCompat="@drawable/earth" />/
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorModernBlack"
-                            android:text="요리별"
-                            android:fontFamily="@font/nanum_normal"
+
                             android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/nanum_normal"
+                            android:text="국가별"
+                            android:textColor="@color/colorModernBlack"
                             android:textSize="25dp"
 
                             />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="3.0">
-                    <GridView
-                        android:padding="3dp"
-                        android:numColumns="2"
-                        android:gravity="center"
-                        android:stretchMode="columnWidth"
-                        android:layout_width="match_parent"
-                        android:layout_height="270dp"
-                        android:id="@+id/grid_cook"
-                        />
 
-                </LinearLayout>
+                        <GridView
+
+                            android:id="@+id/grid_subject"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            android:gravity="center"
+                            android:numColumns="2"
+                            android:padding="3dp"
+                            android:stretchMode="columnWidth" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1.0"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_vertical"
+
+                            app:srcCompat="@drawable/earth" />/
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/nanum_normal"
+                            android:text="요리별"
+                            android:textColor="@color/colorModernBlack"
+                            android:textSize="25dp"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="3.0">
+
+                        <GridView
+                            android:id="@+id/grid_cook"
+                            android:layout_width="match_parent"
+                            android:layout_height="270dp"
+                            android:gravity="center"
+                            android:numColumns="2"
+                            android:padding="3dp"
+                            android:stretchMode="columnWidth" />
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -173,7 +178,7 @@
                     <ListView
                         android:id="@+id/search_list_popular"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
 
                 </LinearLayout>
@@ -188,7 +193,7 @@
                     <ListView
                         android:id="@+id/search_list_recent"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
             </FrameLayout>

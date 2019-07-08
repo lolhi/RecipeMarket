@@ -46,8 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgIcon = (ImageView)itemView.findViewById(R.id.imageview_icon);
-            tvName = (TextView)itemView.findViewById(R.id.tv_category_name);
+            imgIcon = (ImageView) itemView.findViewById(R.id.imageview_icon);
+            tvName = (TextView) itemView.findViewById(R.id.tv_category_name);
         }
     }
 }

@@ -3,25 +3,21 @@ package com.example.tablemanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 ////////d여기당
 public class RecipeActivity_detail extends AppCompatActivity {
 
-    ImageView scrap_image,comment_image;
+    ImageView scrap_image, comment_image;
     TextView title;
     View view;
     Context mcontext;
@@ -29,15 +25,15 @@ public class RecipeActivity_detail extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mcontext =this;
+        mcontext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
 
 
-        final String search_text ; //getIntent롤 넒겨온 title 값
+        final String search_text; //getIntent롤 넒겨온 title 값
         Intent intent;
         intent = getIntent();
-        search_text  = intent.getStringExtra("recipeTitle");
+        search_text = intent.getStringExtra("recipeTitle");
 
         scrap_image = findViewById(R.id.srcap);
         comment_image = findViewById(R.id.comment);
@@ -46,7 +42,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mcontext);
         detail_recycle.setHasFixedSize(true);
         detail_recycle.setLayoutManager(layoutManager);
-        detail_recycle.setAdapter(new Recipe_Detail_Recle_Adapter(mcontext,search_text));
+        detail_recycle.setAdapter(new Recipe_Detail_Recle_Adapter(mcontext, search_text));
         detail_recycle.setItemAnimator(new DefaultItemAnimator());
 
         scrap_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의

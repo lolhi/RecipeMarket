@@ -33,15 +33,15 @@ public class GridItem extends LinearLayout {
     }
 
     private void init(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.search_grid,this);
+        View view = LayoutInflater.from(context).inflate(R.layout.search_grid, this);
         subtitle = (TextView) findViewById(R.id.grid_subtitle);
         title = (TextView) findViewById(R.id.grid_title);
-        image = (ImageView)findViewById(R.id.grid_image);
-        level = (ImageView)findViewById(R.id.grid_level);
-        time = (TextView)findViewById(R.id.grid_time);
+        image = (ImageView) findViewById(R.id.grid_image);
+        level = (ImageView) findViewById(R.id.grid_level);
+        time = (TextView) findViewById(R.id.grid_time);
     }
 
-    public void setData(RecommendItem item){
+    public void setData(RecommendItem item) {
         subtitle.setText(item.getSubtitle());
         int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
         level.setImageResource(levelImg);

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class CallGridlayout extends LinearLayout{
+public class CallGridlayout extends LinearLayout {
     private View childView;
 
     public CallGridlayout(Context context, AttributeSet attrs) {
@@ -20,9 +20,10 @@ public class CallGridlayout extends LinearLayout{
 
         init(context);
     }
-    private void init(Context context){
-        LayoutInflater inflater =(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        childView = inflater.inflate(R.layout.gridlayout,this,true);
+
+    private void init(Context context) {
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        childView = inflater.inflate(R.layout.gridlayout, this, true);
     }
 
     public View getChildView() {

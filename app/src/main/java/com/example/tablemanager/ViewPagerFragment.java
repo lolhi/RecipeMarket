@@ -1,8 +1,5 @@
 package com.example.tablemanager;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +25,7 @@ public class ViewPagerFragment extends Fragment {
 
     public ViewPagerFragment(int layoutValue, int imgviewValue, AppCompatDialog progressDialog) {
         this.layoutValue = layoutValue;
-        this.imgviewValue= imgviewValue;
+        this.imgviewValue = imgviewValue;
         this.progressDialog = progressDialog;
     }
 
@@ -54,7 +51,7 @@ public class ViewPagerFragment extends Fragment {
                     progressOFF();
                     return false;
                 }
-                }).into(imageView);
+            }).into(imageView);
         }
 
         return view;

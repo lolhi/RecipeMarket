@@ -1,6 +1,8 @@
 package com.example.tablemanager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemClickSupport {
     private final RecyclerView mRecyclerView;
@@ -52,7 +54,7 @@ public class ItemClickSupport {
     public static ItemClickSupport addTo(RecyclerView view, int idValue) {
         ItemClickSupport support = (ItemClickSupport) view.getTag(idValue);
         if (support == null) {
-            support = new ItemClickSupport(view,idValue);
+            support = new ItemClickSupport(view, idValue);
         }
         return support;
     }
@@ -60,7 +62,7 @@ public class ItemClickSupport {
     public static ItemClickSupport removeFrom(RecyclerView view, int idValue) {
         ItemClickSupport support = (ItemClickSupport) view.getTag(idValue);
         if (support != null) {
-            support.detach(view,idValue);
+            support.detach(view, idValue);
         }
         return support;
     }

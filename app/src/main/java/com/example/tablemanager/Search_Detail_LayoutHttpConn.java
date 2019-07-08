@@ -10,7 +10,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,18 +23,19 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
-* Search_Detail_LayoutHttpConn.java
-* @author Yongju Jang
-* @version 1.0.0
-* @since 2019-07-05
-**/
+ * Search_Detail_LayoutHttpConn.java
+ *
+ * @author Yongju Jang
+ * @version 1.0.0
+ * @since 2019-07-05
+ **/
 
 public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String> {
     private Context context;
     private Exception e;
     private AppCompatDialog progressDialog;
     private String sUrl;
-    private ArrayList<RecommendItem> CategoryArrList= new ArrayList<>();
+    private ArrayList<RecommendItem> CategoryArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private GridView grid;
 
@@ -115,7 +115,7 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
                         jsonObj.getString("LEVEL_NM")));
             }
 
-            CustomGrid adapter = new CustomGrid(context,CategoryArrList, progressDialog);
+            CustomGrid adapter = new CustomGrid(context, CategoryArrList, progressDialog);
             grid.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
@@ -126,7 +126,7 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
     }
 
     public void progressON(Context mContext) {
-        if (((Activity)mContext).isFinishing()) {
+        if (((Activity) mContext).isFinishing()) {
             return;
         }
 

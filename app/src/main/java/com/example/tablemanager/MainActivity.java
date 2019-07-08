@@ -15,25 +15,22 @@ package com.example.tablemanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView search_button;
     Context mContext;
+    private ImageView search_button;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -68,12 +65,11 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        search_button=findViewById(R.id.search_button);
+        search_button = findViewById(R.id.search_button);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container,HomeActivity.newInstance()).commit();
-
+        fragmentTransaction.add(R.id.fragment_container, HomeActivity.newInstance()).commit();
 
 
         search_button.setOnClickListener(new View.OnClickListener() {

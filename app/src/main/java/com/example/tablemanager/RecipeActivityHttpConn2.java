@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import org.json.JSONArray;
@@ -54,6 +52,21 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private TextView[] grid_title = new TextView[6];
     private TextView[] grid_subtitle = new TextView[6];
     private TextView[] grid_time = new TextView[6];
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            circleAnimIndicator.selectDot(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+        }
+    };
 
     public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView) {
         this.context = context;
@@ -179,7 +192,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                 CallGridlayout callGl = new CallGridlayout(context);
                 View childView = callGl.getChildView();
                 SetFindViewById(childView);
-                for(int i = 0; i < 6; i++){
+                for (int i = 0; i < 6; i++) {
                     GlideApp.with(context).load(FullRecipeArrList.get(i).getImage()).into(grid_image[i]);
                     int levelImg = FullRecipeArrList.get(i).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(i).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
                     grid_level[i].setImageResource(levelImg);
@@ -235,23 +248,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         circleAnimIndicator.createDotPanel(RecommandaArrList.size(), R.drawable.dot_no, R.drawable.dot_color);
     }
 
-    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            circleAnimIndicator.selectDot(position);
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-        }
-    };
-
-    private void SetFindViewById(View childView){
+    private void SetFindViewById(View childView) {
         grid_image[0] = childView.findViewById(R.id.grid_image0);
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);

@@ -25,11 +25,12 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
-* HomeActivityHttpConn.java
-* @author Yongju Jang
-* @version 1.0.0
-* @since 2019-07-05
-**/
+ * HomeActivityHttpConn.java
+ *
+ * @author Yongju Jang
+ * @version 1.0.0
+ * @since 2019-07-05
+ **/
 
 public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
     private Context context;
@@ -62,7 +63,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        if(sUrl.equals("TodaySpecialPrice"))
+        if (sUrl.equals("TodaySpecialPrice"))
             progressON(context);
     }
 
@@ -120,7 +121,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
         try {
             jsonArr = new JSONArray(jsonData);
             fragmentAdapter = new FragmentAdapter(fm);
-            if(sUrl.equals("TodaySpecialPrice")) {
+            if (sUrl.equals("TodaySpecialPrice")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
@@ -130,8 +131,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
                             jsonObj.getString("IMG_URL"),
                             jsonObj.getString("LEVEL_NM")));
                 }
-            }
-            else if(sUrl.equals("GetNotice")){
+            } else if (sUrl.equals("GetNotice")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
@@ -142,15 +142,14 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
                 }
             }
 
-            if( NoticeArrList.size() != 0 && RecommandaArrList.size() != 0) {
+            if (NoticeArrList.size() != 0 && RecommandaArrList.size() != 0) {
                 Home_recycle_Adapter adapter = new Home_recycle_Adapter(context, RecommandaArrList, NoticeArrList, fragmentAdapter, progressDialog);
                 home_recycle.setAdapter(adapter);
                 home_recycle.setItemAnimator(new DefaultItemAnimator());
                 adapter.notifyDataSetChanged();
 
-            }
-            else{
-                HomeActivityHttpConn http2 = new HomeActivityHttpConn(context,"GetNotice", fm, home_recycle, this.getRecommandaArrList(), progressDialog);
+            } else {
+                HomeActivityHttpConn http2 = new HomeActivityHttpConn(context, "GetNotice", fm, home_recycle, this.getRecommandaArrList(), progressDialog);
                 http2.execute();
             }
         } catch (JSONException e) {
@@ -160,7 +159,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
     }
 
     public void progressON(Context mContext) {
-        if (((Activity)mContext).isFinishing()) {
+        if (((Activity) mContext).isFinishing()) {
             return;
         }
 

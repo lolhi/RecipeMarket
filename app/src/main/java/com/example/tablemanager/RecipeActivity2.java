@@ -1,7 +1,6 @@
 package com.example.tablemanager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -46,7 +40,7 @@ public class RecipeActivity2 extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_recipe2, container, false); // 여기서 UI를 생성해서 View를 return
         recipeScrollView = view.findViewById(R.id.scrollview_recipe);
-        final RecipeActivityHttpConn2 httpConn2 = new RecipeActivityHttpConn2(getActivity(),"FullRecipe",getChildFragmentManager(),new ArrayList<RecommendItem>(),new AppCompatDialog(getActivity()), view);
+        final RecipeActivityHttpConn2 httpConn2 = new RecipeActivityHttpConn2(getActivity(), "FullRecipe", getChildFragmentManager(), new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()), view);
         httpConn2.execute();
 
         recipeScrollView.setScrollViewListener(new ScrollViewListener() {
@@ -62,14 +56,14 @@ public class RecipeActivity2 extends Fragment {
 
                         @Override
                         public void run() {
-                            getActivity().runOnUiThread(new Runnable(){
+                            getActivity().runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     int length = position + 6;
                                     CallGridlayout callGl = new CallGridlayout(getActivity());
                                     View childView = callGl.getChildView();
                                     SetFindViewById(childView);
-                                    for (int i = 0; position < length; i++,position++) {
+                                    for (int i = 0; position < length; i++, position++) {
                                         GlideApp.with(getActivity()).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
                                         int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
                                         grid_level[i].setImageResource(levelImg);
@@ -89,7 +83,7 @@ public class RecipeActivity2 extends Fragment {
         return view;
     }
 
-    private void SetFindViewById(View childView){
+    private void SetFindViewById(View childView) {
         grid_image[0] = childView.findViewById(R.id.grid_image0);
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);

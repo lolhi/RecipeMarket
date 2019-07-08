@@ -1,29 +1,22 @@
 package com.example.tablemanager;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ImageView;
-
-import androidx.appcompat.app.AppCompatDialog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import java.net.URL;
 
 /**
-* HttpConnection.java
-* @author Yongju Jang
-* @version 1.0.0
-* @since 2019-07-05
-**/
+ * HttpConnection.java
+ *
+ * @author Yongju Jang
+ * @version 1.0.0
+ * @since 2019-07-05
+ **/
 
 public class HttpConnection extends AsyncTask<String, Void, String> {
     private Context context;

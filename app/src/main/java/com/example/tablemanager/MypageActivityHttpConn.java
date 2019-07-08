@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDialog;
@@ -25,18 +24,19 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
-* MypageActivityHttpConn.java
-* @author Yongju Jang
-* @version 1.0.0
-* @since 2019-07-05
-**/
+ * MypageActivityHttpConn.java
+ *
+ * @author Yongju Jang
+ * @version 1.0.0
+ * @since 2019-07-05
+ **/
 
 public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
     private Context context;
     private Exception e;
     private AppCompatDialog progressDialog;
     private String sUrl;
-    private ArrayList<RecommendItem> CategoryArrList= new ArrayList<>();
+    private ArrayList<RecommendItem> CategoryArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private RecyclerView mypage_recycle;
 
@@ -127,7 +127,7 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
     }
 
     public void progressON(Context mContext) {
-        if (((Activity)mContext).isFinishing()) {
+        if (((Activity) mContext).isFinishing()) {
             return;
         }
 

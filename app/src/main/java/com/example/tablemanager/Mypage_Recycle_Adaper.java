@@ -21,8 +21,6 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 
 public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
@@ -86,6 +84,11 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
         return arrList.size();
     }
 
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
 
     class KnowledgeViewHolder extends RecyclerView.ViewHolder {
 
@@ -103,11 +106,6 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
             txtTime = itemView.findViewById(R.id.mypage_time);
 
 
-        }
-    }
-    public void progressOFF() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
         }
     }
 }

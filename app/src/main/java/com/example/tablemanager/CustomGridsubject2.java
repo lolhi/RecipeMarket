@@ -13,10 +13,10 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 public class CustomGridsubject2 extends BaseAdapter {
-    private Context mContext;
     ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
+    private Context mContext;
 
-    public CustomGridsubject2(Context mContext,  ArrayList<SearchCategoryItem> arrList) {
+    public CustomGridsubject2(Context mContext, ArrayList<SearchCategoryItem> arrList) {
         this.mContext = mContext;
         this.arrList = arrList;
 
@@ -27,6 +27,7 @@ public class CustomGridsubject2 extends BaseAdapter {
         // TODO Auto-generated method stub
         return arrList.size();
     }
+
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
@@ -52,15 +53,12 @@ public class CustomGridsubject2 extends BaseAdapter {
             grid = new View(mContext);
 
 
-
-                grid = inflater.inflate(R.layout.search_listview_item2, null);
-                TextView title = (TextView) grid.findViewById(R.id.tv_category_name1);
-                ImageView image = (ImageView)grid.findViewById(R.id.imageview_icon1);
-                //받아온 parametar를 xml id에 연동
-                title.setText(arrList.get(position).getCategoryName());
-                Glide.with(mContext).load(arrList.get(position).getImgIcon()).into(image);
-
-
+            grid = inflater.inflate(R.layout.search_listview_item2, null);
+            TextView title = (TextView) grid.findViewById(R.id.tv_category_name1);
+            ImageView image = (ImageView) grid.findViewById(R.id.imageview_icon1);
+            //받아온 parametar를 xml id에 연동
+            title.setText(arrList.get(position).getCategoryName());
+            Glide.with(mContext).load(arrList.get(position).getImgIcon()).into(image);
 
 
         } else {
