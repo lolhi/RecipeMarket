@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo_1"
+        android:icon="@mipmap/ic_launcher_recipemarket"
         android:label="레시피마켓"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_recipemarket_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
