@@ -36,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/user_recipe2" />
+            app:srcCompat="@drawable/entire" />
 
         <LinearLayout
             android:id="@+id/con"
