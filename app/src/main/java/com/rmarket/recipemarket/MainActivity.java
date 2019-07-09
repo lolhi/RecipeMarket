@@ -43,14 +43,13 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_recipe:
                     replaceFragment(RecipeActivity2.newInstance());
                     return true;
-                    /*
                 case R.id.navigation_shopping:
                     replaceFragment(ShoppingActivity.newInstance());
                     return true;
                 case R.id.navigation_mypage:
                     replaceFragment(MypageActivity.newInstance());
                     return true;
-                    */
+
             }
             return false;
         }
