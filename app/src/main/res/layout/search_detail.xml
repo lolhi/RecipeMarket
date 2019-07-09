@@ -42,7 +42,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp">
 
         <GridView
@@ -53,5 +53,30 @@
             android:gravity="center"
             android:numColumns="2"
             android:stretchMode="columnWidth" />
+
+
+        <RelativeLayout
+            android:id="@+id/search_fail_re"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/im_search_fail"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/search_failed" />
+
+            <TextView
+                android:id="@+id/tv-search_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/im_search_fail"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="찾을 수 없습니다."
+                android:textSize="15dp" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

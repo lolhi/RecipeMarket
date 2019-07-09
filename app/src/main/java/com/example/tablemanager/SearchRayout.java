@@ -3,6 +3,7 @@ package com.example.tablemanager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,7 @@ public class SearchRayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         search_button = (ImageView) findViewById(R.id.search_button);
+        search_edit = (EditText) findViewById(R.id.search_edit);
 
 
         final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
@@ -50,14 +53,14 @@ public class SearchRayout extends AppCompatActivity {
 
 
         final ArrayList<SearchCategoryItem> arrList2 = new ArrayList<>();
-        arrList2.add(new SearchCategoryItem("밥", "밥", R.drawable.rice));
-        arrList2.add(new SearchCategoryItem("볶음", "볶음", R.drawable.bukum));
+        arrList2.add(new SearchCategoryItem("밥", "", R.drawable.rice));
+        arrList2.add(new SearchCategoryItem("볶음", "", R.drawable.bukum));
         arrList2.add(new SearchCategoryItem("밑반찬", "밑반찬/김치", R.drawable.mitbanchan));
         arrList2.add(new SearchCategoryItem("튀김", "튀김/커틀릿", R.drawable.fried));
         arrList2.add(new SearchCategoryItem("찌개", "찌개/전골/스튜", R.drawable.chigga));
         arrList2.add(new SearchCategoryItem("면류", "만두/면류", R.drawable.nuddle));
-        arrList2.add(new SearchCategoryItem("구이", "구이", R.drawable.guii));
-        arrList2.add(new SearchCategoryItem("국", "국", R.drawable.kuk));
+        arrList2.add(new SearchCategoryItem("구이", "", R.drawable.guii));
+        arrList2.add(new SearchCategoryItem("국", "", R.drawable.kuk));
         CustomGridsubject2 adapter_2 = new CustomGridsubject2(mContext, arrList2);
         grid2 = (GridView) findViewById(R.id.grid_cook);
         grid2.setAdapter(adapter_2);
@@ -136,8 +139,8 @@ public class SearchRayout extends AppCompatActivity {
                     intent.putExtra("SearchString", arrList2.get(position).getCategoryName());
                 else
                     intent.putExtra("SearchString", arrList2.get(position).getRealName());
-                mContext.startActivity(intent);
                 intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
                 // TODO : use strText
             }
         });
@@ -175,14 +178,34 @@ public class SearchRayout extends AppCompatActivity {
             @Override
 
             public void onClick(View v) { //클릭 했을경우
-
-                search_edit.getText();
+                if(search_edit.getText().toString().equals("")) {
+                    Toast.makeText(mContext, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                intent.putExtra("editText", search_edit.getText().toString());
+                intent.putExtra("Category", "");
+                intent.putExtra("SearchString", search_edit.getText().toString());
                 mContext.startActivity(intent);
-
             }
+        });
 
+        search_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //Enter key Action
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    if(search_edit.getText().toString().equals("")) {
+                        Toast.makeText(mContext, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+                    intent.putExtra("Category", "");
+                    intent.putExtra("SearchString", search_edit.getText().toString());
+                    mContext.startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
         });
     }
 

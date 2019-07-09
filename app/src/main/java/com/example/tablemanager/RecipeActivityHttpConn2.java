@@ -91,7 +91,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
 
     @Override
     protected void onPreExecute() {
-        if (sUrl.equals("TodaySpecialPrice"))
+        if (sUrl.equals("FullRecipe"))
             progressON(context);
     }
 

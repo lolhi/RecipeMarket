@@ -7,7 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,16 +42,20 @@ public class Search_Detail_Layout extends AppCompatActivity {
         search_top.setText(search_text);
 
         grid = (GridView) findViewById(R.id.grid);
-        Search_Detail_LayoutHttpConn httpconn = new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + cateroty + "/" + search_text, new AppCompatDialog(mContext), grid);
+        RelativeLayout re = (RelativeLayout) findViewById(R.id.search_fail_re);
+        TextView tvSearchFail = (TextView) findViewById(R.id.tv_search_fail);
+        Search_Detail_LayoutHttpConn httpconn;
+        if(cateroty.equals(""))
+            httpconn= new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + search_text, new AppCompatDialog(mContext), grid, re, tvSearchFail);
+        else
+            httpconn = new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + cateroty + "/" + search_text, new AppCompatDialog(mContext), grid, re,tvSearchFail);
         httpconn.execute();
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                intent.putExtra("recipeTitle", arrList.get(+position).getTitle());
-                mContext.startActivity(intent);
+                Toast.makeText(mContext, "현재 서비스 준비중입니다.", Toast.LENGTH_SHORT).show();
                 // TODO : use strText
             }
         });

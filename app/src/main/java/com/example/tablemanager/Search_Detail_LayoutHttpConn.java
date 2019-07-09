@@ -6,8 +6,11 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialog;
 
@@ -30,7 +33,7 @@ import java.util.ArrayList;
  * @since 2019-07-05
  **/
 
-public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String> {
+public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , String> {
     private Context context;
     private Exception e;
     private AppCompatDialog progressDialog;
@@ -38,12 +41,16 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
     private ArrayList<RecommendItem> CategoryArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private GridView grid;
+    private RelativeLayout re;
+    private TextView tvSearchFail;
 
-    public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid) {
+    public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid, RelativeLayout re, TextView tvSearchFail) {
         this.context = context;
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
         this.grid = grid;
+        this.re = re;
+        this.tvSearchFail = tvSearchFail;
     }
 
     @Override
@@ -95,8 +102,23 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
         }
-
+        try {
+            if(new JSONArray(receiveMsg).length() == 0)
+                publishProgress(View.GONE, View.VISIBLE);
+            else
+                publishProgress(View.VISIBLE, View.GONE);
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
         return receiveMsg;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        grid.setVisibility(values[0]);
+        re.setVisibility(values[1]);
+        tvSearchFail.setText("\"" + sUrl.split("/")[1] + "\"에 대한 검색 결과가 없습니다.");
     }
 
     @Override
@@ -104,7 +126,10 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
 
         try {
             jsonArr = new JSONArray(jsonData);
-
+            if(jsonArr.length() == 0){
+                progressOFF();
+                return;
+            }
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
 
@@ -143,5 +168,11 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Void, String
                 frameAnimation.start();
             }
         });
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }

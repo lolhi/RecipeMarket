@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialog;
@@ -129,9 +130,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             ((Home_Recycle_Bottom) viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                    intent.putExtra("recipeTitle", item.getTitle());
-                    mContext.startActivity(intent);
+                    Toast.makeText(mContext, "현재 서비스 준비중입니다.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
