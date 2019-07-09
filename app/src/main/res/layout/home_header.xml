@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="350dp" />
 
-    <com.example.tablemanager.CircleAnimIndicator
+    <com.rmarket.recipemarket.CircleAnimIndicator
         android:id="@+id/circleAnimIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

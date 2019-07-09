@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tablemanager">
+    package="com.rmarket.recipemarket">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.rmarket.recipemarket.SplashActivity"
             android:noHistory="true"
             >
             <intent-filter>
@@ -23,15 +23,15 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.rmarket.recipemarket.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecipeActivity_detail"/>
-        <activity android:name=".SearchRayout"/>
-        <activity android:name=".Search_Detail_Layout"/>
+        <activity android:name="com.rmarket.recipemarket.RecipeActivity_detail"/>
+        <activity android:name="com.rmarket.recipemarket.SearchRayout"/>
+        <activity android:name="com.rmarket.recipemarket.Search_Detail_Layout"/>
     </application>
 
 </manifest>
