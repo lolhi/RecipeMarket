@@ -2,8 +2,11 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +20,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+
+import static com.rmarket.recipemarket.R.drawable.nonselect_bar;
 
 public class SearchRayout extends AppCompatActivity {
     static final String[] LIST_MENU_POPULAR = {"감자", "양파", "버섯", "카레", "오징어"}; //두번째tap 배열
@@ -37,14 +42,14 @@ public class SearchRayout extends AppCompatActivity {
 
 
         final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
-        arrList.add(new SearchCategoryItem("한국", "한식", R.drawable.nationkorea));
-        arrList.add(new SearchCategoryItem("중국", R.drawable.nationchina));
-        arrList.add(new SearchCategoryItem("일본", R.drawable.nationjapan));
-        arrList.add(new SearchCategoryItem("서양", R.drawable.nationwest));
-        arrList.add(new SearchCategoryItem("이탈리아", R.drawable.nationitalia));
-        arrList.add(new SearchCategoryItem("퓨전", R.drawable.nationfusion));
-        arrList.add(new SearchCategoryItem("동남아시아", R.drawable.nationdongnam));
-        arrList.add(new SearchCategoryItem("", R.color.colorWhite));
+        arrList.add(new SearchCategoryItem("한국", "한식", R.drawable.nation_korea));
+        arrList.add(new SearchCategoryItem("중국", R.drawable.nation_panda));
+        arrList.add(new SearchCategoryItem("일본", R.drawable.nation_japan));
+        arrList.add(new SearchCategoryItem("서양", R.drawable.nation_west));
+        arrList.add(new SearchCategoryItem("이탈리아", R.drawable.nation_italia));
+        arrList.add(new SearchCategoryItem("퓨전", R.drawable.nation_fusion));
+//        arrList.add(new SearchCategoryItem("동남아시아", R.drawable.nation_east));
+//        arrList.add(new SearchCategoryItem("", R.color.colorWhite));
 
 
         CustomGridsubject adapter = new CustomGridsubject(mContext, arrList);
@@ -77,7 +82,7 @@ public class SearchRayout extends AppCompatActivity {
         listview_popular.setAdapter(adapter1);
 
 
-        TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1);
+        final TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1);
         tabHost1.setup();
 
         // 첫 번째 Tab. (탭 표시 텍스트:"TAB 1"), (페이지 뷰:"content1")
@@ -97,7 +102,20 @@ public class SearchRayout extends AppCompatActivity {
         ts3.setContent(R.id.content3);
         ts3.setIndicator("최근검색");
         tabHost1.addTab(ts3);
+
+
+
+
+
+//        for (int i = 0; i < tabHost1.getTabWidget().getChildCount(); i++) {
+//            tabHost1.getTabWidget().getChildAt(i)
+//                    .setBackgroundResource(nonselect_bar); // unselected
+//        }
+//        tabHost1.getTabWidget().getChildAt(tabHost1.getCurrentTab()).setBackgroundResource(R.drawable.select_bar);
 //
+
+
+        // selected
 ////            ItemClickSupport.addTo(grid,R.id.grid_subject).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
 //////                @Override
 //////                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -109,6 +127,34 @@ public class SearchRayout extends AppCompatActivity {
 //                    mContext.startActivity(intent);
 //////                }
 //////            });
+
+//        tabHost1.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+//
+//            public void onTabChanged(String arg0) {
+//                for (int i = 0; i < tabHost1.getTabWidget().getChildCount(); i++) {
+//                    tabHost1.getTabWidget().getChildAt(i)
+//                            .setBackgroundResource(nonselect_bar); // unselected
+//                }
+//                tabHost1.getTabWidget().getChildAt(tabHost1.getCurrentTab())
+//                        .setBackgroundResource(R.drawable.select_bar); // selected
+//
+//            }
+//        });
+
+        grid1.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
+
 
         grid1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -123,6 +169,8 @@ public class SearchRayout extends AppCompatActivity {
                     intent.putExtra("SearchString", arrList.get(position).getRealName());
                 intent.putExtra("Category", "NATION_NM");
                 mContext.startActivity(intent);
+
+
 
                 // TODO : use strText
             }
@@ -208,5 +256,7 @@ public class SearchRayout extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

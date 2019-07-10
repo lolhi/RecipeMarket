@@ -3,43 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:background="@drawable/search_bar"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:padding="5dp"
 
         >
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="8dp">
 
+</LinearLayout>
 
         <EditText
             android:id="@+id/search_edit"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
+            android:layout_weight="8"
             android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/search_bar"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
             android:ems="10"
+            android:textSize="15dp"
             android:endColor="#ffffff"
             android:fontFamily="@font/nanum_normal"
             android:gravity="center"
-            android:hint="검색어를 입력해주세요."
+            android:hint="음식명을 검색해주세요."
             android:inputType="textPersonName"
             android:startColor="#ffffff"
             android:state_enabled="false" />
 
         <ImageView
             android:id="@+id/search_button"
-            android:layout_width="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             app:srcCompat="@drawable/search" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TabHost
         android:id="@+id/tabHost1"
@@ -58,7 +72,7 @@
 
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="55dp" />
 
             <!-- FrameLayout의 id값이 반드시 "tabcontent"로 지정되어야 함. -->
             <FrameLayout
@@ -75,18 +89,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1.0"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginTop="20dp"
+
+
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center_vertical"
-
-                            app:srcCompat="@drawable/earth" />/
 
                         <TextView
                             android:layout_width="match_parent"
@@ -96,33 +105,28 @@
                             android:fontFamily="@font/nanum_normal"
                             android:text="국가별"
                             android:textColor="@color/colorModernBlack"
-                            android:textSize="25dp"
+                            android:textSize="20dp"
 
                             />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="3.0">
 
                         <GridView
 
                             android:id="@+id/grid_subject"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:numColumns="2"
                             android:padding="3dp"
                             android:stretchMode="columnWidth" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="30dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1.0"
+
                         android:orientation="horizontal">
 
                         <ImageView
@@ -144,10 +148,6 @@
                             />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="3.0">
 
                         <GridView
                             android:id="@+id/grid_cook"
@@ -158,14 +158,8 @@
                             android:padding="3dp"
                             android:stretchMode="columnWidth" />
 
-                    </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5">
 
-                    </LinearLayout>
                 </LinearLayout>
 
                 <!-- 두 번째 페이지. content2 -->

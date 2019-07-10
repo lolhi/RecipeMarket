@@ -32,6 +32,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
+    private final int END  = 3;
     ArrayList<RecommendItem> arrList;
     ArrayList<NoticeItem> NoticeArrList;
     FragmentAdapter fragmentAdapter;
@@ -69,6 +70,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             return HEADER;
         else if (position == 1)
             return MIDDLE;
+        else if (position == arrList.size() + 2)
+            return END;
         else
             return BOTTOM;
     }
@@ -82,7 +85,14 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         } else if (viewType == MIDDLE) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_middle, null);
             return new Home_Recycle_Middle(v);
-        } else {
+
+        }
+        else if (viewType == END)
+        {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_end, null);
+            return new Home_Recycle_End(v);
+        }
+        else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_bottom, null);
             return new Home_Recycle_Bottom(v);
         }
@@ -137,7 +147,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return arrList.size() + 2;
+        return arrList.size() + 3;
     }
 
     private void initIndicaotor() {
@@ -157,6 +167,15 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             super(itemView);
             viewPager = itemView.findViewById(R.id.viewPager);
             circleAnimIndicator = itemView.findViewById(R.id.circleAnimIndicator);
+        }
+    }
+
+    class Home_Recycle_End extends RecyclerView.ViewHolder {
+        ViewPager viewPager;
+
+        public Home_Recycle_End(View itemView) {
+            super(itemView);
+
         }
     }
 
