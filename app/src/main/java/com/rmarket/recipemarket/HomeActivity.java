@@ -1,5 +1,6 @@
 package com.rmarket.recipemarket;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 
 
 public class HomeActivity extends Fragment {
-    RecyclerView home_recycle;
+    private RecyclerView home_recycle;
+    private HomeActivityHttpConn http;
 
     public static HomeActivity newInstance() {
         return new HomeActivity();
@@ -35,8 +37,18 @@ public class HomeActivity extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        HomeActivityHttpConn http = new HomeActivityHttpConn(getActivity(), "TodaySpecialPrice", getChildFragmentManager(), home_recycle, new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()));
+        http = new HomeActivityHttpConn(getActivity(), "TodaySpecialPrice", getChildFragmentManager(), home_recycle, new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()));
         http.execute();
+
+        ItemClickSupport.addTo(home_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                ArrayList<RecommendItem> RecommandArrList = http.getRecommandaArrList();
+                Intent intent = new Intent(getActivity(), RecipeActivity_detail.class);
+                intent.putExtra("RecommandItem", RecommandArrList.get(position - 2));
+                getActivity().startActivity(intent);
+            }
+        });
         return view;
     }
 }

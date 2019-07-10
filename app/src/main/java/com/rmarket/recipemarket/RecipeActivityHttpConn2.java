@@ -2,15 +2,18 @@ package com.rmarket.recipemarket;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.FragmentManager;
@@ -47,6 +50,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private JSONArray jsonArr;
     private View rootView;
     private CircleAnimIndicator circleAnimIndicator;
+    private RecipeActivityHttpConn2 http2;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
     private TextView[] grid_title = new TextView[6];
@@ -66,6 +70,8 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         @Override
         public void onPageScrollStateChanged(int state) {
         }
+
+
     };
 
     public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView) {
@@ -78,7 +84,10 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     }
 
     public ArrayList<RecommendItem> getRecommandaArrList() {
-        return RecommandaArrList;
+        if(http2 != null)
+            return http2.getRecommandaArrList();
+        else
+            return RecommandaArrList;
     }
 
     public void setsUrl(String sUrl) {
@@ -156,7 +165,9 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                             jsonObj.getString("SUMRY"),
                             jsonObj.getString("COOKING_TIME"),
                             jsonObj.getString("IMG_URL"),
-                            jsonObj.getString("LEVEL_NM")));
+                            jsonObj.getString("LEVEL_NM"),
+                            jsonObj.getString("CALORIE"),
+                            jsonObj.getString("RECIPE_ID")));
                 }
             } else if (sUrl.equals("FullRecipe")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
@@ -172,7 +183,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
 
             if (FullRecipeArrList.size() != 0 && RecommandaArrList.size() != 0) {
                 // UI Update
-                ViewPager viewPager = rootView.findViewById(R.id.recipe_viewpager);
+                final ViewPager viewPager = rootView.findViewById(R.id.recipe_viewpager);
                 circleAnimIndicator = rootView.findViewById(R.id.circleAnimIndicator2);
                 FragmentAdapter fragmentAdapter = new FragmentAdapter(fm);
                 viewPager.setAdapter(fragmentAdapter);
@@ -189,6 +200,32 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                 }
                 fragmentAdapter.notifyDataSetChanged();
 
+                viewPager.setOnTouchListener(new View.OnTouchListener() {
+                    private float pointX;
+                    private float pointY;
+                    private int tolerance = 50;
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        switch(motionEvent.getAction()){
+                            case MotionEvent.ACTION_MOVE:
+                                return false; //This is important, if you return TRUE the action of swipe will not take place.
+                            case MotionEvent.ACTION_DOWN:
+                                pointX = motionEvent.getX();
+                                pointY = motionEvent.getY();
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                boolean sameX = pointX + tolerance > motionEvent.getX() && pointX - tolerance < motionEvent.getX();
+                                boolean sameY = pointY + tolerance > motionEvent.getY() && pointY - tolerance < motionEvent.getY();
+                                if(sameX && sameY){
+                                    Intent intent = new Intent(context, RecipeActivity_detail.class);
+                                    intent.putExtra("RecommandItem",RecommandaArrList.get(viewPager.getCurrentItem()));
+                                    context.startActivity(intent);
+                                }
+                        }
+                        return false;
+                    }
+                });
+
                 CallGridlayout callGl = new CallGridlayout(context);
                 View childView = callGl.getChildView();
                 SetFindViewById(childView);
@@ -202,9 +239,8 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                 }
                 LinearLayout con = rootView.findViewById(R.id.con);
                 con.addView(callGl);
-
             } else {
-                RecipeActivityHttpConn2 http2 = new RecipeActivityHttpConn2(context, "TodaySpecialPrice", fm, this.getFullRecipeArrList(), progressDialog, rootView);
+                http2 = new RecipeActivityHttpConn2(context, "TodaySpecialPrice", fm, this.getFullRecipeArrList(), progressDialog, rootView);
                 http2.execute();
             }
         } catch (JSONException e) {
@@ -216,6 +252,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String jsonData) {
         super.onPostExecute(jsonData);
+
     }
 
     public void progressON(Context mContext) {

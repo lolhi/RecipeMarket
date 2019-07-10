@@ -1,6 +1,7 @@
 package com.rmarket.recipemarket;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+
+import java.util.ArrayList;
 
 //여기 detail
 public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
@@ -16,14 +26,19 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
     private final int MIDDLE = 1;
     private final int BODY = 2;
     private final int END = 3;
-    String title;
+
+    private RecommendItem recommendItem;
     private Context mContext;
+    private ArrayList<Materialitem> MaterialArrList;
+    private ArrayList<ProcessItem> ProcessArrList;
+    private AppCompatDialog progressDialog;
 
-    public Recipe_Detail_Recle_Adapter(Context mContext, String title) {
+    public Recipe_Detail_Recle_Adapter(Context mContext, RecommendItem recommendItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, AppCompatDialog progressDialog) {
         this.mContext = mContext;
-        this.title = title;
-        //  this.items = Arrays.asList(item);
-
+        this.recommendItem = recommendItem;
+        this.MaterialArrList = MaterialArrList;
+        this.ProcessArrList = ProcessArrList;
+        this.progressDialog = progressDialog;
     }
 
     @Override
@@ -61,8 +76,17 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
 
-        if (viewHolder instanceof Home_recycle_Adapter.Home_Recycle_Bottom) {
-
+        if (viewHolder instanceof Recipe_Detail_Recle_Adapter.Recipe_Recycle_Middle) {
+            for(int i = 0; i < 8 && i < ProcessArrList.size(); i++){
+                if(!(ProcessArrList.get(i).getProcessDc().equals(""))){
+                    ((Recipe_Recycle_Middle) viewHolder).textView[i].setVisibility(View.VISIBLE);
+                    ((Recipe_Recycle_Middle) viewHolder).textView[i].setText(ProcessArrList.get(i).getProcessDc());
+                }
+                if(!(ProcessArrList.get(i).getProcessStepImg().equals(""))){
+                    ((Recipe_Recycle_Middle) viewHolder).imgView[i].setVisibility(View.VISIBLE);
+                    GlideApp.with(mContext).load(ProcessArrList.get(i).getProcessStepImg()).into(((Recipe_Recycle_Middle) viewHolder).imgView[i]);
+                }
+            }
         }
 
         /*
@@ -72,22 +96,29 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 */
 
         if (viewHolder instanceof Recipe_Detail_Recle_Adapter.Recipe_Recycle_Header) {
+            GlideApp.with(mContext).load(recommendItem.getImage()).addListener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    return false;
+                }
 
-//
-            ((Recipe_Recycle_Header) viewHolder).image.setImageResource(R.drawable.chick);
-            ((Recipe_Recycle_Header) viewHolder).level.setImageResource(R.drawable.ic_home_black_24dp);
-            ((Recipe_Recycle_Header) viewHolder).title.setText(title);
-            ((Recipe_Recycle_Header) viewHolder).hash1.setText("#마시쪙");
-            ((Recipe_Recycle_Header) viewHolder).hash2.setText("#사줘성현아");
-            ((Recipe_Recycle_Header) viewHolder).calorie.setText("550cal");
-            ((Recipe_Recycle_Header) viewHolder).subtitle.setText("야식");
-
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    progressOFF();
+                    return false;
+                }
+            }).into(((Recipe_Recycle_Header) viewHolder).image);
+            int levelImg = recommendItem.getLevel().equals("초보환영") ? R.drawable.level_low : recommendItem.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+            ((Recipe_Recycle_Header) viewHolder).level.setImageResource(levelImg);
+            ((Recipe_Recycle_Header) viewHolder).title.setText(recommendItem.getTitle());
+            ((Recipe_Recycle_Header) viewHolder).calorie.setText(recommendItem.getCal());
+            ((Recipe_Recycle_Header) viewHolder).subtitle.setText(recommendItem.getSubtitle());
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return ProcessArrList.size() + 3;
     }
 
     class Recipe_Recycle_Header extends RecyclerView.ViewHolder {
@@ -137,6 +168,12 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             super(itemView);
 
 
+        }
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 }

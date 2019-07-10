@@ -10,15 +10,17 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 ////////d여기당
 public class RecipeActivity_detail extends AppCompatActivity {
 
     ImageView scrap_image, comment_image;
-    TextView title;
     View view;
     Context mcontext;
     RecyclerView detail_recycle;
@@ -29,11 +31,9 @@ public class RecipeActivity_detail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
 
-
-        final String search_text; //getIntent롤 넒겨온 title 값
         Intent intent;
         intent = getIntent();
-        search_text = intent.getStringExtra("recipeTitle");
+        RecommendItem recommendItem = (RecommendItem)intent.getSerializableExtra("RecommandItem");
 
         scrap_image = findViewById(R.id.srcap);
         comment_image = findViewById(R.id.comment);
@@ -42,8 +42,8 @@ public class RecipeActivity_detail extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mcontext);
         detail_recycle.setHasFixedSize(true);
         detail_recycle.setLayoutManager(layoutManager);
-        detail_recycle.setAdapter(new Recipe_Detail_Recle_Adapter(mcontext, search_text));
-        detail_recycle.setItemAnimator(new DefaultItemAnimator());
+        RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new AppCompatDialog(this));
+        httpConn.execute();
 
         scrap_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
             @Override

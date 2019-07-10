@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class RecipeActivity2 extends Fragment {
     private CustomScrollView recipeScrollView;
     private boolean mLockScrollView = false;
-    private int position = 6;
+    private int position = 0;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
     private TextView[] grid_title = new TextView[6];

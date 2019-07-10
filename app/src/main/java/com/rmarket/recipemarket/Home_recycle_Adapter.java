@@ -135,13 +135,6 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             ((Home_Recycle_Bottom) viewHolder).level.setImageResource(levelImg);
             ((Home_Recycle_Bottom) viewHolder).subtitle.setText(item.getSubtitle());
             ((Home_Recycle_Bottom) viewHolder).time.setText(item.getTime());
-
-            ((Home_Recycle_Bottom) viewHolder).Recommend_Layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(mContext, "현재 서비스 준비중입니다.", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 
@@ -187,16 +180,12 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
     class Home_Recycle_Bottom extends RecyclerView.ViewHolder {
 
-        LinearLayout Recommend_Layout;
         ImageView image, level;
         TextView title, subtitle, time;
 
         public Home_Recycle_Bottom(View itemView) {
             super(itemView);
-            Recommend_Layout = itemView.findViewById(R.id.recommend_layout);
             image = itemView.findViewById(R.id.recommend_image);
-
-
             level = itemView.findViewById(R.id.recommend_level);
             title = itemView.findViewById(R.id.recommend_title);
             subtitle = itemView.findViewById(R.id.recommend_subtitle);

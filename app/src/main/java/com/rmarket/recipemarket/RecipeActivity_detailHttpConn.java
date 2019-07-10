@@ -25,45 +25,37 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * HomeActivityHttpConn.java
+ * RecipeActivity_detailHttpConn.java
  *
  * @author Yongju Jang
  * @version 1.0.0
  * @since 2019-07-05
  **/
 
-public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
+public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, String> {
     private Context context;
     private Exception e;
     private AppCompatDialog progressDialog;
     private String sUrl;
-    private FragmentManager fm;
-    private ArrayList<RecommendItem> RecommandaArrList;
-    private ArrayList<NoticeItem> NoticeArrList = new ArrayList<>();
-    private RecyclerView home_recycle;
-    private FragmentAdapter fragmentAdapter;
+    private RecommendItem recommandItem;
+    private ArrayList<Materialitem> MaterialArrList;
+    private ArrayList<ProcessItem> ProcessArrList = new ArrayList<>();
+    private RecyclerView detail_recycle;
     private JSONArray jsonArr;
+    private RecipeActivity_detailHttpConn httpConn;
 
-    public HomeActivityHttpConn(Context context, String sUrl, FragmentManager fm, RecyclerView home_recycle, ArrayList<RecommendItem> RecommandaArrList, AppCompatDialog progressDialog) {
+    public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem,ArrayList<Materialitem> MaterialArrList, AppCompatDialog progressDialog) {
         this.context = context;
         this.sUrl = sUrl;
-        this.fm = fm;
-        this.home_recycle = home_recycle;
-        this.RecommandaArrList = RecommandaArrList;
+        this.detail_recycle = detail_recycle;
+        this.recommandItem = recommandItem;
+        this.MaterialArrList = MaterialArrList;
         this.progressDialog = progressDialog;
-    }
-
-    public ArrayList<RecommendItem> getRecommandaArrList() {
-        return RecommandaArrList;
-    }
-
-    public void setsUrl(String sUrl) {
-        this.sUrl = sUrl;
     }
 
     @Override
     protected void onPreExecute() {
-        if (sUrl.equals("TodaySpecialPrice"))
+        if (sUrl.contains("GetMaterial"))
             progressON(context);
     }
 
@@ -120,39 +112,35 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
 
         try {
             jsonArr = new JSONArray(jsonData);
-            fragmentAdapter = new FragmentAdapter(fm);
-            if (sUrl.equals("TodaySpecialPrice")) {
+            if (sUrl.contains("GetMaterial")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-                    RecommandaArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                            jsonObj.getString("SUMRY"),
-                            jsonObj.getString("COOKING_TIME"),
-                            jsonObj.getString("IMG_URL"),
-                            jsonObj.getString("LEVEL_NM"),
-                            jsonObj.getString("CALORIE"),
-                            jsonObj.getString("RECIPE_ID")));
+                    MaterialArrList.add(new Materialitem(jsonObj.getString("IRDNT_SN"),
+                            jsonObj.getString("IRDNT_NM"),
+                            jsonObj.getString("IRDNT_CPCTY"),
+                            jsonObj.getString("IRDNT_TY_NM")));
                 }
-            } else if (sUrl.equals("GetNotice")) {
+            } else if (sUrl.contains("GetProcess")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-                    NoticeArrList.add(new NoticeItem(jsonObj.getString("NOTICE_TITLE"),
-                            jsonObj.getString("NOTICE_IMG"),
-                            jsonObj.getString("NOTICE_WRITER"),
-                            jsonObj.getString("NOTICE_CONTENTS")));
+                    ProcessArrList.add(new ProcessItem(jsonObj.getString("COOKING_NO"),
+                            jsonObj.getString("COOKING_DC"),
+                            jsonObj.getString("STRE_STEP_IMAGE_URL"),
+                            jsonObj.getString("STEP_TIP")));
                 }
             }
 
-            if (NoticeArrList.size() != 0 && RecommandaArrList.size() != 0) {
-                Home_recycle_Adapter adapter = new Home_recycle_Adapter(context, RecommandaArrList, NoticeArrList, fragmentAdapter, progressDialog);
-                home_recycle.setAdapter(adapter);
-                home_recycle.setItemAnimator(new DefaultItemAnimator());
+            if (MaterialArrList.size() != 0 && ProcessArrList.size() != 0) {
+                Recipe_Detail_Recle_Adapter adapter = new Recipe_Detail_Recle_Adapter(context, recommandItem, MaterialArrList, ProcessArrList,  progressDialog);
+                detail_recycle.setAdapter(adapter);
+                detail_recycle.setItemAnimator(new DefaultItemAnimator());
                 adapter.notifyDataSetChanged();
-
-            } else {
-                HomeActivityHttpConn http2 = new HomeActivityHttpConn(context, "GetNotice", fm, home_recycle, this.getRecommandaArrList(), progressDialog);
-                http2.execute();
+            }
+            else{
+                httpConn = new RecipeActivity_detailHttpConn(context,"GetProcess/" + recommandItem.getId(), detail_recycle, recommandItem,MaterialArrList,progressDialog);
+                httpConn.execute();
             }
         } catch (JSONException e) {
             e.printStackTrace();

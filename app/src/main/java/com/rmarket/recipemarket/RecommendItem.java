@@ -1,7 +1,9 @@
 package com.rmarket.recipemarket;
 
-public class RecommendItem {
-    private String title, subtitle, image, time, level; // 제목, 날짜, 소제목
+import java.io.Serializable;
+
+public class RecommendItem implements Serializable {
+    private String title, subtitle, image, time, level, cal, id; // 제목, 날짜, 소제목
 
     public RecommendItem(String title, String subtitle, String time, String image, String level) {
         this.title = title;
@@ -16,6 +18,24 @@ public class RecommendItem {
         this.title = title;
         this.level = level;
         this.subtitle = subtitle;
+    }
+
+    public RecommendItem(String title, String subtitle, String time, String image, String level, String cal, String id) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.image = image;
+        this.time = time;
+        this.level = level;
+        this.cal = cal;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getCal() {
+        return cal;
     }
 
     public String getTitle() {
