@@ -50,6 +50,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private JSONArray jsonArr;
     private View rootView;
     private CircleAnimIndicator circleAnimIndicator;
+    private TextView viewpager_tv;
     private RecipeActivityHttpConn2 http2;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
@@ -65,6 +66,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         @Override
         public void onPageSelected(int position) {
             circleAnimIndicator.selectDot(position);
+            viewpager_tv.setText(RecommandaArrList.get(position).getTitle());
         }
 
         @Override
@@ -185,6 +187,9 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                 // UI Update
                 final ViewPager viewPager = rootView.findViewById(R.id.recipe_viewpager);
                 circleAnimIndicator = rootView.findViewById(R.id.circleAnimIndicator2);
+                viewpager_tv = rootView.findViewById(R.id.viewPager_tv);
+                if(RecommandaArrList.size() != 0)
+                    viewpager_tv.setText(RecommandaArrList.get(viewPager.getCurrentItem()).getTitle());
                 FragmentAdapter fragmentAdapter = new FragmentAdapter(fm);
                 viewPager.setAdapter(fragmentAdapter);
                 viewPager.addOnPageChangeListener(mOnPageChangeListener);
