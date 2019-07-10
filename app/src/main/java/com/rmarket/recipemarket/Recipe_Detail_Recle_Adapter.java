@@ -19,6 +19,8 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 //여기 detail
 public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
@@ -38,6 +40,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
         this.recommendItem = recommendItem;
         this.MaterialArrList = MaterialArrList;
         this.ProcessArrList = ProcessArrList;
+        Collections.sort(ProcessArrList);
         this.progressDialog = progressDialog;
     }
 
@@ -80,7 +83,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             for(int i = 0; i < 8 && i < ProcessArrList.size(); i++){
                 if(!(ProcessArrList.get(i).getProcessDc().equals(""))){
                     ((Recipe_Recycle_Middle) viewHolder).textView[i].setVisibility(View.VISIBLE);
-                    ((Recipe_Recycle_Middle) viewHolder).textView[i].setText(ProcessArrList.get(i).getProcessDc());
+                    ((Recipe_Recycle_Middle) viewHolder).textView[i].setText(ProcessArrList.get(i).getProcessNum() + "." + ProcessArrList.get(i).getProcessDc());
                 }
                 if(!(ProcessArrList.get(i).getProcessStepImg().equals(""))){
                     ((Recipe_Recycle_Middle) viewHolder).imgView[i].setVisibility(View.VISIBLE);

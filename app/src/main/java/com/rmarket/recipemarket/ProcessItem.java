@@ -1,6 +1,6 @@
 package com.rmarket.recipemarket;
 
-public class ProcessItem {
+public class ProcessItem implements Comparable {
     private String processNum;
     private String processDc;
     private String processStepImg;
@@ -27,5 +27,10 @@ public class ProcessItem {
 
     public String getProcessTip() {
         return processTip;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.processNum.compareTo(((ProcessItem)o).processNum);
     }
 }
