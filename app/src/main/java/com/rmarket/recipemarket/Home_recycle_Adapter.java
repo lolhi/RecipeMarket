@@ -12,8 +12,10 @@
 package com.rmarket.recipemarket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -118,6 +120,35 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
                 fragmentAdapter.addItem(ViewPager);
             }
             fragmentAdapter.notifyDataSetChanged();
+
+            ((Home_Recycle_Header) viewHolder).viewPager.setOnTouchListener(new View.OnTouchListener() {
+                private float pointX;
+                private float pointY;
+                private int tolerance = 50;
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch(motionEvent.getAction()){
+                        case MotionEvent.ACTION_MOVE:
+                            return false; //This is important, if you return TRUE the action of swipe will not take place.
+                        case MotionEvent.ACTION_DOWN:
+                            pointX = motionEvent.getX();
+                            pointY = motionEvent.getY();
+                            break;
+                        case MotionEvent.ACTION_UP:
+                            boolean sameX = pointX + tolerance > motionEvent.getX() && pointX - tolerance < motionEvent.getX();
+                            boolean sameY = pointY + tolerance > motionEvent.getY() && pointY - tolerance < motionEvent.getY();
+                            if(sameX && sameY){
+                            /*
+                            Intent intent = new Intent(context, RecipeActivity_detail.class);
+                            intent.putExtra("RecommandItem",RecommandaArrList.get(viewPager.getCurrentItem()));
+                            context.startActivity(intent);
+                            */
+                                Toast.makeText(mContext, "공지사항" + ((Home_Recycle_Header) viewHolder).viewPager.getCurrentItem(), Toast.LENGTH_SHORT).show();
+                            }
+                    }
+                    return false;
+                }
+            });
         }
 
         /*
