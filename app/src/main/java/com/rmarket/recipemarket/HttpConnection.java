@@ -4,11 +4,23 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * HttpConnection.java
@@ -19,17 +31,13 @@ import java.net.URL;
  **/
 
 public class HttpConnection extends AsyncTask<String, Void, String> {
-    private Context context;
     private Exception e;
     private String sUrl;
+    private JSONObject jsonObj;
 
-    public HttpConnection(Context context, String sUrl) {
-        this.context = context;
+    public HttpConnection(String sUrl, JSONObject josnObj) {
         this.sUrl = sUrl;
-    }
-
-    @Override
-    protected void onPreExecute() {
+        this.jsonObj = josnObj;
     }
 
     @Override
@@ -37,8 +45,17 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
         String str, receiveMsg = "";
         URL url = null;
         try {
-            url = new URL(sUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            url = new URL(UrlClass.Url + sUrl);
+
+            trustAllHosts();
+            HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+            httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            });
+            HttpURLConnection conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -52,13 +69,21 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
 
                 //http 연결의 경우 요청방식을 지정할수 있습니다.
                 //지정하지 않으면 디폴트인 GET 방식이 적용됩니다.
-                conn.setRequestMethod("GET");
+                conn.setRequestMethod("POST");
 
                 //서버에 요청을 보내가 응답 결과를 받아옵니다.
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                conn.setDefaultUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                os.write(jsonObj.toString().getBytes("UTF-8"));
+                os.flush();
+                os.close();
+
                 int resCode = conn.getResponseCode();
-
-
                 if (resCode == conn.HTTP_OK) {
                     InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                     BufferedReader reader = new BufferedReader(tmp);
@@ -80,9 +105,38 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
         return receiveMsg;
     }
 
-    @Override
-    protected void onPostExecute(String jsonData) {
+    private static void trustAllHosts() {
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return new java.security.cert.X509Certificate[]{};
+            }
 
-        super.onPostExecute(jsonData);
+            @Override
+            public void checkClientTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)
+                    throws java.security.cert.CertificateException {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void checkServerTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)
+                    throws java.security.cert.CertificateException {
+                // TODO Auto-generated method stub
+            }
+        }};
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection
+                    .setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

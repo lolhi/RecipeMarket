@@ -32,7 +32,6 @@
         <activity android:name="com.rmarket.recipemarket.RecipeActivity_detail"/>
         <activity android:name="com.rmarket.recipemarket.SearchRayout"/>
         <activity android:name="com.rmarket.recipemarket.Search_Detail_Layout"/>
-        <activity android:name="com.rmarket.recipemarket.ShoppingDetail"/>
     </application>
 
 </manifest>
