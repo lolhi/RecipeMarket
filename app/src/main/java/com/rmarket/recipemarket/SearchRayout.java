@@ -29,17 +29,19 @@ public class SearchRayout extends AppCompatActivity {
     EditText search_edit;
     GridView grid1, grid2;
     ImageView search_button;//오른쪽 상단 서치버튼
+    ImageView img_italy;
     Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         mContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         search_button = (ImageView) findViewById(R.id.search_button);
         search_edit = (EditText) findViewById(R.id.search_edit);
-
+        img_italy = findViewById(R.id.nation4);
 
         final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
         arrList.add(new SearchCategoryItem("한국", "한식", R.drawable.nation_korea));
@@ -52,9 +54,9 @@ public class SearchRayout extends AppCompatActivity {
 //        arrList.add(new SearchCategoryItem("", R.color.colorWhite));
 
 
-        CustomGridsubject adapter = new CustomGridsubject(mContext, arrList);
-        grid1 = (GridView) findViewById(R.id.grid_subject);
-        grid1.setAdapter(adapter);
+//        CustomGridsubject adapter = new CustomGridsubject(mContext, arrList);
+//        grid1 = (GridView) findViewById(R.id.grid_subject);
+//        grid1.setAdapter(adapter);
 
 
         final ArrayList<SearchCategoryItem> arrList2 = new ArrayList<>();
@@ -66,9 +68,9 @@ public class SearchRayout extends AppCompatActivity {
         arrList2.add(new SearchCategoryItem("면류", "만두/면류", R.drawable.nuddle));
         arrList2.add(new SearchCategoryItem("구이", "", R.drawable.guii));
         arrList2.add(new SearchCategoryItem("국", "", R.drawable.kuk));
-        CustomGridsubject2 adapter_2 = new CustomGridsubject2(mContext, arrList2);
-        grid2 = (GridView) findViewById(R.id.grid_cook);
-        grid2.setAdapter(adapter_2);
+//        CustomGridsubject2 adapter_2 = new CustomGridsubject2(mContext, arrList2);
+//        grid2 = (GridView) findViewById(R.id.grid_cook);
+//        grid2.setAdapter(adapter_2);
 
 
         ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU_RECENT);
@@ -114,6 +116,15 @@ public class SearchRayout extends AppCompatActivity {
 //        tabHost1.getTabWidget().getChildAt(tabHost1.getCurrentTab()).setBackgroundResource(R.drawable.select_bar);
 //
 
+        img_italy.setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList.get(4).getCategoryName());
+                mContext.startActivity(intent);
+                // your code here
+            }
+        });
 
         // selected
 ////            ItemClickSupport.addTo(grid,R.id.grid_subject).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -141,57 +152,57 @@ public class SearchRayout extends AppCompatActivity {
 //            }
 //        });
 
-        grid1.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
-                {
-                    return true;
-                }
-                return false;
-            }
-
-        });
-
-
-
-        grid1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                if (arrList.get(position).getRealName().equals(""))
-                    intent.putExtra("SearchString", arrList.get(position).getCategoryName());
-                else
-                    intent.putExtra("SearchString", arrList.get(position).getRealName());
-                intent.putExtra("Category", "NATION_NM");
-                mContext.startActivity(intent);
+//        grid1.setOnTouchListener(new View.OnTouchListener()
+//        {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
+//                {
+//                    return true;
+//                }
+//                return false;
+//            }
+//
+//        });
 
 
-
-                // TODO : use strText
-            }
-        });
-
-        grid2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                if (arrList2.get(position).getRealName().equals(""))
-                    intent.putExtra("SearchString", arrList2.get(position).getCategoryName());
-                else
-                    intent.putExtra("SearchString", arrList2.get(position).getRealName());
-                intent.putExtra("Category", "TY_NM");
-                mContext.startActivity(intent);
-                // TODO : use strText
-            }
-        });
+//
+//        grid1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+//                if (arrList.get(position).getRealName().equals(""))
+//                    intent.putExtra("SearchString", arrList.get(position).getCategoryName());
+//                else
+//                    intent.putExtra("SearchString", arrList.get(position).getRealName());
+//                intent.putExtra("Category", "NATION_NM");
+//                mContext.startActivity(intent);
+//
+//
+//
+//                // TODO : use strText
+//            }
+//        });
+//
+//        grid2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//
+//                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+//                if (arrList2.get(position).getRealName().equals(""))
+//                    intent.putExtra("SearchString", arrList2.get(position).getCategoryName());
+//                else
+//                    intent.putExtra("SearchString", arrList2.get(position).getRealName());
+//                intent.putExtra("Category", "TY_NM");
+//                mContext.startActivity(intent);
+//                // TODO : use strText
+//            }
+//        });
 
         listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // 코드 계속 ...

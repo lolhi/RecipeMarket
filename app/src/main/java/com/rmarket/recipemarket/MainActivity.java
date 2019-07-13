@@ -18,17 +18,21 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity {
+RelativeLayout main_top;
+CardView main_card;
     Context mContext;
     private ImageView search_button;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -39,15 +43,20 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     replaceFragment(HomeActivity.newInstance());
+                    main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_recipe:
                     replaceFragment(RecipeActivity2.newInstance());
+                    main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_shopping:
                     replaceFragment(ShoppingActivity.newInstance());
+                    main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_mypage:
+
                     replaceFragment(MypageActivity.newInstance());
+                    main_card.setVisibility(View.GONE);
                     return true;
 
             }
@@ -64,8 +73,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
+        main_top = findViewById(R.id.main_top);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        main_card = findViewById(R.id.main_card);
         search_button = findViewById(R.id.search_button);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
