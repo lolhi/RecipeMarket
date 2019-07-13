@@ -3,21 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
+    android:columnCount="1"
     android:orientation="horizontal">
 
-
     <LinearLayout
-        android:layout_width="220dp"
-        android:layout_margin="10dp"
-        android:layout_height="225dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,8 +26,7 @@
                 <ImageView
                     android:id="@+id/grid_image0"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -96,21 +94,14 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-
-        android:layout_margin="10dp"
-        android:layout_width="205dp"
-        android:layout_height="220dp"
-        android:orientation="vertical">
-
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -120,8 +111,7 @@
                 <ImageView
                     android:id="@+id/grid_image1"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -189,19 +179,20 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
+        </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="205dp"
-        android:layout_height="220dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -211,8 +202,7 @@
                 <ImageView
                     android:id="@+id/grid_image2"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -280,19 +270,14 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="205dp"
-        android:layout_height="220dp"
-        android:orientation="vertical">
-
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -302,8 +287,7 @@
                 <ImageView
                     android:id="@+id/grid_image3"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -371,19 +355,20 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="205dp"
-        android:layout_height="220dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -393,8 +378,7 @@
                 <ImageView
                     android:id="@+id/grid_image4"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -462,18 +446,14 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="205dp"
-        android:layout_height="220dp"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -483,8 +463,7 @@
                 <ImageView
                     android:id="@+id/grid_image5"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
+                    android:layout_height="150dp"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/straw" />
 
@@ -552,15 +531,12 @@
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
-
     <ImageView
         android:id="@+id/spon"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:layout_columnSpan="2"
-        android:padding="10dp"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/banner1" />
 </GridLayout>
