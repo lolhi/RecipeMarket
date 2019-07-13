@@ -70,3 +70,6 @@ app/src/main/java/com/rmarket/recipemarket/UrlClass.java
 
 # release
 app/release/
+
+# kakao string
+app/src/main/res/values/kakao_string.xml

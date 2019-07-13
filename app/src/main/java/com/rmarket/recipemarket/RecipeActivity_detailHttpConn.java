@@ -24,6 +24,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 /**
  * RecipeActivity_detailHttpConn.java
  *
@@ -65,7 +72,15 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
         URL url = null;
         try {
             url = new URL(UrlClass.Url + sUrl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            trustAllHosts();
+            HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+            httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String s, SSLSession sslSession) {
+                    return true;
+                }
+            });
+            HttpURLConnection conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -166,5 +181,39 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                 frameAnimation.start();
             }
         });
+    }
+    private static void trustAllHosts() {
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return new java.security.cert.X509Certificate[]{};
+            }
+
+            @Override
+            public void checkClientTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)
+                    throws java.security.cert.CertificateException {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void checkServerTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)
+                    throws java.security.cert.CertificateException {
+                // TODO Auto-generated method stub
+            }
+        }};
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection
+                    .setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
