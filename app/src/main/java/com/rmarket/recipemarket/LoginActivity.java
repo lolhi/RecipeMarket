@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
     private ImageView im_custom_login;
     private LoginButton btn_kakao_login;
-    private TextView tv_login_later;
     private ImageView im_login_later;
 
 
@@ -38,11 +37,6 @@ public class LoginActivity extends AppCompatActivity {
 
         im_custom_login = (ImageView) findViewById(R.id.im_custom_login);
         btn_kakao_login = (LoginButton) findViewById(R.id.btn_kakao_login);
-
-        tv_login_later = (TextView) findViewById(R.id.login_later_tv);
-
-        btn_custom_login.setOnClickListener(new View.OnClickListener() {
-
         im_login_later = (ImageView) findViewById(R.id.login_later_im);
 
         im_custom_login.setOnClickListener(new View.OnClickListener() {
@@ -52,9 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 btn_kakao_login.performClick();
             }
         });
-
-
-        tv_login_later.setOnClickListener(new View.OnClickListener() {
 
         im_login_later.setOnClickListener(new View.OnClickListener() {
 
