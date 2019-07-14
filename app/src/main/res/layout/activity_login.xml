@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_login"
     tools:context=".LoginActivity">
+
+
+    <Button
+        android:id="@+id/btn_custom_login"
+        android:layout_height="30dp"
+        android:layout_width="30dp"></Button>
 
     <ImageView
         android:layout_width="match_parent"
@@ -24,11 +31,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.803" />
+
+    <TextView
+        android:id="@+id/login_later_tv"
         app:layout_constraintVertical_bias="0.803"
-        android:scaleType="fitXY"/>
+        android:scaleType="fitXY"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/login_later_im"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -42,10 +58,12 @@
         app:layout_constraintVertical_bias="0.863"
         android:scaleType="fitXY"/>
 
+
     <com.kakao.usermgmt.LoginButton
         android:id="@+id/btn_kakao_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
