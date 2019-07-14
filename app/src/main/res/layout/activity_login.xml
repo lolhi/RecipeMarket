@@ -7,8 +7,8 @@
     android:background="@drawable/background_login"
     tools:context=".LoginActivity">
 
-    <Button
-        android:id="@+id/btn_custom_login"
+    <ImageView
+        android:id="@+id/im_custom_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,8 +22,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.803" />
 
-    <TextView
-        android:id="@+id/login_later_tv"
+    <ImageView
+        android:id="@+id/login_later_im"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
