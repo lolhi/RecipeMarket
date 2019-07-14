@@ -41,6 +41,9 @@
         <activity android:name="com.rmarket.recipemarket.SearchRayout"/>
         <activity android:name="com.rmarket.recipemarket.Search_Detail_Layout"/>
         <activity android:name=".ShoppingDetail"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".ActivityBasket"/>
+        <activity android:name=".ActivityAcoount"/>
     </application>
 
 </manifest>

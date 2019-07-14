@@ -38,7 +38,7 @@
             android:endColor="#ffffff"
             android:fontFamily="@font/nanum_normal"
             android:gravity="center"
-            android:hint="음식명을 검색해주세요."
+            android:hint="재료, 음식명을 검색해주세요."
             android:inputType="textPersonName"
             android:startColor="#ffffff"
             android:state_enabled="false" />

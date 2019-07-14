@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
 public class ShoppingActivity extends Fragment {
 
     Context mContext;
-    ImageView img;
+
+       LinearLayout shopping1,shopping2,shopping3;
     public static ShoppingActivity newInstance() {
         return new ShoppingActivity();
     }
@@ -22,8 +24,12 @@ public class ShoppingActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopping, container, false); // 여기서 UI를 생성해서 View를 return
 
-       img = view.findViewById(R.id.store_main);
-       img.setOnClickListener(new View.OnClickListener() {
+        shopping1 =view.findViewById(R.id.linear_shopping1);
+        shopping2 =view.findViewById(R.id.linear_shopping2);
+        shopping3 =view.findViewById(R.id.linear_shopping3);
+
+
+       shopping1.setOnClickListener(new View.OnClickListener() {
            public void onClick(View v) {
                Intent intent = new Intent(getActivity(), ShoppingDetail.class);
 
