@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,11 +22,13 @@ import com.kakao.util.exception.KakaoException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
     private Button btn_custom_login;
     private LoginButton btn_kakao_login;
+    private TextView tv_login_later;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +37,19 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_custom_login = (Button) findViewById(R.id.btn_custom_login);
         btn_kakao_login = (LoginButton) findViewById(R.id.btn_kakao_login);
+        tv_login_later = (TextView) findViewById(R.id.login_later_tv);
+
         btn_custom_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btn_kakao_login.performClick();
+            }
+        });
+
+        tv_login_later.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMainActivity();
             }
         });
         sessionCallback = new SessionCallback();
