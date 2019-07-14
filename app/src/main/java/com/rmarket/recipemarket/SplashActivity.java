@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.util.exception.KakaoException;
@@ -16,6 +17,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
+        animationView.setImageAssetsFolder("images/");
+        animationView.setAnimation("logo.json");;
+        //Lottie Animation start
+        animationView.playAnimation();
 
         iSessionCallback = new ISessionCallback() {
             @Override
@@ -33,12 +40,12 @@ public class SplashActivity extends AppCompatActivity {
 
         Session.getCurrentSession().addCallback(iSessionCallback);
 
-        findViewById(R.id.splash).postDelayed(()-> {
+        findViewById(R.id.animation_view).postDelayed(()-> {
             if (!Session.getCurrentSession().checkAndImplicitOpen()) {
                 Log.e("postDelayed ::", "call redir");
                 redirectToLoginActivity();
             }
-        }, 1000);
+        }, 1500);
     }
 
     @Override

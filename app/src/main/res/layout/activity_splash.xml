@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,12 +7,11 @@
     android:background="@color/colorWhite"
     android:gravity="center">
 
-
-    <ImageView
-        android:id="@+id/splash"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/splash" />
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"/>
 
-
-</FrameLayout>
+</LinearLayout>

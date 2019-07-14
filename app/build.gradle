@@ -44,4 +44,5 @@ dependencies {
 
     //kakao
     implementation group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    implementation 'com.airbnb.android:lottie:3.0.1'
 }
