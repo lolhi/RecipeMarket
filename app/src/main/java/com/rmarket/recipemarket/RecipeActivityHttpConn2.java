@@ -64,6 +64,8 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private TextView[] grid_title = new TextView[6];
     private TextView[] grid_subtitle = new TextView[6];
     private TextView[] grid_time = new TextView[6];
+    private HttpURLConnection conn;
+
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -127,7 +129,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                     return true;
                 }
             });
-            HttpURLConnection conn = httpsURLConnection;
+            conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -164,6 +166,10 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         } catch (IOException e) {
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
+        }
+        finally {
+            if(conn != null)
+                conn.disconnect();
         }
         publishProgress(receiveMsg);
         return receiveMsg;

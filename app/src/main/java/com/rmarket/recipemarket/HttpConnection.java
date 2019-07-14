@@ -34,6 +34,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
     private Exception e;
     private String sUrl;
     private JSONObject jsonObj;
+    private HttpURLConnection conn;
 
     public HttpConnection(String sUrl, JSONObject josnObj) {
         this.sUrl = sUrl;
@@ -55,7 +56,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
                     return true;
                 }
             });
-            HttpURLConnection conn = httpsURLConnection;
+            conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -100,6 +101,10 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
         } catch (IOException e) {
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
+        }
+        finally {
+            if(conn != null)
+                conn.disconnect();
         }
 
         return receiveMsg;

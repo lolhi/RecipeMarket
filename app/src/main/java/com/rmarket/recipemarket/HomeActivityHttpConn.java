@@ -50,6 +50,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
     private RecyclerView home_recycle;
     private FragmentAdapter fragmentAdapter;
     private JSONArray jsonArr;
+    private HttpURLConnection conn;
 
     public HomeActivityHttpConn(Context context, String sUrl, FragmentManager fm, RecyclerView home_recycle, ArrayList<RecommendItem> RecommandaArrList, AppCompatDialog progressDialog) {
         this.context = context;
@@ -88,7 +89,7 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
                     return true;
                 }
             });
-            HttpURLConnection conn = httpsURLConnection;
+            conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -125,6 +126,10 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
         } catch (IOException e) {
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
+        }
+        finally {
+            if(conn != null)
+                conn.disconnect();
         }
 
         return receiveMsg;

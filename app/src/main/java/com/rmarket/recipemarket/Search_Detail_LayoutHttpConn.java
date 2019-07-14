@@ -50,6 +50,7 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
     private GridView grid;
     private RelativeLayout re;
     private TextView tvSearchFail;
+    private HttpURLConnection conn;
 
     public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid, RelativeLayout re, TextView tvSearchFail) {
         this.context = context;
@@ -79,7 +80,7 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
                     return true;
                 }
             });
-            HttpURLConnection conn = httpsURLConnection;
+            conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -116,6 +117,10 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
         } catch (IOException e) {
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
+        }
+        finally {
+            if(conn != null)
+                conn.disconnect();
         }
         try {
             if(new JSONArray(receiveMsg).length() == 0)

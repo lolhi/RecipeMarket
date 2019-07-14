@@ -50,6 +50,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
     private RecyclerView detail_recycle;
     private JSONArray jsonArr;
     private RecipeActivity_detailHttpConn httpConn;
+    private HttpURLConnection conn;
 
     public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem,ArrayList<Materialitem> MaterialArrList, AppCompatDialog progressDialog) {
         this.context = context;
@@ -80,7 +81,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                     return true;
                 }
             });
-            HttpURLConnection conn = httpsURLConnection;
+            conn = httpsURLConnection;
             if (conn != null) {
                 //연결 제한 시간을 1/1000 초 단위로 지정합니다.
                 //0이면 무한 대기입니다.
@@ -118,6 +119,11 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
             //인터넷 연결 실패에 대한 exception 추가
             this.e = e;
         }
+        finally {
+            if(conn != null)
+                conn.disconnect();
+        }
+
 
         return receiveMsg;
     }
