@@ -2,11 +2,13 @@ package com.rmarket.recipemarket;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -157,12 +159,22 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
                         jsonObj.getString("SUMRY"),
                         jsonObj.getString("COOKING_TIME"),
                         jsonObj.getString("IMG_URL"),
-                        jsonObj.getString("LEVEL_NM")));
+                        jsonObj.getString("LEVEL_NM"),
+                        jsonObj.getString("CALORIE"),
+                        jsonObj.getString("RECIPE_ID")));
             }
 
             CustomGrid adapter = new CustomGrid(context, CategoryArrList, progressDialog);
             grid.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(context, RecipeActivity_detail.class);
+                    intent.putExtra("RecommandItem",CategoryArrList.get(i));
+                    context.startActivity(intent);
+                }
+            });
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -320,7 +320,6 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                             }
                             LinearLayout con = view.findViewById(R.id.con);
                             con.addView(callGl);
-
                         }
                     }
                 });
@@ -358,6 +357,12 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                 frameAnimation.start();
             }
         });
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 
     private void initIndicaotor() {

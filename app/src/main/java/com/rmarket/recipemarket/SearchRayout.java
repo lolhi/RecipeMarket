@@ -254,6 +254,7 @@ public class SearchRayout extends AppCompatActivity {
                 //Enter key Action
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     if(search_edit.getText().toString().equals("")) {
+                        search_edit.setText("");
                         Toast.makeText(mContext, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
                         return false;
                     }
