@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +66,10 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private TextView[] grid_title = new TextView[6];
     private TextView[] grid_subtitle = new TextView[6];
     private TextView[] grid_time = new TextView[6];
+    private LinearLayout[] ll_gridlayout = new LinearLayout[6];
+    private CustomScrollView recipeScrollView;
+    private boolean mLockScrollView = false;
+    private int position = 6;
     private HttpURLConnection conn;
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -85,13 +91,14 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
 
     };
 
-    public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView) {
+    public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView, CustomScrollView recipeScrollView) {
         this.context = context;
         this.sUrl = sUrl;
         this.fm = fm;
         this.FullRecipeArrList = FullRecipeArrList;
         this.progressDialog = progressDialog;
         this.rootView = rootView;
+        this.recipeScrollView = recipeScrollView;
     }
 
     public ArrayList<RecommendItem> getRecommandaArrList() {
@@ -200,7 +207,9 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                             jsonObj.getString("SUMRY"),
                             jsonObj.getString("COOKING_TIME"),
                             jsonObj.getString("IMG_URL"),
-                            jsonObj.getString("LEVEL_NM")));
+                            jsonObj.getString("LEVEL_NM"),
+                            jsonObj.getString("CALORIE"),
+                            jsonObj.getString("RECIPE_ID")));
                 }
             }
 
@@ -262,11 +271,61 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                     grid_subtitle[i].setText(FullRecipeArrList.get(i).getSubtitle());
                     grid_time[i].setText(FullRecipeArrList.get(i).getTime());
                     grid_title[i].setText(FullRecipeArrList.get(i).getTitle());
+                    ll_gridlayout[i].setTag(i);
+                    ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int tag = (Integer) view.getTag();
+
+                            Intent intent = new Intent(context, RecipeActivity_detail.class);
+                            intent.putExtra("RecommandItem",FullRecipeArrList.get(tag));
+                            context.startActivity(intent);
+                        }
+
+                    });
                 }
                 LinearLayout con = rootView.findViewById(R.id.con);
                 con.addView(callGl);
+
+                recipeScrollView.setScrollViewListener(new ScrollViewListener() {
+
+                    @Override
+                    public void onScrollChanged(CustomScrollView scrollView, int x, int y, int oldx, int oldy) {
+                        final View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
+                        int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
+
+                        if (diff == 0 && mLockScrollView == false) { // 스크롤 bottom
+                            int length = position + 6;
+                            CallGridlayout callGl = new CallGridlayout(context);
+                            View childView = callGl.getChildView();
+                            SetFindViewById(childView);
+                            for (int i = 0; position < length; i++, position++) {
+                                GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
+                                int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+                                grid_level[i].setImageResource(levelImg);
+                                grid_subtitle[i].setText(FullRecipeArrList.get(position).getSubtitle());
+                                grid_time[i].setText(FullRecipeArrList.get(position).getTime());
+                                grid_title[i].setText(FullRecipeArrList.get(position).getTitle());
+                                ll_gridlayout[i].setTag(position);
+                                ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        int tag = (Integer) view.getTag();
+
+                                        Intent intent = new Intent(context, RecipeActivity_detail.class);
+                                        intent.putExtra("RecommandItem",FullRecipeArrList.get(tag));
+                                        context.startActivity(intent);
+                                    }
+                                });
+                            }
+                            LinearLayout con = view.findViewById(R.id.con);
+                            con.addView(callGl);
+
+                        }
+                    }
+                });
             } else {
-                http2 = new RecipeActivityHttpConn2(context, "TodaySpecialPrice", fm, this.getFullRecipeArrList(), progressDialog, rootView);
+                http2 = new RecipeActivityHttpConn2(context, "TodaySpecialPrice", fm, this.getFullRecipeArrList(), progressDialog, rootView, recipeScrollView);
                 http2.execute();
             }
         } catch (JSONException e) {
@@ -312,6 +371,14 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     }
 
     private void SetFindViewById(View childView) {
+
+        ll_gridlayout[0] = childView.findViewById(R.id.ll_gridlayout0);
+        ll_gridlayout[1] = childView.findViewById(R.id.ll_gridlayout1);
+        ll_gridlayout[2] = childView.findViewById(R.id.ll_gridlayout2);
+        ll_gridlayout[3] = childView.findViewById(R.id.ll_gridlayout3);
+        ll_gridlayout[4] = childView.findViewById(R.id.ll_gridlayout4);
+        ll_gridlayout[5] = childView.findViewById(R.id.ll_gridlayout5);
+
         grid_image[0] = childView.findViewById(R.id.grid_image0);
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);

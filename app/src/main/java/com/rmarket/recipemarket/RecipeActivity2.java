@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
@@ -16,13 +18,12 @@ import java.util.ArrayList;
 
 public class RecipeActivity2 extends Fragment {
     private CustomScrollView recipeScrollView;
-    private boolean mLockScrollView = false;
-    private int position = 0;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
     private TextView[] grid_title = new TextView[6];
     private TextView[] grid_subtitle = new TextView[6];
     private TextView[] grid_time = new TextView[6];
+    private LinearLayout[] ll_gridlayout = new LinearLayout[6];
 
 
     public static RecipeActivity2 newInstance() {
@@ -32,6 +33,7 @@ public class RecipeActivity2 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -40,50 +42,21 @@ public class RecipeActivity2 extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_recipe2, container, false); // 여기서 UI를 생성해서 View를 return
         recipeScrollView = view.findViewById(R.id.scrollview_recipe);
-        final RecipeActivityHttpConn2 httpConn2 = new RecipeActivityHttpConn2(getActivity(), "FullRecipe", getChildFragmentManager(), new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()), view);
+        final RecipeActivityHttpConn2 httpConn2 = new RecipeActivityHttpConn2(getActivity(), "FullRecipe", getChildFragmentManager(), new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()), view, recipeScrollView);
         httpConn2.execute();
 
-        recipeScrollView.setScrollViewListener(new ScrollViewListener() {
-
-            @Override
-            public void onScrollChanged(CustomScrollView scrollView, int x, int y, int oldx, int oldy) {
-                final View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
-                int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-
-                if (diff == 0 && mLockScrollView == false) { // 스크롤 bottom
-                    new Thread(new Runnable() {
-                        ArrayList<RecommendItem> FullRecipeArrList = httpConn2.getFullRecipeArrList();
-
-                        @Override
-                        public void run() {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    int length = position + 6;
-                                    CallGridlayout callGl = new CallGridlayout(getActivity());
-                                    View childView = callGl.getChildView();
-                                    SetFindViewById(childView);
-                                    for (int i = 0; position < length; i++, position++) {
-                                        GlideApp.with(getActivity()).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
-                                        int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-                                        grid_level[i].setImageResource(levelImg);
-                                        grid_subtitle[i].setText(FullRecipeArrList.get(position).getSubtitle());
-                                        grid_time[i].setText(FullRecipeArrList.get(position).getTime());
-                                        grid_title[i].setText(FullRecipeArrList.get(position).getTitle());
-                                    }
-                                    LinearLayout con = view.findViewById(R.id.con);
-                                    con.addView(callGl);
-                                }
-                            });
-                        }
-                    }).start();
-                }
-            }
-        });
         return view;
     }
 
     private void SetFindViewById(View childView) {
+
+        ll_gridlayout[0] = childView.findViewById(R.id.ll_gridlayout0);
+        ll_gridlayout[1] = childView.findViewById(R.id.ll_gridlayout1);
+        ll_gridlayout[2] = childView.findViewById(R.id.ll_gridlayout2);
+        ll_gridlayout[3] = childView.findViewById(R.id.ll_gridlayout3);
+        ll_gridlayout[4] = childView.findViewById(R.id.ll_gridlayout4);
+        ll_gridlayout[5] = childView.findViewById(R.id.ll_gridlayout5);
+
         grid_image[0] = childView.findViewById(R.id.grid_image0);
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);
