@@ -41,6 +41,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
     private AppCompatDialog progressDialog;
     private CircleAnimIndicator circleAnimIndicator;
+    private int flag = 0;
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -181,7 +182,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         //애니메이션 속도
         circleAnimIndicator.setAnimDuration(300);
         //indecator 생성
-        circleAnimIndicator.createDotPanel(NoticeArrList.size(), R.drawable.dot_no, R.drawable.dot_color);
+        circleAnimIndicator.createDotPanel(flag ==0 ? NoticeArrList.size() : 0, R.drawable.dot_no, R.drawable.dot_color);
+        flag = 1;
     }
 
     class Home_Recycle_Header extends RecyclerView.ViewHolder {

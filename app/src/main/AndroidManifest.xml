@@ -44,6 +44,7 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".ActivityBasket"/>
         <activity android:name=".ActivityAcoount"/>
+
     </application>
 
 </manifest>
