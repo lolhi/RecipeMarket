@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recommend_detail_recycle"
+        android:id="@+id/recommend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -18,21 +18,13 @@
         android:background="@color/colorWhite"
         android:padding="4dp">
 
-        <ImageView
-            android:id="@+id/srcap"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="4dp"
-            android:layout_weight="8"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/scrap" />
+       <EditText
+           android:layout_width="0dp"
+           android:layout_height="45dp"
+           android:layout_weight="8"/>
 
         <ImageView
-            android:id="@+id/comment"
+            android:id="@+id/commenddt"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_gravity="center_vertical"

@@ -49,7 +49,7 @@ public class ShoppingActivity extends Fragment {
         shopping3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Toast.makeText(mContext, "판매자와 협의중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "판매자와 협의중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
