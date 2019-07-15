@@ -18,6 +18,9 @@ import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ActivityAcoount extends AppCompatActivity {
     Context mContext;
     ImageView back;
@@ -46,6 +49,18 @@ public class ActivityAcoount extends AppCompatActivity {
                                             @Override
                                             public void onCompleteLogout() {
                                                 goToLoginActivity();
+                                            }
+
+                                            @Override
+                                            public void onSessionClosed(ErrorResult errorResult) {
+                                                super.onSessionClosed(errorResult);
+                                                Toast.makeText(mContext, "로그인 상태가 아닙니다. 로그인 후 시도해주세요.", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void onNotSignedUp() {
+                                                super.onNotSignedUp();
+                                                Toast.makeText(mContext, "로그인 상태가 아닙니다. 로그인 후 시도해주세요.", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                         dialog.dismiss();
@@ -79,6 +94,7 @@ public class ActivityAcoount extends AppCompatActivity {
 
                                             @Override
                                             public void onSessionClosed(ErrorResult errorResult) {
+                                                Toast.makeText(mContext, "로그인 상태가 아닙니다. 로그인 후 시도해주세요.", Toast.LENGTH_SHORT).show();
                                                 Log.e("onSessionClosed ::", errorResult.toString());
                                             }
 
@@ -92,6 +108,14 @@ public class ActivityAcoount extends AppCompatActivity {
                                             public void onSuccess(Long userId) {
                                                 Log.e("onSuccess ::", "unlink success");
                                                 //서버로 데이터 보내서 삭제
+                                                JSONObject jsonObj = new JSONObject();
+                                                try {
+                                                    jsonObj.put("ID" ,userId);
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                HttpConnection connPost = new HttpConnection("UnlinkUser",jsonObj);
+                                                connPost.execute();
                                                 goToLoginActivity();
 
                                             }
