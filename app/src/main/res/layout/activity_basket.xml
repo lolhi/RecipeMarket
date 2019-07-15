@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/colorWhite"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/colorWhite"
+        android:layout_marginBottom="3dp"
         >
 
 
@@ -37,4 +38,14 @@
             app:srcCompat="@drawable/back_arr" />
 
     </RelativeLayout>
+
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+
+             android:layout_gravity="center"
+            app:srcCompat="@drawable/empty" />
+
 </LinearLayout>

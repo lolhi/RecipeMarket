@@ -10,21 +10,21 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ShoppingDetail extends AppCompatActivity {
+public class shopping_detail2 extends AppCompatActivity {
     Context mContext;
-    ImageView onion,corn,honey,potato;
+    ImageView jadoo,apple,prefare1,prefare2;
     ImageView back,basket;
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shopping_ranina);
-        onion = findViewById(R.id.ranina_onion);
-        corn = findViewById(R.id.ranina_corn);
-        honey = findViewById(R.id.ranina_honey);
-        potato = findViewById(R.id.ranina_potato);
+        setContentView(R.layout.shopping_gizo);
+        jadoo = findViewById(R.id.gizo_jadoo);
+        apple = findViewById(R.id.gizo_apple);
+        prefare1 = findViewById(R.id.gizo_prefare1);
+        prefare2 = findViewById(R.id.gizo_prefare2);
 
-        back = findViewById(R.id.ranina_back);
-        basket = findViewById(R.id.ranina_basket);
+        back = findViewById(R.id.gizo_back);
+        basket = findViewById(R.id.gizo_basket);
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -39,27 +39,27 @@ public class ShoppingDetail extends AppCompatActivity {
             }
         });
 
-        onion.setOnClickListener(new View.OnClickListener() {
+        jadoo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "만생종 저장 양파 준비중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "김천 자두 준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        potato.setOnClickListener(new View.OnClickListener() {
+        apple.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "춘천 소양강 감자 준비중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "김천 사과 준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        honey.setOnClickListener(new View.OnClickListener() {
+        prefare1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "잡화꿀 준비중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "상품 준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        corn.setOnClickListener(new View.OnClickListener() {
+        prefare2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "고랭지 백찰 옥수수 준비중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "상품 준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

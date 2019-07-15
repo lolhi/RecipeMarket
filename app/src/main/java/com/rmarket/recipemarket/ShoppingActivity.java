@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -30,12 +31,27 @@ public class ShoppingActivity extends Fragment {
 
 
        shopping1.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-               Intent intent = new Intent(getActivity(), ShoppingDetail.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ShoppingDetail.class);
 
-               getActivity().startActivity(intent);
-           }
-       });
+                getActivity().startActivity(intent);
+            }
+        });
+
+        shopping2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), shopping_detail2.class);
+
+                getActivity().startActivity(intent);
+            }
+        });
+
+        shopping3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Toast.makeText(mContext, "판매자와 협의중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

@@ -29,7 +29,8 @@ public class SearchRayout extends AppCompatActivity {
     EditText search_edit;
     GridView grid1, grid2;
     ImageView search_button;//오른쪽 상단 서치버튼
-    ImageView img_italy;
+    ImageView imgnation[];
+    ImageView imgfood[];
     Context mContext;
 
     @Override
@@ -41,7 +42,13 @@ public class SearchRayout extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         search_button = (ImageView) findViewById(R.id.search_button);
         search_edit = (EditText) findViewById(R.id.search_edit);
-        img_italy = findViewById(R.id.nation4);
+
+
+        imgnation = new ImageView[]{findViewById(R.id.nation0), findViewById(R.id.nation1),findViewById(R.id.nation2),findViewById(R.id.nation3),findViewById(R.id.nation4),findViewById(R.id.nation5)};
+
+        imgfood = new ImageView[]{findViewById(R.id.cook0), findViewById(R.id.cook1),findViewById(R.id.cook2),findViewById(R.id.cook3),findViewById(R.id.cook4),findViewById(R.id.cook5),findViewById(R.id.cook6),findViewById(R.id.cook7)};
+
+
 
         final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
         arrList.add(new SearchCategoryItem("한국", "한식", R.drawable.nation_korea));
@@ -62,12 +69,12 @@ public class SearchRayout extends AppCompatActivity {
         final ArrayList<SearchCategoryItem> arrList2 = new ArrayList<>();
         arrList2.add(new SearchCategoryItem("밥", "", R.drawable.rice));
         arrList2.add(new SearchCategoryItem("볶음", "", R.drawable.bukum));
-        arrList2.add(new SearchCategoryItem("밑반찬", "밑반찬/김치", R.drawable.mitbanchan));
-        arrList2.add(new SearchCategoryItem("튀김", "튀김/커틀릿", R.drawable.fried));
+        arrList2.add(new SearchCategoryItem("밑반찬", "밑반찬/김치", R.drawable.level_hight));
+        arrList2.add(new SearchCategoryItem("튀김", "튀김/커틀릿", R.drawable.level_hight));
         arrList2.add(new SearchCategoryItem("찌개", "찌개/전골/스튜", R.drawable.chigga));
         arrList2.add(new SearchCategoryItem("면류", "만두/면류", R.drawable.nuddle));
-        arrList2.add(new SearchCategoryItem("구이", "", R.drawable.guii));
-        arrList2.add(new SearchCategoryItem("국", "", R.drawable.kuk));
+        arrList2.add(new SearchCategoryItem("구이", "", R.drawable.level_hight));
+        arrList2.add(new SearchCategoryItem("국", "", R.drawable.level_hight));
 //        CustomGridsubject2 adapter_2 = new CustomGridsubject2(mContext, arrList2);
 //        grid2 = (GridView) findViewById(R.id.grid_cook);
 //        grid2.setAdapter(adapter_2);
@@ -107,102 +114,147 @@ public class SearchRayout extends AppCompatActivity {
 
 
 
-
-
-//        for (int i = 0; i < tabHost1.getTabWidget().getChildCount(); i++) {
-//            tabHost1.getTabWidget().getChildAt(i)
-//                    .setBackgroundResource(nonselect_bar); // unselected
-//        }
-//        tabHost1.getTabWidget().getChildAt(tabHost1.getCurrentTab()).setBackgroundResource(R.drawable.select_bar);
-//
-
-        img_italy.setOnClickListener(new View.OnClickListener() {
+        imgnation[0].setOnClickListener(new View.OnClickListener() {
             Intent intent = new Intent(mContext, Search_Detail_Layout.class);
             public void onClick(View v) {
-
-                intent.putExtra("SearchString",arrList.get(4).getCategoryName());
-                mContext.startActivity(intent);
-                // your code here
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(0).getRealName());
+                   mContext.startActivity(intent);
             }
         });
 
-        // selected
-////            ItemClickSupport.addTo(grid,R.id.grid_subject).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//////                @Override
-//////                public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//////                    Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-//                    if(arrList.get(position).getRealName().equals(""))
-//                        intent.putExtra("SearchString",arrList.get(position).getCategoryName());
-//                    else
-//                        intent.putExtra("SearchString",arrList.get(position).getRealName());
-//                    mContext.startActivity(intent);
-//////                }
-//////            });
+        imgnation[1].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(1).getCategoryName());
+                  mContext.startActivity(intent);
+            }
+        });
+        imgnation[2].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(2).getCategoryName());
+                mContext.startActivity(intent);
+            }
+        });
+        imgnation[3].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(3).getCategoryName());
+                mContext.startActivity(intent);
+            }
+        });
+        imgnation[4].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(4).getCategoryName());
+                mContext.startActivity(intent);
+            }
+        });
+        imgnation[5].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+                intent.putExtra("Category", "NATION_NM");
+                intent.putExtra("SearchString",arrList.get(5).getCategoryName());
+                mContext.startActivity(intent);
+            }
+        });
 
-//        tabHost1.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-//
-//            public void onTabChanged(String arg0) {
-//                for (int i = 0; i < tabHost1.getTabWidget().getChildCount(); i++) {
-//                    tabHost1.getTabWidget().getChildAt(i)
-//                            .setBackgroundResource(nonselect_bar); // unselected
-//                }
-//                tabHost1.getTabWidget().getChildAt(tabHost1.getCurrentTab())
-//                        .setBackgroundResource(R.drawable.select_bar); // selected
-//
-//            }
-//        });
 
-//        grid1.setOnTouchListener(new View.OnTouchListener()
-//        {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
-//                {
-//                    return true;
-//                }
-//                return false;
-//            }
-//
-//        });
+        imgfood[0].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
 
+                intent.putExtra("SearchString",arrList2.get(0).getCategoryName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+
+        imgfood[1].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(1).getCategoryName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+
+        imgfood[2].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(2).getRealName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+
+        imgfood[3].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(3).getRealName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+
+        imgfood[4].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(4).getRealName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+
+        imgfood[5].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(5).getRealName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+        imgfood[6].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(6).getCategoryName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
+        imgfood[7].setOnClickListener(new View.OnClickListener() {
+            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+            public void onClick(View v) {
+
+                intent.putExtra("SearchString",arrList2.get(7).getCategoryName());
+                intent.putExtra("Category", "TY_NM");
+                mContext.startActivity(intent);
+            }
+        });
 
 //
-//        grid1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        img_italy.setOnClickListener(new View.OnClickListener() {
+//            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+//            public void onClick(View v) {
 //
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-//                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-//                if (arrList.get(position).getRealName().equals(""))
-//                    intent.putExtra("SearchString", arrList.get(position).getCategoryName());
-//                else
-//                    intent.putExtra("SearchString", arrList.get(position).getRealName());
-//                intent.putExtra("Category", "NATION_NM");
+//                intent.putExtra("SearchString",arrList.get(4).getCategoryName());
 //                mContext.startActivity(intent);
-//
-//
-//
-//                // TODO : use strText
+//                // your code here
 //            }
 //        });
-//
-//        grid2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-//                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-//                if (arrList2.get(position).getRealName().equals(""))
-//                    intent.putExtra("SearchString", arrList2.get(position).getCategoryName());
-//                else
-//                    intent.putExtra("SearchString", arrList2.get(position).getRealName());
-//                intent.putExtra("Category", "TY_NM");
-//                mContext.startActivity(intent);
-//                // TODO : use strText
-//            }
-//        });
+
+
 
         listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             // 코드 계속 ...

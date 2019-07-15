@@ -93,48 +93,48 @@
 
 
     <!--두번째 리니어 레이아웃-->
-    <LinearLayout
-        android:id="@+id/linear_shopping2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="30dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="세도 오이농장"
-                android:layout_gravity="center_vertical"
-                android:fontFamily="@font/nanum_normal"
-                android:textColor="@color/colorModernBlack"
-                android:textSize="15dp"
-                android:gravity="left"
-                />
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1">
-            </LinearLayout>
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:gravity="right"
+                android:id="@+id/linear_shopping2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="스토어 이동하기"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp">
 
-                android:layout_gravity="center_vertical"
-                android:textSize="12dp"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="30dp"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="기조 자두농장"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/nanum_normal"
+                        android:textColor="@color/colorModernBlack"
+                        android:textSize="15dp"
+                        android:gravity="left"
+                        />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1">
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="right"
+                        android:layout_height="wrap_content"
+                        android:text="스토어 이동하기"
+
+                        android:layout_gravity="center_vertical"
+                        android:textSize="12dp"
 
                 android:fontFamily="@font/nanum_normal"
                 android:textColor="@color/colorRed"/>
@@ -145,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/shopping_2"/>
+            app:srcCompat="@drawable/shopping_3"/>
     </LinearLayout>
 
     <!--3번째 레이아웃 -->
@@ -170,7 +170,7 @@
                 android:layout_weight="1"
                 android:gravity="left"
                 android:layout_height="wrap_content"
-                android:text="기조 자두농장"
+                android:text="세도 오이농장"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/nanum_normal"
                 android:textColor="@color/colorModernBlack"
@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/shopping_3"/>
+            app:srcCompat="@drawable/shopping_2"/>
     </LinearLayout>
 
         <ImageView
