@@ -106,11 +106,17 @@ public class LoginActivity extends AppCompatActivity {
                         jsonParam.put("ID", response.getId());
                         jsonParam.put("NICKNAME", response.getNickname());
                         jsonParam.put("PROFILE_IMG", response.getProfileImagePath() == null ? "NoImg" : response.getProfileImagePath());
+                        JSONObject temp3 = new JSONObject();
+                        temp3.put("SEARCH_STRING","");
+                        JSONArray temp4 = new JSONArray();
+                        temp4.put(temp3);
+                        jsonParam.put("RECENT_SEARCH",temp4);
                         JSONObject temp = new JSONObject();
-                        temp.put("RECIPE_ID",0);
+                        temp.put("RECIPE_ID","");
                         JSONArray temp2 = new JSONArray();
                         temp2.put(temp);
-                        jsonParam.put("LIKE", temp2);
+                        jsonParam.put("CLIPPING", temp2);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
