@@ -91,6 +91,16 @@ public class MypageActivity extends Fragment {
         mypage_recycle.setLayoutManager(layoutManager);
         MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "TodaySpecialPrice", new AppCompatDialog(getActivity()), mypage_recycle);
         http.execute();
+
+        ItemClickSupport.addTo(mypage_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                ArrayList<RecommendItem> RecommandArrList = http.getClippingRecipeArrList();
+                Intent intent = new Intent(getActivity(), RecipeActivity_detail.class);
+                intent.putExtra("RecommandItem", RecommandArrList.get(position ));
+                getActivity().startActivity(intent);
+            }
+        });
         return view;
     }
 

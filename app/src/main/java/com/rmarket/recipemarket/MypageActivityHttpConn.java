@@ -43,7 +43,7 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
     private Exception e;
     private AppCompatDialog progressDialog;
     private String sUrl;
-    private ArrayList<RecommendItem> CategoryArrList = new ArrayList<>();
+    private ArrayList<RecommendItem> ClippingRecipeArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private RecyclerView mypage_recycle;
     HttpURLConnection conn;
@@ -53,6 +53,10 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
         this.mypage_recycle = mypage_recycle;
+    }
+
+    public ArrayList<RecommendItem> getClippingRecipeArrList() {
+        return ClippingRecipeArrList;
     }
 
     @Override
@@ -129,13 +133,15 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-                CategoryArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
+                ClippingRecipeArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
                         jsonObj.getString("SUMRY"),
                         jsonObj.getString("COOKING_TIME"),
                         jsonObj.getString("IMG_URL"),
-                        jsonObj.getString("LEVEL_NM")));
+                        jsonObj.getString("LEVEL_NM"),
+                        jsonObj.getString("CALORIE"),
+                        jsonObj.getString("RECIPE_ID")));
             }
-            Mypage_Recycle_Adaper adapter = new Mypage_Recycle_Adaper(context, CategoryArrList, progressDialog);
+            Mypage_Recycle_Adaper adapter = new Mypage_Recycle_Adaper(context, ClippingRecipeArrList, progressDialog);
             mypage_recycle.setAdapter(adapter);
             mypage_recycle.setItemAnimator(new DefaultItemAnimator());
             adapter.notifyDataSetChanged();

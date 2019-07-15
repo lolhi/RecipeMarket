@@ -66,15 +66,6 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
             ((KnowledgeViewHolder) viewHolder).imgLevel.setImageResource(levelImg);
             ((KnowledgeViewHolder) viewHolder).txtSubTitle.setText(item.getSubtitle());
             ((KnowledgeViewHolder) viewHolder).txtTime.setText(item.getTime());
-
-            ((KnowledgeViewHolder) viewHolder).mypage_layout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, RecipeActivity_detail.class);
-                    intent.putExtra("recipeTitle", item.getTitle());
-                    mContext.startActivity(intent);
-                }
-            });
         }
 
     }
