@@ -39,7 +39,7 @@
                     android:layout_weight="8"
                     android:fontFamily="@font/nanum_bold"
                     android:gravity="left|center_vertical"
-                    android:text="똥꾹 씨발 똥꾹그만"
+                    android:text="낑깡"
                     android:textColor="@color/colorModernBlack"
                     android:textSize="28dp" />
 
