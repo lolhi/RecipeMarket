@@ -16,7 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -33,6 +40,7 @@ public class MypageActivity extends Fragment {
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
     ImageView deliver;
+    ImageView ivClippingFail;
 
     public static MypageActivity newInstance() {
         return new MypageActivity();
@@ -54,6 +62,7 @@ public class MypageActivity extends Fragment {
         userprofile = view.findViewById(R.id.mypage_userimage);
         accountmanager =view.findViewById(R.id.mypage_accountmanage);
         deliver = view.findViewById(R.id.mypage_deliver);
+        ivClippingFail = view.findViewById(R.id.clipping_fail_iv);
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -67,7 +76,6 @@ public class MypageActivity extends Fragment {
         accountmanager.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityAcoount.class);
-
                 getActivity().startActivity(intent);
             }
         });
@@ -89,18 +97,42 @@ public class MypageActivity extends Fragment {
         });
         mypage_recycle.setHasFixedSize(true);
         mypage_recycle.setLayoutManager(layoutManager);
-        MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "TodaySpecialPrice", new AppCompatDialog(getActivity()), mypage_recycle);
-        http.execute();
 
-        ItemClickSupport.addTo(mypage_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                ArrayList<RecommendItem> RecommandArrList = http.getClippingRecipeArrList();
-                Intent intent = new Intent(getActivity(), RecipeActivity_detail.class);
-                intent.putExtra("RecommandItem", RecommandArrList.get(position ));
-                getActivity().startActivity(intent);
+            public void onSessionClosed(ErrorResult errorResult) {
+                mypage_recycle.setVisibility(View.GONE);
+                ivClippingFail.setVisibility((View.VISIBLE));
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                mypage_recycle.setVisibility(View.VISIBLE);
+                ivClippingFail.setVisibility((View.GONE));
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("ID", result.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http.execute();
+
+                ItemClickSupport.addTo(mypage_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        ArrayList<RecommendItem> RecommandArrList = http.getClippingRecipeArrList();
+                        Intent intent = new Intent(getActivity(), RecipeActivity_detail.class);
+                        intent.putExtra("RecommandItem", RecommandArrList.get(position));
+                        getActivity().startActivity(intent);
+                    }
+                });
+
             }
         });
+
+
+
         return view;
     }
 

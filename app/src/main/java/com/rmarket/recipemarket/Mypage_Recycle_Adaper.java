@@ -40,32 +40,35 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.mypage_recycle_item, null);
-        return new KnowledgeViewHolder(v);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_mypage, null);
+        return new KnowledgeViewHolder(v, rootView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
 
         if (viewHolder instanceof KnowledgeViewHolder) {
-            final RecommendItem item = arrList.get(position);
+                ((KnowledgeViewHolder) viewHolder).mypage_recycer.setVisibility(View.VISIBLE);
+                ((KnowledgeViewHolder) viewHolder).ivClippingFail.setVisibility(View.GONE);
+                final RecommendItem item = arrList.get(position);
 
-            Glide.with(mContext).load(item.getImage()).addListener(new RequestListener<Drawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                    return false;
-                }
+                Glide.with(mContext).load(item.getImage()).addListener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
 
-                @Override
-                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                    progressOFF();
-                    return false;
-                }
-            }).into(((KnowledgeViewHolder) viewHolder).imgImage);
-            ((KnowledgeViewHolder) viewHolder).txtTitle.setText(item.getTitle());
-            int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            ((KnowledgeViewHolder) viewHolder).imgLevel.setImageResource(levelImg);
-            ((KnowledgeViewHolder) viewHolder).txtSubTitle.setText(item.getSubtitle());
-            ((KnowledgeViewHolder) viewHolder).txtTime.setText(item.getTime());
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressOFF();
+                        return false;
+                    }
+                }).into(((KnowledgeViewHolder) viewHolder).imgImage);
+                ((KnowledgeViewHolder) viewHolder).txtTitle.setText(item.getTitle());
+                int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+                ((KnowledgeViewHolder) viewHolder).imgLevel.setImageResource(levelImg);
+                ((KnowledgeViewHolder) viewHolder).txtSubTitle.setText(item.getSubtitle());
+                ((KnowledgeViewHolder) viewHolder).txtTime.setText(item.getTime());
         }
 
     }
@@ -86,8 +89,10 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
         TextView txtTitle, txtSubTitle, txtTime;
         ImageView imgImage, imgLevel;
         LinearLayout mypage_layout;
+        RecyclerView mypage_recycer;
+        ImageView ivClippingFail;
 
-        public KnowledgeViewHolder(View itemView) {
+        public KnowledgeViewHolder(View itemView, View rootView) {
             super(itemView);
             mypage_layout = itemView.findViewById(R.id.mypage_layout);
             txtTitle = itemView.findViewById(R.id.mypage_title);
@@ -96,7 +101,8 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
             imgLevel = itemView.findViewById(R.id.mypage_level);
             txtTime = itemView.findViewById(R.id.mypage_time);
 
-
+            mypage_recycer = rootView.findViewById(R.id.mypage_recycle);
+            ivClippingFail = rootView.findViewById(R.id.clipping_fail_iv);
         }
     }
 }

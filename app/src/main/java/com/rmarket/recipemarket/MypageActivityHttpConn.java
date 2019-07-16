@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDialog;
@@ -19,6 +20,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ import javax.net.ssl.X509TrustManager;
  * @since 2019-07-05
  **/
 
-public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
+public class MypageActivityHttpConn extends AsyncTask<String, Integer, String> {
     private Context context;
     private Exception e;
     private AppCompatDialog progressDialog;
@@ -46,13 +48,17 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
     private ArrayList<RecommendItem> ClippingRecipeArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private RecyclerView mypage_recycle;
-    HttpURLConnection conn;
+    private HttpURLConnection conn;
+    private JSONObject jsonObj;
+    private ImageView ivClippingFail;
 
-    public MypageActivityHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView mypage_recycle) {
+    public MypageActivityHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView mypage_recycle, JSONObject jsonObject, ImageView ivClippingFail) {
         this.context = context;
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
         this.mypage_recycle = mypage_recycle;
+        this.jsonObj = jsonObject;
+        this.ivClippingFail = ivClippingFail;
     }
 
     public ArrayList<RecommendItem> getClippingRecipeArrList() {
@@ -70,6 +76,7 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
         URL url = null;
         try {
             url = new URL(UrlClass.Url + sUrl);
+
             trustAllHosts();
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
             httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
@@ -92,13 +99,21 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
 
                 //http 연결의 경우 요청방식을 지정할수 있습니다.
                 //지정하지 않으면 디폴트인 GET 방식이 적용됩니다.
-                conn.setRequestMethod("GET");
+                conn.setRequestMethod("POST");
 
                 //서버에 요청을 보내가 응답 결과를 받아옵니다.
-                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                conn.setDefaultUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                os.write(jsonObj.toString().getBytes("UTF-8"));
+                os.flush();
+                os.close();
+
                 int resCode = conn.getResponseCode();
-
-
                 if (resCode == conn.HTTP_OK) {
                     InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                     BufferedReader reader = new BufferedReader(tmp);
@@ -121,13 +136,28 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
                 conn.disconnect();
         }
 
+        if(receiveMsg.equals(""))
+            publishProgress(View.GONE, View.VISIBLE);
+        else
+            publishProgress(View.VISIBLE, View.GONE);
         return receiveMsg;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        mypage_recycle.setVisibility(values[0]);
+        ivClippingFail.setVisibility(values[1]);
     }
 
     @Override
     protected void onPostExecute(String jsonData) {
 
         try {
+            if(jsonData.equals("")) {
+                progressOFF();
+                return;
+            }
             jsonArr = new JSONArray(jsonData);
 
             for (int i = 0; i < jsonArr.length(); i++) {
@@ -170,6 +200,12 @@ public class MypageActivityHttpConn extends AsyncTask<String, Void, String> {
                 frameAnimation.start();
             }
         });
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
     private static void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains

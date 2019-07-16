@@ -3,6 +3,7 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,14 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -48,8 +57,30 @@ public class RecipeActivity_detail extends AppCompatActivity {
         scrap_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
             @Override
             public void onClick(View v) { //클릭 했을경우
-//                Toast.makeText(getApplicationContext(), search_text + " : Scrap", Toast.LENGTH_LONG).show();
-                Toast.makeText(mcontext, "아직 준비중입니다.", Toast.LENGTH_SHORT).show();
+                UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        // 로그인 x
+                        Log.e("onSessionClosed ::", errorResult.toString());
+                        Toast.makeText(mcontext, "로그인 하지 않았습니다. 로그인 후 다시 시도해주세요", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(MeV2Response result) {
+                        // 로그인 o
+                        Toast.makeText(mcontext, "스크랩 하였습니다.", Toast.LENGTH_SHORT).show();
+                        Log.e("onSuccess ::", "login");
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("ID",result.getId());
+                            jsonObject.put("RECIPE_ID", recommendItem.getId());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        HttpConnection connPost = new HttpConnection("AddClipping",jsonObject);
+                        connPost.execute();
+                    }
+                });
             }
         });
 
