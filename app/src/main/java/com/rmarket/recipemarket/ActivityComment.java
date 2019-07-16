@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ActivityComment extends AppCompatActivity {
     Context mContext;
@@ -51,7 +53,14 @@ public class ActivityComment extends AppCompatActivity {
         //댓글등록 버튼 클릭이벤트 구현...
         comment_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "버튼이 입력되었습니다.", Toast.LENGTH_SHORT).show();
+
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+
+                String getTime = sdf.format(date);
+
+                Toast.makeText(mContext, getTime, Toast.LENGTH_SHORT).show();
             }
         });
 

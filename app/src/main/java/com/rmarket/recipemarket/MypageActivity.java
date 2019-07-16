@@ -1,6 +1,8 @@
 package com.rmarket.recipemarket;
 
 import android.content.Intent;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,6 +63,10 @@ public class MypageActivity extends Fragment {
         basket = view.findViewById(R.id.mypage_basket);
         username = view.findViewById(R.id.mypage_username);
         userprofile = view.findViewById(R.id.mypage_userimage);
+        userprofile.setBackground(new ShapeDrawable(new OvalShape()));
+        userprofile.setClipToOutline(true);
+
+
         accountmanager =view.findViewById(R.id.mypage_accountmanage);
         deliver = view.findViewById(R.id.mypage_deliver);
         ivClippingFail = view.findViewById(R.id.clipping_fail_iv);
