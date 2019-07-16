@@ -312,6 +312,7 @@ public class SearchRayout extends AppCompatActivity {
                             }
                             HttpConnection connPost = new HttpConnection(SearchRayout.this,"AddResentSearch", jsonObject);
                             connPost.execute();
+
                         }
                     });
 
@@ -327,5 +328,28 @@ public class SearchRayout extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
 
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                ListView listview_resent = (ListView) findViewById(R.id.search_list_recent);
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("ID", result.getId());
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                SearchLayoutHttpConn connPost = new SearchLayoutHttpConn(SearchRayout.this, "GetRecentSearch",new AppCompatDialog(SearchRayout.this),jsonObject, listview_resent);
+                connPost.execute();
+            }
+        });
+    }
 }

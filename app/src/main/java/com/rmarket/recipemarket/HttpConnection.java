@@ -115,6 +115,7 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             else
                 publishProgress("스크랩 하였습니다.");
         }
+
         return receiveMsg;
     }
 
