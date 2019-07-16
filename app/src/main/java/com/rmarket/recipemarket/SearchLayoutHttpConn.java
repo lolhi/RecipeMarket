@@ -1,20 +1,34 @@
 package com.rmarket.recipemarket;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatDialog;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -24,24 +38,35 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * HttpConnection.java
+ * MypageActivityHttpConn.java
  *
  * @author Yongju Jang
  * @version 1.0.0
  * @since 2019-07-05
  **/
 
-public class HttpConnection extends AsyncTask<String, String, String> {
-    private Context mContext;
+public class SearchLayoutHttpConn extends AsyncTask<String, Integer, String> {
+    private Context context;
     private Exception e;
+    private AppCompatDialog progressDialog;
     private String sUrl;
-    private JSONObject jsonObj;
+    private ArrayList<String> recentSearchArrList = new ArrayList<>();
+    private JSONArray jsonArr;
     private HttpURLConnection conn;
+    private JSONObject jsonObj;
+    private ListView listview_resent;
 
-    public HttpConnection(Context mContext, String sUrl, JSONObject josnObj) {
+    public SearchLayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, JSONObject jsonObject, ListView listview_resent) {
+        this.context = context;
         this.sUrl = sUrl;
-        this.jsonObj = josnObj;
-        this.mContext = mContext;
+        this.progressDialog = progressDialog;
+        this.jsonObj = jsonObject;
+        this.listview_resent = listview_resent;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressON(context);
     }
 
     @Override
@@ -109,21 +134,83 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             if(conn != null)
                 conn.disconnect();
         }
-        if(sUrl.equals("AddClipping")) {
-            if (receiveMsg.equals("exist"))
-                publishProgress("이미 스크랩한 레시피 입니다.");
-            else
-                publishProgress("스크랩 하였습니다.");
-        }
+
+        if(receiveMsg.equals(""))
+            publishProgress(View.GONE);
+        else
+            publishProgress(View.VISIBLE);
         return receiveMsg;
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
+    protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
+        listview_resent.setVisibility(values[0]);
     }
 
+    @Override
+    protected void onPostExecute(String jsonData) {
+
+        try {
+            if(jsonData.equals("")) {
+                progressOFF();
+                return;
+            }
+            jsonArr = new JSONArray(jsonData);
+
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                recentSearchArrList.add(jsonObj.getString("SEARCH_STRING"));
+            }
+            ArrayAdapter adapter2 = new ArrayAdapter(context, android.R.layout.simple_list_item_1, recentSearchArrList);
+            listview_resent.setAdapter(adapter2);
+            progressOFF();
+            listview_resent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // 코드 계속 ...
+
+                @Override
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    // get TextView's Text.
+                    Intent intent = new Intent(context, Search_Detail_Layout.class);
+                    intent.putExtra("SearchString", recentSearchArrList.get(position));
+                    intent.putExtra("Category", "");
+                    context.startActivity(intent);
+                    // TODO : use strText
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        super.onPostExecute(jsonData);
+    }
+
+    public void progressON(Context mContext) {
+        if (((Activity) mContext).isFinishing()) {
+            return;
+        }
+
+        progressDialog.setCancelable(false);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_layout);
+        progressDialog.show();
+
+        final ImageView img_loading_frame = (ImageView) progressDialog.findViewById(R.id.iv_frame_loading);
+        final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
+        img_loading_frame.post(new Runnable() {
+            @Override
+            public void run() {
+                frameAnimation.start();
+            }
+        });
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
     private static void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {

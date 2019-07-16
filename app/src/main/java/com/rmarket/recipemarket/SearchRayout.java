@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,16 +19,22 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
+
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import static com.rmarket.recipemarket.R.drawable.nonselect_bar;
 
 public class SearchRayout extends AppCompatActivity {
-    static final String[] LIST_MENU_POPULAR = {"감자", "양파", "버섯", "카레", "오징어"}; //두번째tap 배열
-    static final String[] LIST_MENU_RECENT = {"감자", "양파", "버섯", "카레", "오징어"}; // 세번째tap 배열
     EditText search_edit;
-    GridView grid1, grid2;
     ImageView search_button;//오른쪽 상단 서치버튼
     ImageView imgnation[];
     ImageView imgfood[];
@@ -42,13 +49,8 @@ public class SearchRayout extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         search_button = (ImageView) findViewById(R.id.search_button);
         search_edit = (EditText) findViewById(R.id.search_edit);
-
-
         imgnation = new ImageView[]{findViewById(R.id.nation0), findViewById(R.id.nation1),findViewById(R.id.nation2),findViewById(R.id.nation3),findViewById(R.id.nation4),findViewById(R.id.nation5)};
-
         imgfood = new ImageView[]{findViewById(R.id.cook0), findViewById(R.id.cook1),findViewById(R.id.cook2),findViewById(R.id.cook3),findViewById(R.id.cook4),findViewById(R.id.cook5),findViewById(R.id.cook6),findViewById(R.id.cook7)};
-
-
 
         final ArrayList<SearchCategoryItem> arrList = new ArrayList<>();
         arrList.add(new SearchCategoryItem("한국", "한식", R.drawable.nation_korea));
@@ -57,14 +59,6 @@ public class SearchRayout extends AppCompatActivity {
         arrList.add(new SearchCategoryItem("서양", R.drawable.nation_west));
         arrList.add(new SearchCategoryItem("이탈리아", R.drawable.nation_italia));
         arrList.add(new SearchCategoryItem("퓨전", R.drawable.nation_fusion));
-//        arrList.add(new SearchCategoryItem("동남아시아", R.drawable.nation_east));
-//        arrList.add(new SearchCategoryItem("", R.color.colorWhite));
-
-
-//        CustomGridsubject adapter = new CustomGridsubject(mContext, arrList);
-//        grid1 = (GridView) findViewById(R.id.grid_subject);
-//        grid1.setAdapter(adapter);
-
 
         final ArrayList<SearchCategoryItem> arrList2 = new ArrayList<>();
         arrList2.add(new SearchCategoryItem("밥", "", R.drawable.rice));
@@ -75,21 +69,31 @@ public class SearchRayout extends AppCompatActivity {
         arrList2.add(new SearchCategoryItem("면류", "만두/면류", R.drawable.nuddle));
         arrList2.add(new SearchCategoryItem("구이", "", R.drawable.level_hight));
         arrList2.add(new SearchCategoryItem("국", "", R.drawable.level_hight));
-//        CustomGridsubject2 adapter_2 = new CustomGridsubject2(mContext, arrList2);
-//        grid2 = (GridView) findViewById(R.id.grid_cook);
-//        grid2.setAdapter(adapter_2);
 
-
-        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU_RECENT);
-        ListView listview_resent = (ListView) findViewById(R.id.search_list_recent);
-        listview_resent.setAdapter(adapter2);
-
-
-        //인기검색 리스트
-        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU_POPULAR);
         ListView listview_popular = (ListView) findViewById(R.id.search_list_popular);
-        listview_popular.setAdapter(adapter1);
+        SearchLayoutHttpConn2 conn = new SearchLayoutHttpConn2(SearchRayout.this,"GetPopular",listview_popular);
+        conn.execute();
 
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                ListView listview_resent = (ListView) findViewById(R.id.search_list_recent);
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("ID", result.getId());
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                SearchLayoutHttpConn connPost = new SearchLayoutHttpConn(SearchRayout.this, "GetRecentSearch",new AppCompatDialog(SearchRayout.this),jsonObject, listview_resent);
+                connPost.execute();
+            }
+        });
 
         final TabHost tabHost1 = (TabHost) findViewById(R.id.tabHost1);
         tabHost1.setup();
@@ -243,48 +247,6 @@ public class SearchRayout extends AppCompatActivity {
             }
         });
 
-//
-//        img_italy.setOnClickListener(new View.OnClickListener() {
-//            Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-//            public void onClick(View v) {
-//
-//                intent.putExtra("SearchString",arrList.get(4).getCategoryName());
-//                mContext.startActivity(intent);
-//                // your code here
-//            }
-//        });
-
-
-
-        listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            // 코드 계속 ...
-
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-
-                // get TextView's Text.
-                String strText = (String) parent.getItemAtPosition(position);
-
-                // TODO : use strText
-            }
-        });
-
-        listview_resent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            // 코드 계속 ...
-
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-
-                // get TextView's Text.
-                String temp = "위치값" + position;
-                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
-                intent.putExtra("SearchString", temp);
-                mContext.startActivity(intent);
-                // TODO : use strText
-            }
-        });
-
-
         search_button.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
             @Override
 
@@ -293,6 +255,28 @@ public class SearchRayout extends AppCompatActivity {
                     Toast.makeText(mContext, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(MeV2Response result) {
+                        Log.e("OnSuccess :: ", "success");
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("ID", result.getId());
+                            jsonObject.put("SEARCH_STRING", search_edit.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        HttpConnection connPost = new HttpConnection(SearchRayout.this,"AddResentSearch", jsonObject);
+                        connPost.execute();
+                    }
+                });
+
                 Intent intent = new Intent(mContext, Search_Detail_Layout.class);
                 intent.putExtra("Category", "");
                 intent.putExtra("SearchString", search_edit.getText().toString());
@@ -310,6 +294,27 @@ public class SearchRayout extends AppCompatActivity {
                         Toast.makeText(mContext, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
                         return false;
                     }
+                    UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(MeV2Response result) {
+                            Log.e("OnSuccess :: ", "success");
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("ID", result.getId());
+                                jsonObject.put("SEARCH_STRING", search_edit.getText().toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            HttpConnection connPost = new HttpConnection(SearchRayout.this,"AddResentSearch", jsonObject);
+                            connPost.execute();
+                        }
+                    });
+
                     Intent intent = new Intent(mContext, Search_Detail_Layout.class);
                     intent.putExtra("Category", "");
                     intent.putExtra("SearchString", search_edit.getText().toString());
