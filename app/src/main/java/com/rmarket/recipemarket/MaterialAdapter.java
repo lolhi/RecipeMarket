@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class MaterialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<Material_Item> arrList;
+    ArrayList<Materialitem> arrList;
 
-    public MaterialAdapter(ArrayList<Material_Item> arrList) {
+    public MaterialAdapter(ArrayList<Materialitem> arrList) {
         this.arrList = arrList;
     }
 
@@ -29,10 +29,10 @@ public class MaterialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RecyclerViewHolder1 recyclerViewHolder = (RecyclerViewHolder1) holder;
-        Material_Item item = arrList.get(position);
+        Materialitem item = arrList.get(position);
 
-        recyclerViewHolder.material.setText(item.getMaterial());
-        recyclerViewHolder.amount.setText(item.getAmount());
+        recyclerViewHolder.material.setText(item.getMeterialName());
+        recyclerViewHolder.amount.setText(item.getMeterialCpcty());
 
     }
 

@@ -36,7 +36,6 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         recyclerViewHolder.text.setText(item.getCommentText());
         recyclerViewHolder.time.setText(item.getCommetTime());
         recyclerViewHolder.name.setText(item.getCommentName());
-        recyclerViewHolder.profile.setImageResource(item.getCommentProfile());
     }
 
     @Override

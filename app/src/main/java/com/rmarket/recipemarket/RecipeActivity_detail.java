@@ -89,6 +89,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
             public void onClick(View v) { //클릭 했을경우
 //
                 Intent intent = new Intent(mcontext, ActivityComment.class);
+                intent.putExtra("RecommandItem", recommendItem);
                 mcontext.startActivity(intent);
 
             }

@@ -142,7 +142,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/no_scrap2"
                 android:id="@+id/clipping_fail_iv"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:layout_marginTop="50dp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
