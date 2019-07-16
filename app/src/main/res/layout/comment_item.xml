@@ -17,11 +17,11 @@
             android:layout_weight="1.5">
             <ImageView
                 android:id="@+id/comment_profile"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:scaleType="fitXY"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat = "@drawable/profile_raninae"/>
+                app:srcCompat = "@drawable/user_picture"/>
 
         </LinearLayout>
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
 
             android:layout_weight="7"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="7dp"
             android:orientation="vertical">
 <LinearLayout
     android:layout_width="match_parent"
