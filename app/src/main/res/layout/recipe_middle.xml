@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
    >
 
 <LinearLayout
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
-
+        android:textColor="@color/colorModernBlack"
         android:textSize="15dp"
         android:visibility="gone" />
 
@@ -31,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/colorModernBlack"
         android:layout_margin="20dp"
         android:textSize="15dp"
         android:visibility="gone" />
@@ -46,6 +48,7 @@
     <TextView
         android:id="@+id/recipe_text3"
         android:layout_width="match_parent"
+        android:textColor="@color/colorModernBlack"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
@@ -64,6 +67,7 @@
         android:id="@+id/recipe_text4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
         android:textSize="15dp"
@@ -80,6 +84,7 @@
     <TextView
         android:id="@+id/recipe_text5"
         android:layout_width="match_parent"
+        android:textColor="@color/colorModernBlack"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
@@ -97,6 +102,7 @@
     <TextView
         android:id="@+id/recipe_text6"
         android:layout_width="match_parent"
+        android:textColor="@color/colorModernBlack"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
@@ -114,6 +120,7 @@
     <TextView
         android:id="@+id/recipe_text7"
         android:layout_width="match_parent"
+        android:textColor="@color/colorModernBlack"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
@@ -124,6 +131,7 @@
         android:id="@+id/recipe_image7"
         android:layout_width="300dp"
         android:layout_height="200dp"
+
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:visibility="gone" />
@@ -132,6 +140,7 @@
         android:id="@+id/recipe_text8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
         android:layout_gravity="center_vertical"
         android:layout_margin="20dp"
         android:textSize="15dp"

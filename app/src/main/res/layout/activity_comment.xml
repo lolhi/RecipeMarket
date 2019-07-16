@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_recycle"
@@ -52,14 +52,14 @@
             android:state_enabled="false" />
 
         <ImageView
+
             android:background="@color/colorWhite"
             android:id="@+id/comment_button"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
-            android:layout_height="18dp"
-            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             app:srcCompat="@drawable/enter" />
 

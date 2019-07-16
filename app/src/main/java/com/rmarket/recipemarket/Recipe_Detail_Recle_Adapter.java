@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.load.DataSource;
@@ -128,9 +129,35 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 
         TextView hash1, hash2, time, calorie, title, subtitle;
         ImageView level, image;
+        RecyclerView materail_recycle;
+        MaterialAdapter mAdapter;
 
         public Recipe_Recycle_Header(View itemView) {
             super(itemView);
+
+            final ArrayList<Material_Item> arrList = new ArrayList<>();
+
+            arrList.add(new Material_Item("감자","2개" ));
+            arrList.add(new Material_Item("계란","1개" ));
+            arrList.add(new Material_Item("양파","2개" ));
+            arrList.add(new Material_Item("두부","1개" ));
+            arrList.add(new Material_Item("소금","아빠큰숟가락" ));
+            arrList.add(new Material_Item("계란","30g" ));
+            arrList.add(new Material_Item("요시","20kg" ));
+            arrList.add(new Material_Item("명란","모노노" ));
+
+
+            materail_recycle = itemView.findViewById(R.id.material_recycle);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+            materail_recycle.setHasFixedSize(true);
+            materail_recycle.setLayoutManager(layoutManager);
+
+            mAdapter = new MaterialAdapter(arrList);
+            materail_recycle.setAdapter(mAdapter);
+
+
+
             calorie = itemView.findViewById(R.id.detail_calorie);
             hash1 = itemView.findViewById(R.id.detail_hash1);
             hash2 = itemView.findViewById(R.id.detail_hash2);

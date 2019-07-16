@@ -1,5 +1,7 @@
 package com.rmarket.recipemarket;
 
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,8 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         public RecyclerViewHolder1(@NonNull View itemView) {
             super(itemView);
             profile = itemView.findViewById(R.id.comment_profile);
+            profile.setBackground(new ShapeDrawable(new OvalShape()));
+            profile.setClipToOutline(true);
             name = itemView.findViewById(R.id.comment_name);
             time = itemView.findViewById(R.id.comment_time);
             text = itemView.findViewById(R.id.comment_text);

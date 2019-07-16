@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -64,21 +64,90 @@
     </LinearLayout>
 
 
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    app:srcCompat="@drawable/line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginTop="5dp"
+
+                android:layout_marginLeft="25dp"
+
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:fontFamily="@font/nanum_bold"
+                android:textColor="@color/colorModernBlack"
+
+                android:text="농장소개"
+                android:textSize="11dp"/>
 
     <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:gravity="center"
-        android:fontFamily="@font/nanum_normal"
-        android:textColor="@color/colorModernBlack"
-        android:background="@drawable/search_bar"
-        android:text="믿을 수 있는 농수산물을 생산자와 직거래하는 장터 입니다.^^"
-        android:textSize="11dp"/>
+            android:layout_marginTop="5dp"
 
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:fontFamily="@font/nanum_normal"
+            android:textColor="@color/colorModernBlack"
+
+            android:text="농수산물을 생산자와 직거래하는 장터 입니다.^^"
+            android:textSize="11dp"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="25dp"
+
+                android:layout_width="0dp"
+                android:layout_weight="0.8"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:fontFamily="@font/nanum_bold"
+                android:textColor="@color/colorModernBlack"
+
+                android:text="공지사항"
+                android:textSize="11dp"/>
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="5dp"
+
+                android:layout_marginRight="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:fontFamily="@font/nanum_normal"
+                android:textColor="@color/colorModernBlack"
+
+                android:text="♥공지♥ 곧 오픈하니 조금만 기다려주세요 ~~~~"
+                android:textSize="11dp"/>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:srcCompat="@drawable/line"/>
 
     <TextView
         android:layout_marginTop="30dp"
@@ -149,9 +218,10 @@
 
 
     <ImageView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/useimport_bottom2"/>
 
 </LinearLayout>

@@ -104,6 +104,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int position) {
 
+
         if (viewHolder instanceof Home_Recycle_Header) {
             // ViewPager와  FragmentAdapter 연결
             ((Home_Recycle_Header) viewHolder).viewPager.setAdapter(fragmentAdapter);
@@ -168,6 +169,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             ((Home_Recycle_Bottom) viewHolder).subtitle.setText(item.getSubtitle());
             ((Home_Recycle_Bottom) viewHolder).time.setText(item.getTime());
         }
+
+
     }
 
     @Override

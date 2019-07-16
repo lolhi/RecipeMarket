@@ -21,7 +21,6 @@ import com.kakao.usermgmt.response.MeV2Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,6 +80,9 @@ public class ActivityComment extends AppCompatActivity {
                         }
                         HttpConnection connPost = new HttpConnection(mContext,"AddComment", jsonObject);
                         connPost.execute();
+                        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/" + recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
+                        httpConn.execute();
+                        comment_edit.setText("");
                     }
                 });
             }
