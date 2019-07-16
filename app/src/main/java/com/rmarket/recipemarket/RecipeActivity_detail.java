@@ -85,10 +85,13 @@ public class RecipeActivity_detail extends AppCompatActivity {
         });
 
         comment_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
+
             @Override
             public void onClick(View v) { //클릭 했을경우
-//                Toast.makeText(getApplicationContext(), search_text+" : Comment", Toast.LENGTH_LONG).show();
-                Toast.makeText(mcontext, "아직 준비중입니다.", Toast.LENGTH_SHORT).show();
+//
+                Intent intent = new Intent(mcontext, ActivityComment.class);
+                mcontext.startActivity(intent);
+
             }
         });
     }

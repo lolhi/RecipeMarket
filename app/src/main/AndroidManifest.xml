@@ -45,6 +45,9 @@
         <activity android:name=".ActivityBasket"/>
         <activity android:name=".ActivityAcoount"/>
         <activity android:name=".shopping_detail2"/>
+        <activity android:name=".ActivityComment"/>
+        <activity android:name=".ActivityNotice"/>
+        <activity android:name=".ActivityUserImport"/>
 
     </application>
 

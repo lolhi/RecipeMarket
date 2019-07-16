@@ -2,6 +2,7 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ public class ShoppingActivity extends Fragment {
     Context mContext;
 
        LinearLayout shopping1,shopping2,shopping3;
+       ImageView userimport;
     public static ShoppingActivity newInstance() {
         return new ShoppingActivity();
     }
@@ -28,7 +30,7 @@ public class ShoppingActivity extends Fragment {
         shopping1 =view.findViewById(R.id.linear_shopping1);
         shopping2 =view.findViewById(R.id.linear_shopping2);
         shopping3 =view.findViewById(R.id.linear_shopping3);
-
+        userimport =view.findViewById(R.id.userimport);
 
        shopping1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -49,7 +51,16 @@ public class ShoppingActivity extends Fragment {
         shopping3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                Toast.makeText(mContext, "판매자와 협의중입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "판매자와 협의중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        userimport.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), ActivityUserImport.class);
+
+                getActivity().startActivity(intent);
             }
         });
 
