@@ -72,12 +72,13 @@ CardView main_card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mContext = this;
-        main_top = findViewById(R.id.main_top);
+
 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        mContext = this;
+        main_top = findViewById(R.id.main_top);
         main_card = findViewById(R.id.main_card);
         search_button = findViewById(R.id.search_button);
         BottomNavigationView navView = findViewById(R.id.nav_view);
