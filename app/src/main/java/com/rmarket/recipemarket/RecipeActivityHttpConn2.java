@@ -67,9 +67,11 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private TextView[] grid_subtitle = new TextView[6];
     private TextView[] grid_time = new TextView[6];
     private LinearLayout[] ll_gridlayout = new LinearLayout[6];
+    private ImageView ivBanner;
     private CustomScrollView recipeScrollView;
     private boolean mLockScrollView = false;
     private int position = 6;
+    private int idx = 1;
     private HttpURLConnection conn;
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -299,6 +301,22 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                             CallGridlayout callGl = new CallGridlayout(context);
                             View childView = callGl.getChildView();
                             SetFindViewById(childView);
+
+                            switch(idx){
+                                case 0 :
+                                    ivBanner.setImageResource(R.drawable.banner1);
+                                    idx++;
+                                    break;
+                                case 1:
+                                    ivBanner.setImageResource(R.drawable.banner2);
+                                    idx++;
+                                    break;
+                                case 2:
+                                    ivBanner.setImageResource(R.drawable.banner3);
+                                    idx = 0;
+                                    break;
+                            }
+                                ivBanner.setImageResource(R.drawable.banner2);
                             for (int i = 0; position < length; i++, position++) {
                                 GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
                                 int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
@@ -376,7 +394,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     }
 
     private void SetFindViewById(View childView) {
-
+        ivBanner = childView.findViewById(R.id.banner_iv);
         ll_gridlayout[0] = childView.findViewById(R.id.ll_gridlayout0);
         ll_gridlayout[1] = childView.findViewById(R.id.ll_gridlayout1);
         ll_gridlayout[2] = childView.findViewById(R.id.ll_gridlayout2);

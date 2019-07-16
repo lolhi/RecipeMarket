@@ -1,5 +1,6 @@
 package com.rmarket.recipemarket;
 
+import android.content.Context;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.view.LayoutInflater;
@@ -15,10 +16,12 @@ import java.util.ArrayList;
 
 public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ArrayList<Commetn_Item> arrList;
+    private ArrayList<Commetn_Item> arrList;
+    private Context mContext;
 
-    public ActivityCommentAdapter(ArrayList<Commetn_Item> arrList) {
+    public ActivityCommentAdapter(Context mContext, ArrayList<Commetn_Item> arrList) {
         this.arrList = arrList;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -36,6 +39,7 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         recyclerViewHolder.text.setText(item.getCommentText());
         recyclerViewHolder.time.setText(item.getCommetTime());
         recyclerViewHolder.name.setText(item.getCommentName());
+        GlideApp.with(mContext).load(item.getCommentProfile()).into(recyclerViewHolder.profile);
     }
 
     @Override

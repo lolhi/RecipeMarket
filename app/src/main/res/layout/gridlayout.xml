@@ -541,7 +541,7 @@
         </LinearLayout>
     </LinearLayout>
     <ImageView
-        android:id="@+id/spon"
+        android:id="@+id/banner_iv"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:scaleType="fitXY"
