@@ -40,6 +40,7 @@ public class MypageActivity extends Fragment {
     ImageView userprofile;  //유저 프로필사진
     TextView accountmanager;    //계정관리 텍스트 버튼
     TextView username;      //유저 이름
+
     JSONArray jsonArr;
     FragmentAdapter fragmentAdapter;
     ImageView deliver;
@@ -67,6 +68,7 @@ public class MypageActivity extends Fragment {
         userprofile.setClipToOutline(true);
 
 
+
         accountmanager =view.findViewById(R.id.mypage_accountmanage);
         deliver = view.findViewById(R.id.mypage_deliver);
         ivClippingFail = view.findViewById(R.id.clipping_fail_iv);
@@ -74,6 +76,10 @@ public class MypageActivity extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+
+
+
 
 
         //유저 계정 관리 띄위기
