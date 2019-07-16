@@ -222,7 +222,7 @@
 
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/nanum_normal"
-                                android:text="요리별"
+                                android:text="조리별"
                                 android:textColor="@color/colorModernBlack"
                                 android:textSize="20dp"
 

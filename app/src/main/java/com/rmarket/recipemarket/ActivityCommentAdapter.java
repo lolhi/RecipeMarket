@@ -39,7 +39,8 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         recyclerViewHolder.text.setText(item.getCommentText());
         recyclerViewHolder.time.setText(item.getCommetTime());
         recyclerViewHolder.name.setText(item.getCommentName());
-        GlideApp.with(mContext).load(item.getCommentProfile()).into(recyclerViewHolder.profile);
+        if(!item.getCommentProfile().equals("NoImg"))
+            GlideApp.with(mContext).load(item.getCommentProfile()).into(recyclerViewHolder.profile);
     }
 
     @Override
