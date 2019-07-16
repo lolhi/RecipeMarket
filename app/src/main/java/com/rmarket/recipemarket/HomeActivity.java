@@ -43,6 +43,8 @@ public class HomeActivity extends Fragment {
         ItemClickSupport.addTo(home_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                if(position == 12)
+                    return;
                 ArrayList<RecommendItem> RecommandArrList = http.getRecommandaArrList();
                 Intent intent = new Intent(getActivity(), RecipeActivity_detail.class);
                 intent.putExtra("RecommandItem", RecommandArrList.get(position - 2));

@@ -305,18 +305,17 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
                             switch(idx){
                                 case 0 :
                                     ivBanner.setImageResource(R.drawable.banner1);
-                                    idx++;
+                                    idx += 1;
                                     break;
                                 case 1:
                                     ivBanner.setImageResource(R.drawable.banner2);
-                                    idx++;
+                                    idx += 1;
                                     break;
                                 case 2:
                                     ivBanner.setImageResource(R.drawable.banner3);
                                     idx = 0;
                                     break;
                             }
-                                ivBanner.setImageResource(R.drawable.banner2);
                             for (int i = 0; position < length; i++, position++) {
                                 GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
                                 int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
@@ -354,7 +353,11 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String jsonData) {
         super.onPostExecute(jsonData);
-
+        if(e != null){
+            ExceptionHandling exceptHandling = new ExceptionHandling(e,context,"인터넷 연결이 불안정 합니다. \n인터넷 연결 상태를 확인 후 어플리케이션을 재실행 하십시오.");
+            exceptHandling.StartingExceptionDialog();
+            return;
+        }
     }
 
     public void progressON(Context mContext) {

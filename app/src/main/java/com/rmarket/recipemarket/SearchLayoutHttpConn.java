@@ -150,7 +150,11 @@ public class SearchLayoutHttpConn extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String jsonData) {
-
+        if(e != null){
+            ExceptionHandling exceptHandling = new ExceptionHandling(e,context,"인터넷 연결이 불안정 합니다. \n인터넷 연결 상태를 확인 후 어플리케이션을 재실행 하십시오.");
+            exceptHandling.StartingExceptionDialog();
+            return;
+        }
         try {
             if(jsonData.equals("")) {
                 progressOFF();
