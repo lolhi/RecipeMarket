@@ -25,7 +25,6 @@ public class RecipeActivity2 extends Fragment {
     private TextView[] grid_time = new TextView[6];
     private LinearLayout[] ll_gridlayout = new LinearLayout[6];
 
-
     public static RecipeActivity2 newInstance() {
         return new RecipeActivity2();
     }

@@ -142,7 +142,7 @@ public class ActivityCommentHttpConn extends AsyncTask<String, Void, String> {
                         jsonObj.getString("TIME")));
             }
 
-            ActivityCommentAdapter adapter = new ActivityCommentAdapter(CommentArrList);
+            ActivityCommentAdapter adapter = new ActivityCommentAdapter(context, CommentArrList);
             comment_recycle.setAdapter(adapter);
             comment_recycle.setItemAnimator(new DefaultItemAnimator());
             adapter.notifyDataSetChanged();
