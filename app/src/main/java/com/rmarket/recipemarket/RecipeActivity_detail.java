@@ -68,7 +68,6 @@ public class RecipeActivity_detail extends AppCompatActivity {
                     @Override
                     public void onSuccess(MeV2Response result) {
                         // 로그인 o
-                        Toast.makeText(mcontext, "스크랩 하였습니다.", Toast.LENGTH_SHORT).show();
                         Log.e("onSuccess ::", "login");
                         JSONObject jsonObject = new JSONObject();
                         try {
@@ -77,7 +76,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        HttpConnection connPost = new HttpConnection("AddClipping",jsonObject);
+                        HttpConnection connPost = new HttpConnection(RecipeActivity_detail.this, "AddClipping",jsonObject);
                         connPost.execute();
                     }
                 });

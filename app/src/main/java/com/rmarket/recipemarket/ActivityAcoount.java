@@ -114,7 +114,7 @@ public class ActivityAcoount extends AppCompatActivity {
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
-                                                HttpConnection connPost = new HttpConnection("UnlinkUser",jsonObj);
+                                                HttpConnection connPost = new HttpConnection(ActivityAcoount.this,"UnlinkUser",jsonObj);
                                                 connPost.execute();
                                                 goToLoginActivity();
 

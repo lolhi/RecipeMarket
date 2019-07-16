@@ -1,20 +1,31 @@
 package com.rmarket.recipemarket;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatDialog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -24,25 +35,28 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * HttpConnection.java
+ * MypageActivityHttpConn.java
  *
  * @author Yongju Jang
  * @version 1.0.0
  * @since 2019-07-05
  **/
 
-public class HttpConnection extends AsyncTask<String, String, String> {
-    private Context mContext;
+public class SearchLayoutHttpConn2 extends AsyncTask<String, Integer, String> {
+    private Context context;
     private Exception e;
     private String sUrl;
-    private JSONObject jsonObj;
+    private ArrayList<String> popularSearchArrList = new ArrayList<>();
+    private JSONArray jsonArr;
     private HttpURLConnection conn;
+    private ListView listview_popular;
 
-    public HttpConnection(Context mContext, String sUrl, JSONObject josnObj) {
+    public SearchLayoutHttpConn2(Context context, String sUrl, ListView listview_popular) {
+        this.context = context;
         this.sUrl = sUrl;
-        this.jsonObj = josnObj;
-        this.mContext = mContext;
+        this.listview_popular = listview_popular;
     }
+
 
     @Override
     protected String doInBackground(String... strings) {
@@ -73,21 +87,13 @@ public class HttpConnection extends AsyncTask<String, String, String> {
 
                 //http 연결의 경우 요청방식을 지정할수 있습니다.
                 //지정하지 않으면 디폴트인 GET 방식이 적용됩니다.
-                conn.setRequestMethod("POST");
+                conn.setRequestMethod("GET");
 
                 //서버에 요청을 보내가 응답 결과를 받아옵니다.
-                conn.setRequestProperty("Accept", "application/json");
-                conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-                conn.setDefaultUseCaches(false);
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                OutputStream os = conn.getOutputStream();
-                os.write(jsonObj.toString().getBytes("UTF-8"));
-                os.flush();
-                os.close();
-
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
                 int resCode = conn.getResponseCode();
+
+
                 if (resCode == conn.HTTP_OK) {
                     InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                     BufferedReader reader = new BufferedReader(tmp);
@@ -109,19 +115,54 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             if(conn != null)
                 conn.disconnect();
         }
-        if(sUrl.equals("AddClipping")) {
-            if (receiveMsg.equals("exist"))
-                publishProgress("이미 스크랩한 레시피 입니다.");
-            else
-                publishProgress("스크랩 하였습니다.");
-        }
+
+        if(receiveMsg.equals(""))
+            publishProgress(View.GONE);
+        else
+            publishProgress(View.VISIBLE);
         return receiveMsg;
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
+    protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
+        listview_popular.setVisibility(values[0]);
+    }
+
+    @Override
+    protected void onPostExecute(String jsonData) {
+
+        try {
+            if(jsonData.equals("")) {
+                return;
+            }
+            jsonArr = new JSONArray(jsonData);
+
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                popularSearchArrList.add(jsonObj.getString("PRDLST_NAME"));
+            }
+            ArrayAdapter adapter2 = new ArrayAdapter(context, android.R.layout.simple_list_item_1, popularSearchArrList);
+            listview_popular.setAdapter(adapter2);
+            listview_popular.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                // 코드 계속 ...
+
+                @Override
+                public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    // get TextView's Text.
+                    Intent intent = new Intent(context, Search_Detail_Layout.class);
+                    intent.putExtra("SearchString", popularSearchArrList.get(position));
+                    intent.putExtra("Category", "");
+                    context.startActivity(intent);
+                    // TODO : use strText
+                }
+            });
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        super.onPostExecute(jsonData);
     }
 
     private static void trustAllHosts() {

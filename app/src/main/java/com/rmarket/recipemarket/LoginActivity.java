@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Log.e("HttpConnection :: ", jsonParam.toString());
-                    HttpConnection httpconn = new HttpConnection("RegisterUser", jsonParam);
+                    HttpConnection httpconn = new HttpConnection(LoginActivity.this, "RegisterUser", jsonParam);
                     httpconn.execute();
                     goToMainActivity();
 /*

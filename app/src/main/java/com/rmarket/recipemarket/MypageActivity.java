@@ -3,6 +3,7 @@ package com.rmarket.recipemarket;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,9 +69,6 @@ public class MypageActivity extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        username.setText("박지훈"); //유저이름 설정
-        userprofile.setImageResource(R.drawable.user_picture);  //사용자 프로필 설정
-
 
         //유저 계정 관리 띄위기
         accountmanager.setOnClickListener(new View.OnClickListener() {
@@ -101,12 +99,16 @@ public class MypageActivity extends Fragment {
         UserManagement.getInstance().me(new MeV2ResponseCallback() {
             @Override
             public void onSessionClosed(ErrorResult errorResult) {
+                username.setText("로그인 해주세요"); //유저이름 설정
                 mypage_recycle.setVisibility(View.GONE);
                 ivClippingFail.setVisibility((View.VISIBLE));
             }
 
             @Override
             public void onSuccess(MeV2Response result) {
+                username.setText(result.getNickname()); //유저이름 설정
+                if(result.getProfileImagePath() != null)
+                    GlideApp.with(getActivity()).load(result.getProfileImagePath()).into(userprofile);
                 mypage_recycle.setVisibility(View.VISIBLE);
                 ivClippingFail.setVisibility((View.GONE));
                 JSONObject jsonObject = new JSONObject();
