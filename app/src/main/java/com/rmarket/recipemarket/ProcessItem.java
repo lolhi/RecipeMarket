@@ -1,19 +1,19 @@
 package com.rmarket.recipemarket;
 
-public class ProcessItem implements Comparable {
-    private String processNum;
+public class ProcessItem implements Comparable<ProcessItem> {
+    private int processNum;
     private String processDc;
     private String processStepImg;
     private String processTip;
 
-    public ProcessItem(String processNum, String processDc, String processStepImg, String processTip) {
+    public ProcessItem(int processNum, String processDc, String processStepImg, String processTip) {
         this.processNum = processNum;
         this.processDc = processDc;
         this.processStepImg = processStepImg;
         this.processTip = processTip;
     }
 
-    public String getProcessNum() {
+    public int getProcessNum() {
         return processNum;
     }
 
@@ -30,7 +30,12 @@ public class ProcessItem implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        return this.processNum.compareTo(((ProcessItem)o).processNum);
+    public int compareTo(ProcessItem item) {
+        if(this.processNum < item.getProcessNum())
+            return -1;
+        else if(this.processNum > item.getProcessNum())
+            return 1;
+        else
+            return 0;
     }
 }

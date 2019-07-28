@@ -150,7 +150,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-                    ProcessArrList.add(new ProcessItem(jsonObj.getString("COOKING_NO"),
+                    ProcessArrList.add(new ProcessItem(Integer.parseInt(jsonObj.getString("COOKING_NO")),
                             jsonObj.getString("COOKING_DC"),
                             jsonObj.getString("STRE_STEP_IMAGE_URL"),
                             jsonObj.getString("STEP_TIP")));

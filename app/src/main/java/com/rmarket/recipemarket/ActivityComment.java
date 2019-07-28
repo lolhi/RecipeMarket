@@ -72,7 +72,10 @@ public class ActivityComment extends AppCompatActivity {
                         try {
                             jsonObject.put("RECIPE_ID",recommendItem.getId());
                             jsonObject.put("WRITER", result.getNickname());
-                            jsonObject.put("PROFILE_IMG", result.getProfileImagePath());
+                            if(result.getProfileImagePath() == null)
+                                jsonObject.put("PROFILE_IMG", "NoImg");
+                            else
+                                jsonObject.put("PROFILE_IMG", result.getProfileImagePath());
                             jsonObject.put("TIME", getTime);
                             jsonObject.put("COMM", comment_edit.getText().toString());
                         } catch (JSONException e) {

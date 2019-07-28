@@ -30,6 +30,8 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class Home_recycle_Adapter extends RecyclerView.Adapter {
@@ -167,7 +169,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
             GlideApp.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
             ((Home_Recycle_Bottom) viewHolder).title.setText(item.getTitle());
             int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            ((Home_Recycle_Bottom) viewHolder).level.setImageResource(levelImg);
+            GlideApp.with(mContext).load(levelImg).into(((Home_Recycle_Bottom) viewHolder).level);
             ((Home_Recycle_Bottom) viewHolder).subtitle.setText(item.getSubtitle());
             ((Home_Recycle_Bottom) viewHolder).time.setText(item.getTime());
         }
