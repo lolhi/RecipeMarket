@@ -57,6 +57,30 @@ public class MypageActivity extends Fragment {
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("ID", result.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http.execute();
+
+
+            }
+        });
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mypage, container, false); // 여기서 UI를 생성해서 View를 return
@@ -76,11 +100,6 @@ public class MypageActivity extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
-
-
-
-
 
         //유저 계정 관리 띄위기
         accountmanager.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +163,6 @@ public class MypageActivity extends Fragment {
 
             }
         });
-
-
 
         return view;
     }
