@@ -10,36 +10,107 @@
     tools:context=".MainActivity">
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:id="@+id/main_card">
+<LinearLayout
+    android:id="@+id/main_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_top"
-            >
-
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="50dp"
+         android:background="@color/colorOrange"
+         android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:layout_margin="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_marginTop="3dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
                 app:srcCompat="@drawable/top_logo" />
 
             <ImageView
                 android:id="@+id/search_button"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="14dp"
-                android:layout_marginRight="10dp"
+                 android:background="@color/colorOrange"
+                android:layout_gravity="center_vertical"
                 app:srcCompat="@drawable/search" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.7"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        app:srcCompat= "@drawable/matsungbi"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/food_ranking"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/colorModernBlack"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/nanum_bold"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:text="감자"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorModernBlack"
+                android:fontFamily="@font/nanum_normal"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginRight="10dp"
+                android:text="25.2%"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorModernBlack"
+                android:fontFamily="@font/nanum_normal"/>
+          <ImageView
+              android:layout_width="0dp"
+              android:layout_weight="0.5"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical"
+              app:srcCompat = "@drawable/down_arrow"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ranking_btn"
+            android:layout_width="0dp"
+            android:layout_weight="0.85"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:srcCompat = "@drawable/enter"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
 
     <FrameLayout
         android:id="@+id/fragment_container"

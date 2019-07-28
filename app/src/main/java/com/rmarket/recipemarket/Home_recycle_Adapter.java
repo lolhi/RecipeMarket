@@ -13,6 +13,8 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -222,6 +224,9 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         public Home_Recycle_Bottom(View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.recommend_image);
+            GradientDrawable drawable=(GradientDrawable) mContext.getDrawable(R.drawable.background_rounding);
+            image.setBackground(drawable);
+            image.setClipToOutline(true);
             level = itemView.findViewById(R.id.recommend_level);
             title = itemView.findViewById(R.id.recommend_title);
             subtitle = itemView.findViewById(R.id.recommend_subtitle);

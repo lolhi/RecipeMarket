@@ -17,7 +17,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -31,8 +35,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
-RelativeLayout main_top;
-CardView main_card;
+
+LinearLayout main_card;
     Context mContext;
     private ImageView search_button;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -78,7 +82,7 @@ CardView main_card;
 
         setContentView(R.layout.activity_main);
         mContext = this;
-        main_top = findViewById(R.id.main_top);
+
         main_card = findViewById(R.id.main_card);
         search_button = findViewById(R.id.search_button);
         BottomNavigationView navView = findViewById(R.id.nav_view);
