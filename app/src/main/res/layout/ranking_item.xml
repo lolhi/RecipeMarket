@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/detail_ranking_num"
+            android:textSize="15dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_bold"
+            android:layout_weight="1"
+            android:text="1"/>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/detail_ranking_name"
+            android:textSize="15dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_weight="1"
+            android:text="감자"/>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/detail_ranking_reduce"
+            android:textSize="15dp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_weight="1"
+            android:text="25.8%"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="3dp"
+            android:layout_height="match_parent">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            app:srcCompat = "@drawable/down_arrow"/>
+        </LinearLayout>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/godetailrecipe"
+            android:textSize="10dp"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_weight="1"
+            android:text="레시피바로가기"/>
+
+
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:srcCompat="@drawable/line"/>
+
+</LinearLayout>

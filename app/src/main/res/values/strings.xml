@@ -2,5 +2,6 @@
     <string name="app_name">TableManager</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="your_string_here">This is an <u>underline</u>.</string>
     <string name="title_notifications">Notifications</string>
 </resources>

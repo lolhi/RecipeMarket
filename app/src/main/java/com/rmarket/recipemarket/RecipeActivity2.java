@@ -1,5 +1,7 @@
 package com.rmarket.recipemarket;
 
+import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class RecipeActivity2 extends Fragment {
+
     private CustomScrollView recipeScrollView;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
@@ -33,6 +36,7 @@ public class RecipeActivity2 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -41,6 +45,7 @@ public class RecipeActivity2 extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_recipe2, container, false); // 여기서 UI를 생성해서 View를 return
         recipeScrollView = view.findViewById(R.id.scrollview_recipe);
+
         final RecipeActivityHttpConn2 httpConn2 = new RecipeActivityHttpConn2(getActivity(), "FullRecipe", getChildFragmentManager(), new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()), view, recipeScrollView);
         httpConn2.execute();
 
@@ -56,12 +61,16 @@ public class RecipeActivity2 extends Fragment {
         ll_gridlayout[4] = childView.findViewById(R.id.ll_gridlayout4);
         ll_gridlayout[5] = childView.findViewById(R.id.ll_gridlayout5);
 
+
+
         grid_image[0] = childView.findViewById(R.id.grid_image0);
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);
         grid_image[3] = childView.findViewById(R.id.grid_image3);
         grid_image[4] = childView.findViewById(R.id.grid_image4);
         grid_image[5] = childView.findViewById(R.id.grid_image5);
+
+
 
         grid_level[0] = childView.findViewById(R.id.grid_level0);
         grid_level[1] = childView.findViewById(R.id.grid_level1);

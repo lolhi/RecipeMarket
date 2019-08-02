@@ -35,7 +35,7 @@ public class ViewPagerFragment extends Fragment {
         View view = inflater.inflate(layoutValue, container, false);
 
         ImageView imageView = view.findViewById(imgviewValue);
-
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         if (getArguments() != null) {
             Bundle args = getArguments();
             // MainActivity에서 받아온 Resource를 ImageView에 셋팅

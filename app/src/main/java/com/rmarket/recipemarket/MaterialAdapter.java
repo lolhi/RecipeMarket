@@ -30,7 +30,6 @@ public class MaterialAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RecyclerViewHolder1 recyclerViewHolder = (RecyclerViewHolder1) holder;
         Materialitem item = arrList.get(position);
-
         recyclerViewHolder.material.setText(item.getMeterialName());
         recyclerViewHolder.amount.setText(item.getMeterialCpcty());
 
