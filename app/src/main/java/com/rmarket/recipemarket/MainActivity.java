@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
-                int Num = 0;
+                int Num = -1;
                 while (true) {
 
                     if(Num<5)
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
        main_anim.setAnimation(aniFlow);
        main_title.setText(buffer.getMaterial());
        main_num.setText(""+(Num+1));
-       main_reduce.setText(buffer.getReduce());
+       main_reduce.setText(buffer.getReduce()+"%");
 
    }
 

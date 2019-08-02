@@ -64,6 +64,10 @@ public class RecipeActivity2 extends Fragment {
 
 
         grid_image[0] = childView.findViewById(R.id.grid_image0);
+        GradientDrawable drawable=(GradientDrawable) getContext().getDrawable(R.drawable.background_rounding);
+        grid_image[0].setBackground(drawable);
+        grid_image[0].setClipToOutline(true);
+
         grid_image[1] = childView.findViewById(R.id.grid_image1);
         grid_image[2] = childView.findViewById(R.id.grid_image2);
         grid_image[3] = childView.findViewById(R.id.grid_image3);
