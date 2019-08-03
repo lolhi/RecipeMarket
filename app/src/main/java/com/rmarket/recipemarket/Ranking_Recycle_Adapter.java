@@ -33,8 +33,8 @@ public class Ranking_Recycle_Adapter extends RecyclerView.Adapter {
         Ranking_Recycle_Adapter.RankingViewHolder recyclerViewHolder = (Ranking_Recycle_Adapter.RankingViewHolder) holder;
         Ranking_Item item = arrayList.get(position);
         recyclerViewHolder.material.setText(item.getMaterial());
-        recyclerViewHolder.reduce.setText(item.getReduce()+"%");
-        recyclerViewHolder.num.setText(""+(position+1));
+        recyclerViewHolder.reduce.setText(String.format("%.2f",item.getReduce()) + "%");
+        recyclerViewHolder.num.setText("" + (position + 1));
 
     }
 

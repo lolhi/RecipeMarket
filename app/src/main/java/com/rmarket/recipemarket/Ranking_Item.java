@@ -3,17 +3,17 @@ package com.rmarket.recipemarket;
 public class Ranking_Item{
 
     private String material;
-    private String reduce;
+    private double reduce;
 
     public String getMaterial() {
         return material;
     }
 
-    public String getReduce() {
+    public double getReduce() {
         return reduce;
     }
 
-    Ranking_Item(String material, String amount)
+    Ranking_Item(String material, double amount)
     {
         this.material = material;
         this.reduce = amount;
