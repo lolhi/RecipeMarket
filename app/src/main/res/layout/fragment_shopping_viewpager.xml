@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    cardCornerRadius : 모서리 둥근정도, dp단위
+    cardElevation : shadow 설정, dp단위
+    cardMaxElevation : Elevation 한계값
+    cardPreventCornerOverlap :  CardView 내의 내용과 모서리가 겹칠 때 T/F를 사용해서 겹치지 않도록 설정합니다.
+    cardUseCompatPadding : CardView의 내용에 따른 그림자가 생성될 공간을 만들어줄 것인지 아닌지 결정짓습니다.
+    contentPadding : CardView 내의 패딩을 주기위한 Attribute로, 추가적으로 Left, Top, Right, Bottom을 따로 지정해줄 수 있습니다.
+-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_shopping_viewpager_funding_mark"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/search_failed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.42"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.059" />
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_funding_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_bold"
+            android:text="맛성비"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.058" />
+
+        <ImageView
+            android:id="@+id/iv_shopping_viewpager_product"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_funding_name"
+            app:layout_constraintVertical_bias="0.27"
+            android:src="@mipmap/ic_launcher_recipemarket_round"/>
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_normal"
+            android:text="청정지역 제주에서 자란 유기농 당근"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.127"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_shopping_viewpager_product"
+            app:layout_constraintVertical_bias="0.728" />
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_product_subname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_normal"
+            android:text="제주도 지하암반수로 키운 아삭아삭한 당근을 맛보세요."
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_punding_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_bold"
+            android:text="81%"
+            android:textColor="@color/color9"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.934"
+            app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ProgressBar
+            android:id="@+id/pb_shopping_viewpager_percent"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="366dp"
+            android:layout_height="wrap_content"
+            android:progress="81"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_subname"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintVertical_bias="0.66"
+            android:progressBackgroundTint="@color/color10"
+            android:progressTint="@color/color9"/>
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_punding_goal_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_normal"
+            android:text="목표 250만원"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintTop_toTopOf="@id/pb_shopping_viewpager_percent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:id="@+id/tv_shopping_viewpager_punding_present_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_normal"
+            android:text="현재 모금액 203만원"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.934"
+            app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_name"
+            app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_punding_goal_amount"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
