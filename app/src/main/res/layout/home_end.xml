@@ -13,8 +13,8 @@
         android:background="@color/colorWhite"></LinearLayout>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
         app:srcCompat="@drawable/useimport_bottom2"
-        android:scaleType="fitXY"/>
+       android:scaleType="fitXY"/>
 
 </LinearLayout>

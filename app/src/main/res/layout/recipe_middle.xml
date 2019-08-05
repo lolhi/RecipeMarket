@@ -153,5 +153,124 @@
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image9"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image10"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image11"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image12"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image13"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image14"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/recipe_text15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorModernBlack"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/recipe_image15"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:visibility="gone" />
 </LinearLayout>
 </RelativeLayout>

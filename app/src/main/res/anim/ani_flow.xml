@@ -7,7 +7,7 @@
         android:toYDelta="100%p"
         android:duration="1200"
         android:repeatCount="infinite"
-        android:startOffset = "2800"
+        android:startOffset = "1800"
       />
 
 

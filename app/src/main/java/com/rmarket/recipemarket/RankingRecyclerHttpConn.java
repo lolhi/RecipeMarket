@@ -167,7 +167,7 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
                             test(buffer,Num);
                         }
                         try {
-                            Thread.sleep(4000);
+                            Thread.sleep(3000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
