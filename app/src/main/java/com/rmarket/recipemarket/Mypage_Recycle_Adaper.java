@@ -3,6 +3,7 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,9 @@ public class Mypage_Recycle_Adaper extends RecyclerView.Adapter {
             txtSubTitle = itemView.findViewById(R.id.mypage_subtitle);
             imgImage = itemView.findViewById(R.id.mypage_image);
             imgLevel = itemView.findViewById(R.id.mypage_level);
+            GradientDrawable drawable=(GradientDrawable) mContext.getDrawable(R.drawable.background_rounding);
+            imgImage.setBackground(drawable);
+            imgImage.setClipToOutline(true);
             txtTime = itemView.findViewById(R.id.mypage_time);
 
             mypage_recycer = rootView.findViewById(R.id.mypage_recycle);

@@ -53,8 +53,8 @@
             android:layout_height="match_parent">
         <ImageView
             android:layout_gravity="center"
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="13.5dp"
+            android:layout_height="13.5dp"
             app:srcCompat = "@drawable/down_arrow"/>
         </LinearLayout>
         <TextView

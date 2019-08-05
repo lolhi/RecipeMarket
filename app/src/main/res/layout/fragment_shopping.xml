@@ -216,10 +216,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="20dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/useimport_bottom2" />
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/useimport_bottom2"
+            android:scaleType="fitXY"/>
     </LinearLayout>
 
 </ScrollView>

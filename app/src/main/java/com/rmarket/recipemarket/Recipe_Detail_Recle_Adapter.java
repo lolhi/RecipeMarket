@@ -2,10 +2,12 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -127,10 +129,11 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 
     class Recipe_Recycle_Header extends RecyclerView.ViewHolder {
 
-        TextView hash1, hash2, time, calorie, title, subtitle;
+        TextView hash1, hash2, time, calorie, title, subtitle,material_reduce;
         ImageView level, image;
         RecyclerView materail_recycle;
         MaterialAdapter mAdapter;
+        LinearLayout material_layout;
 
         public Recipe_Recycle_Header(View itemView) {
             super(itemView);
@@ -150,8 +153,19 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             title = itemView.findViewById(R.id.detail_title);
             time = itemView.findViewById(R.id.detail_time);
             subtitle = itemView.findViewById(R.id.detail_subtile);
+
+            GradientDrawable drawable= (GradientDrawable) mContext.getDrawable(R.drawable.background_rounding);
+
             image = itemView.findViewById(R.id.detail_image);
+            image.setBackground(drawable);
+            image.setClipToOutline(true);
+
+
+
             level = itemView.findViewById(R.id.detail_level);
+
+            material_reduce =itemView.findViewById(R.id.material_reduce); // 증감률 넣기
+            material_layout =itemView.findViewById(R.id.material_layout); // visible 시킬 레이아웃 현제 invisible 로 되있어서
         }
     }
 
@@ -162,8 +176,8 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             ImageView [] imgView;
         public Recipe_Recycle_Middle(View itemView) {
             super(itemView);
-            textView = new TextView[]{itemView.findViewById(R.id.recipe_text1), itemView.findViewById(R.id.recipe_text2), itemView.findViewById(R.id.recipe_text3), itemView.findViewById(R.id.recipe_text4), itemView.findViewById(R.id.recipe_text5), itemView.findViewById(R.id.recipe_text6), itemView.findViewById(R.id.recipe_text7), itemView.findViewById(R.id.recipe_text8)};
-            imgView = new ImageView[]{itemView.findViewById(R.id.recipe_image1),itemView.findViewById(R.id.recipe_image2),itemView.findViewById(R.id.recipe_image3),itemView.findViewById(R.id.recipe_image4),itemView.findViewById(R.id.recipe_image5),itemView.findViewById(R.id.recipe_image6),itemView.findViewById(R.id.recipe_image7),itemView.findViewById(R.id.recipe_image8)};
+            textView = new TextView[]{itemView.findViewById(R.id.recipe_text1), itemView.findViewById(R.id.recipe_text2), itemView.findViewById(R.id.recipe_text3), itemView.findViewById(R.id.recipe_text4), itemView.findViewById(R.id.recipe_text5), itemView.findViewById(R.id.recipe_text6), itemView.findViewById(R.id.recipe_text7), itemView.findViewById(R.id.recipe_text8), itemView.findViewById(R.id.recipe_text9), itemView.findViewById(R.id.recipe_text10), itemView.findViewById(R.id.recipe_text11), itemView.findViewById(R.id.recipe_text12), itemView.findViewById(R.id.recipe_text13), itemView.findViewById(R.id.recipe_text14), itemView.findViewById(R.id.recipe_text15)};
+            imgView = new ImageView[]{itemView.findViewById(R.id.recipe_image1),itemView.findViewById(R.id.recipe_image2),itemView.findViewById(R.id.recipe_image3),itemView.findViewById(R.id.recipe_image4),itemView.findViewById(R.id.recipe_image5),itemView.findViewById(R.id.recipe_image6),itemView.findViewById(R.id.recipe_image7), itemView.findViewById(R.id.recipe_image8), itemView.findViewById(R.id.recipe_image9), itemView.findViewById(R.id.recipe_image10), itemView.findViewById(R.id.recipe_image11), itemView.findViewById(R.id.recipe_image12), itemView.findViewById(R.id.recipe_image13), itemView.findViewById(R.id.recipe_image14), itemView.findViewById(R.id.recipe_image15)};
         }
     }
 
