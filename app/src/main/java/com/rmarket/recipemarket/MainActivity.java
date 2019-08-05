@@ -128,6 +128,16 @@ public class MainActivity extends AppCompatActivity {
         RankingRecyclerHttpConn httpConn = new RankingRecyclerHttpConn(getApplicationContext(),"Getpopular", detail_recycle, main_reduce, main_title, main_num, main_anim);
         httpConn.execute();
 
+        ItemClickSupport.addTo(detail_recycle,R.id.ranking_detail_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Intent intent = new Intent(mContext, Search_Detail_Layout.class);
+                intent.putExtra("Category", "");
+                intent.putExtra("SearchString", httpConn.getRankingArrayList().get(position).getMaterial());
+                mContext.startActivity(intent);
+            }
+        });
+
         detail_ranking.setVisibility(View.GONE);
 
         main_card = findViewById(R.id.main_card);
