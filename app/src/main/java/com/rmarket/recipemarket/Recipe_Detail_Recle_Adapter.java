@@ -2,10 +2,12 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -127,10 +129,11 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 
     class Recipe_Recycle_Header extends RecyclerView.ViewHolder {
 
-        TextView hash1, hash2, time, calorie, title, subtitle;
+        TextView hash1, hash2, time, calorie, title, subtitle,material_reduce;
         ImageView level, image;
         RecyclerView materail_recycle;
         MaterialAdapter mAdapter;
+        LinearLayout material_layout;
 
         public Recipe_Recycle_Header(View itemView) {
             super(itemView);
@@ -150,8 +153,19 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             title = itemView.findViewById(R.id.detail_title);
             time = itemView.findViewById(R.id.detail_time);
             subtitle = itemView.findViewById(R.id.detail_subtile);
+
+            GradientDrawable drawable= (GradientDrawable) mContext.getDrawable(R.drawable.background_rounding);
+
             image = itemView.findViewById(R.id.detail_image);
+            image.setBackground(drawable);
+            image.setClipToOutline(true);
+
+
+
             level = itemView.findViewById(R.id.detail_level);
+
+            material_reduce =itemView.findViewById(R.id.material_reduce); // 증감률 넣기
+            material_layout =itemView.findViewById(R.id.material_layout); // visible 시킬 레이아웃 현제 invisible 로 되있어서
         }
     }
 

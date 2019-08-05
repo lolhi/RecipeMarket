@@ -64,19 +64,27 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     replaceFragment(HomeActivity.newInstance());
+                    detail_ranking.setVisibility(View.GONE);
+                    main_ranking.setVisibility(View.VISIBLE);
                     main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_recipe:
                     replaceFragment(RecipeActivity2.newInstance());
+                    detail_ranking.setVisibility(View.GONE);
+                    main_ranking.setVisibility(View.VISIBLE);
                     main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_shopping:
                     replaceFragment(ShoppingActivity.newInstance());
+                    detail_ranking.setVisibility(View.GONE);
+                    main_ranking.setVisibility(View.VISIBLE);
                     main_card.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_mypage:
 
                     replaceFragment(MypageActivity.newInstance());
+                    detail_ranking.setVisibility(View.GONE);
+                    main_ranking.setVisibility(View.VISIBLE);
                     main_card.setVisibility(View.GONE);
                     return true;
 
