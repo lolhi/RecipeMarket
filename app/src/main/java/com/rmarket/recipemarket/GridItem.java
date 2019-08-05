@@ -2,6 +2,7 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -34,9 +35,16 @@ public class GridItem extends LinearLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.search_grid, this);
+
+        GradientDrawable drawable= (GradientDrawable) context.getDrawable(R.drawable.background_rounding);
+
         subtitle = (TextView) findViewById(R.id.grid_subtitle);
         title = (TextView) findViewById(R.id.grid_title);
         image = (ImageView) findViewById(R.id.grid_image);
+        image.setBackground(drawable);
+        image.setClipToOutline(true);
+
+
         level = (ImageView) findViewById(R.id.grid_level);
         time = (TextView) findViewById(R.id.grid_time);
     }
