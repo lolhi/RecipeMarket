@@ -66,6 +66,10 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
         this.main_anim = main_anim;
     }
 
+    public ArrayList<Ranking_Item> getRankingArrayList() {
+        return RankingArrayList;
+    }
+
     @Override
     protected String doInBackground(String... strings) {
         String str, receiveMsg = "";
