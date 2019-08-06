@@ -36,13 +36,15 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
     private Context mContext;
     private ArrayList<Materialitem> MaterialArrList;
     private ArrayList<ProcessItem> ProcessArrList;
+    private ArrayList<Ranking_Item> RankingArrList;
     private AppCompatDialog progressDialog;
 
-    public Recipe_Detail_Recle_Adapter(Context mContext, RecommendItem recommendItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, AppCompatDialog progressDialog) {
+    public Recipe_Detail_Recle_Adapter(Context mContext, RecommendItem recommendItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, ArrayList<Ranking_Item> RankingArrList, AppCompatDialog progressDialog) {
         this.mContext = mContext;
         this.recommendItem = recommendItem;
         this.MaterialArrList = MaterialArrList;
         this.ProcessArrList = ProcessArrList;
+        this.RankingArrList = RankingArrList;
         Collections.sort(ProcessArrList);
         this.progressDialog = progressDialog;
     }
@@ -144,7 +146,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
             materail_recycle.setHasFixedSize(true);
             materail_recycle.setLayoutManager(layoutManager);
 
-            mAdapter = new MaterialAdapter(MaterialArrList);
+            mAdapter = new MaterialAdapter(MaterialArrList, RankingArrList);
             materail_recycle.setAdapter(mAdapter);
 
             calorie = itemView.findViewById(R.id.detail_calorie);
@@ -163,9 +165,6 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 
 
             level = itemView.findViewById(R.id.detail_level);
-
-            material_reduce =itemView.findViewById(R.id.material_reduce); // 증감률 넣기
-            material_layout =itemView.findViewById(R.id.material_layout); // visible 시킬 레이아웃 현제 invisible 로 되있어서
         }
     }
 

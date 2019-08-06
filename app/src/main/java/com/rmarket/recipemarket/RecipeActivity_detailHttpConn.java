@@ -46,18 +46,20 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
     private String sUrl;
     private RecommendItem recommandItem;
     private ArrayList<Materialitem> MaterialArrList;
-    private ArrayList<ProcessItem> ProcessArrList = new ArrayList<>();
+    private ArrayList<ProcessItem> ProcessArrList;
+    private ArrayList<Ranking_Item> RankingArrList = new ArrayList<>();
     private RecyclerView detail_recycle;
     private JSONArray jsonArr;
     private RecipeActivity_detailHttpConn httpConn;
     private HttpURLConnection conn;
 
-    public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem,ArrayList<Materialitem> MaterialArrList, AppCompatDialog progressDialog) {
+    public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem,ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, AppCompatDialog progressDialog) {
         this.context = context;
         this.sUrl = sUrl;
         this.detail_recycle = detail_recycle;
         this.recommandItem = recommandItem;
         this.MaterialArrList = MaterialArrList;
+        this.ProcessArrList = ProcessArrList;
         this.progressDialog = progressDialog;
     }
 
@@ -156,15 +158,27 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                             jsonObj.getString("STEP_TIP")));
                 }
             }
+            else if (sUrl.contains("Getpopular")) {
+                for (int i = 0; i < jsonArr.length(); i++) {
+                    JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-            if (MaterialArrList.size() != 0 && ProcessArrList.size() != 0) {
-                Recipe_Detail_Recle_Adapter adapter = new Recipe_Detail_Recle_Adapter(context, recommandItem, MaterialArrList, ProcessArrList,  progressDialog);
+                    RankingArrList.add(new Ranking_Item(jsonObj.getString("PRDLST_NAME"),
+                            jsonObj.getDouble("CommonYearReduction")));
+                }
+            }
+
+            if (MaterialArrList.size() != 0 && ProcessArrList.size() != 0 && RankingArrList.size() != 0) {
+                Recipe_Detail_Recle_Adapter adapter = new Recipe_Detail_Recle_Adapter(context, recommandItem, MaterialArrList, ProcessArrList, RankingArrList,  progressDialog);
                 detail_recycle.setAdapter(adapter);
                 detail_recycle.setItemAnimator(new DefaultItemAnimator());
                 adapter.notifyDataSetChanged();
             }
-            else{
-                httpConn = new RecipeActivity_detailHttpConn(context,"GetProcess/" + recommandItem.getId(), detail_recycle, recommandItem,MaterialArrList,progressDialog);
+            else if(MaterialArrList.size() != 0 && ProcessArrList.size() != 0){
+                httpConn = new RecipeActivity_detailHttpConn(context,"Getpopular" , detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
+                httpConn.execute();
+            }
+            else {
+                httpConn = new RecipeActivity_detailHttpConn(context,"GetProcess/" + recommandItem.getId(), detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
                 httpConn.execute();
             }
         } catch (JSONException e) {
