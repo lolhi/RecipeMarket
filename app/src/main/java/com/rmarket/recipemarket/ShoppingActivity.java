@@ -32,8 +32,16 @@ public class ShoppingActivity extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.fragment_shopping_viewpager);
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         viewPager.setAdapter(fragmentAdapter);
+
+        viewPager.setClipToPadding(false);
+        int dpValue = 25;
+        float d = getResources().getDisplayMetrics().density;
+        int margin = (int) (dpValue * d);
+        viewPager.setPadding(margin, 0, margin, 0);
+        viewPager.setPageMargin(margin/1000);
+
         // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product);
             Bundle bundle = new Bundle();
             bundle.putInt("imgurl", R.drawable.banner1);
