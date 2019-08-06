@@ -53,13 +53,12 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private AppCompatDialog progressDialog;
     private String sUrl;
     private FragmentManager fm;
-    private ArrayList<RecommendItem> RecommandaArrList = new ArrayList<>();
+    private ArrayList<String> TipArrList = new ArrayList<>();
     private ArrayList<RecommendItem> FullRecipeArrList;
     private FragmentAdapter fragmentAdapter;
     private JSONArray jsonArr;
     private View rootView;
     private CircleAnimIndicator circleAnimIndicator;
-    private TextView viewpager_tv;
     private RecipeActivityHttpConn2 http2;
     private ImageView[] grid_image = new ImageView[6];
     private ImageView[] grid_level = new ImageView[6];
@@ -83,7 +82,6 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         @Override
         public void onPageSelected(int position) {
             circleAnimIndicator.selectDot(position);
-            viewpager_tv.setText(RecommandaArrList.get(position).getTitle());
         }
 
         @Override
@@ -101,13 +99,6 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         this.progressDialog = progressDialog;
         this.rootView = rootView;
         this.recipeScrollView = recipeScrollView;
-    }
-
-    public ArrayList<RecommendItem> getRecommandaArrList() {
-        if(http2 != null)
-            return http2.getRecommandaArrList();
-        else
-            return RecommandaArrList;
     }
 
     public void setsUrl(String sUrl) {
@@ -189,161 +180,120 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         try {
             jsonArr = new JSONArray(values[0]);
             fragmentAdapter = new FragmentAdapter(fm);
-            if (sUrl.equals("TodaySpecialPrice")) {
-                for (int i = 0; i < jsonArr.length(); i++) {
-                    JSONObject jsonObj = jsonArr.getJSONObject(i);
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
 
-                    RecommandaArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                            jsonObj.getString("SUMRY"),
-                            jsonObj.getString("COOKING_TIME"),
-                            jsonObj.getString("IMG_URL"),
-                            jsonObj.getString("LEVEL_NM"),
-                            jsonObj.getString("CALORIE"),
-                            jsonObj.getString("RECIPE_ID")));
-                }
-            } else if (sUrl.equals("FullRecipe")) {
-                for (int i = 0; i < jsonArr.length(); i++) {
-                    JSONObject jsonObj = jsonArr.getJSONObject(i);
-
-                    FullRecipeArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
-                            jsonObj.getString("SUMRY"),
-                            jsonObj.getString("COOKING_TIME"),
-                            jsonObj.getString("IMG_URL"),
-                            jsonObj.getString("LEVEL_NM"),
-                            jsonObj.getString("CALORIE"),
-                            jsonObj.getString("RECIPE_ID")));
-                }
+                FullRecipeArrList.add(new RecommendItem(jsonObj.getString("RECIPE_NM_KO"),
+                        jsonObj.getString("SUMRY"),
+                        jsonObj.getString("COOKING_TIME"),
+                        jsonObj.getString("IMG_URL"),
+                        jsonObj.getString("LEVEL_NM"),
+                        jsonObj.getString("CALORIE"),
+                        jsonObj.getString("RECIPE_ID")));
             }
 
-            if (FullRecipeArrList.size() != 0 && RecommandaArrList.size() != 0) {
-                // UI Update
-                final ViewPager viewPager = rootView.findViewById(R.id.recipe_viewpager);
-                circleAnimIndicator = rootView.findViewById(R.id.circleAnimIndicator2);
-                viewpager_tv = rootView.findViewById(R.id.viewPager_tv);
-                if(RecommandaArrList.size() != 0)
-                    viewpager_tv.setText(RecommandaArrList.get(viewPager.getCurrentItem()).getTitle());
-                FragmentAdapter fragmentAdapter = new FragmentAdapter(fm);
-                viewPager.setAdapter(fragmentAdapter);
-                viewPager.addOnPageChangeListener(mOnPageChangeListener);
-                //Indicator 초기화
-                this.initIndicaotor();
-                // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
-                for (int i = 0; i < RecommandaArrList.size(); i++) {
-                    ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview, progressDialog);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("imgurl", RecommandaArrList.get(i).getImage());
-                    ViewPager.setArguments(bundle);
-                    fragmentAdapter.addItem(ViewPager);
-                }
-                fragmentAdapter.notifyDataSetChanged();
+            TipArrList.add(UrlClass.Url + "img/viewtip1.png");
+            TipArrList.add(UrlClass.Url + "img/viewtip2.png");
+            TipArrList.add(UrlClass.Url + "img/viewtip3.png");
+            TipArrList.add(UrlClass.Url + "img/viewtip4.png");
+            TipArrList.add(UrlClass.Url + "img/viewtip5.png");
 
-                viewPager.setOnTouchListener(new View.OnTouchListener() {
-                    private float pointX;
-                    private float pointY;
-                    private int tolerance = 50;
+            // UI Update
+            final ViewPager viewPager = rootView.findViewById(R.id.recipe_viewpager);
+            circleAnimIndicator = rootView.findViewById(R.id.circleAnimIndicator2);
+            FragmentAdapter fragmentAdapter = new FragmentAdapter(fm);
+            viewPager.setAdapter(fragmentAdapter);
+            viewPager.addOnPageChangeListener(mOnPageChangeListener);
+            //Indicator 초기화
+            this.initIndicaotor();
+            // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
+            for (int i = 0; i < TipArrList.size(); i++) {
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview, progressDialog);
+                Bundle bundle = new Bundle();
+                bundle.putString("imgurl", TipArrList.get(i));
+                ViewPager.setArguments(bundle);
+                fragmentAdapter.addItem(ViewPager);
+            }
+            fragmentAdapter.notifyDataSetChanged();
+
+            CallGridlayout callGl = new CallGridlayout(context);
+            View childView = callGl.getChildView();
+            SetFindViewById(childView);
+            for (int i = 0; i < 6; i++) {
+                GlideApp.with(context).load(FullRecipeArrList.get(i).getImage()).into(grid_image[i]);
+                int levelImg = FullRecipeArrList.get(i).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(i).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+                grid_level[i].setImageResource(levelImg);
+                grid_subtitle[i].setText(FullRecipeArrList.get(i).getSubtitle());
+                grid_time[i].setText(FullRecipeArrList.get(i).getTime());
+                grid_title[i].setText(FullRecipeArrList.get(i).getTitle());
+                ll_gridlayout[i].setTag(i);
+                ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        switch(motionEvent.getAction()){
-                            case MotionEvent.ACTION_MOVE:
-                                return false; //This is important, if you return TRUE the action of swipe will not take place.
-                            case MotionEvent.ACTION_DOWN:
-                                pointX = motionEvent.getX();
-                                pointY = motionEvent.getY();
+                    public void onClick(View view) {
+                        int tag = (Integer) view.getTag();
+
+                        Intent intent = new Intent(context, RecipeActivity_detail.class);
+                        intent.putExtra("RecommandItem", FullRecipeArrList.get(tag));
+                        context.startActivity(intent);
+                    }
+
+                });
+            }
+            LinearLayout con = rootView.findViewById(R.id.con);
+            con.addView(callGl);
+
+            recipeScrollView.setScrollViewListener(new ScrollViewListener() {
+
+                @Override
+                public void onScrollChanged(CustomScrollView scrollView, int x, int y, int oldx, int oldy) {
+                    final View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
+                    int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
+
+                    if (diff == 0 && mLockScrollView == false) { // 스크롤 bottom
+                        int length = position + 6;
+                        CallGridlayout callGl = new CallGridlayout(context);
+                        View childView = callGl.getChildView();
+                        SetFindViewById(childView);
+
+                        switch (idx) {
+                            case 0:
+                                ivBanner.setImageResource(R.drawable.banner1);
+                                idx += 1;
                                 break;
-                            case MotionEvent.ACTION_UP:
-                                boolean sameX = pointX + tolerance > motionEvent.getX() && pointX - tolerance < motionEvent.getX();
-                                boolean sameY = pointY + tolerance > motionEvent.getY() && pointY - tolerance < motionEvent.getY();
-                                if(sameX && sameY){
+                            case 1:
+                                ivBanner.setImageResource(R.drawable.banner2);
+                                idx += 1;
+                                break;
+                            case 2:
+                                ivBanner.setImageResource(R.drawable.banner3);
+                                idx = 0;
+                                break;
+                        }
+                        for (int i = 0; position < length; i++, position++) {
+                            GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
+                            int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+                            grid_level[i].setImageResource(levelImg);
+                            grid_subtitle[i].setText(FullRecipeArrList.get(position).getSubtitle());
+                            grid_time[i].setText(FullRecipeArrList.get(position).getTime());
+                            grid_title[i].setText(FullRecipeArrList.get(position).getTitle());
+                            ll_gridlayout[i].setTag(position);
+                            ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    int tag = (Integer) view.getTag();
+
                                     Intent intent = new Intent(context, RecipeActivity_detail.class);
-                                    intent.putExtra("RecommandItem",RecommandaArrList.get(viewPager.getCurrentItem()));
+                                    intent.putExtra("RecommandItem", FullRecipeArrList.get(tag));
                                     context.startActivity(intent);
                                 }
+                            });
                         }
-                        return false;
+                        LinearLayout con = view.findViewById(R.id.con);
+                        con.addView(callGl);
                     }
-                });
-
-                CallGridlayout callGl = new CallGridlayout(context);
-                View childView = callGl.getChildView();
-                SetFindViewById(childView);
-                for (int i = 0; i < 6; i++) {
-                    GlideApp.with(context).load(FullRecipeArrList.get(i).getImage()).into(grid_image[i]);
-                    int levelImg = FullRecipeArrList.get(i).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(i).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-                    grid_level[i].setImageResource(levelImg);
-                    grid_subtitle[i].setText(FullRecipeArrList.get(i).getSubtitle());
-                    grid_time[i].setText(FullRecipeArrList.get(i).getTime());
-                    grid_title[i].setText(FullRecipeArrList.get(i).getTitle());
-                    ll_gridlayout[i].setTag(i);
-                    ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int tag = (Integer) view.getTag();
-
-                            Intent intent = new Intent(context, RecipeActivity_detail.class);
-                            intent.putExtra("RecommandItem",FullRecipeArrList.get(tag));
-                            context.startActivity(intent);
-                        }
-
-                    });
                 }
-                LinearLayout con = rootView.findViewById(R.id.con);
-                con.addView(callGl);
+            });
 
-                recipeScrollView.setScrollViewListener(new ScrollViewListener() {
-
-                    @Override
-                    public void onScrollChanged(CustomScrollView scrollView, int x, int y, int oldx, int oldy) {
-                        final View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
-                        int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-
-                        if (diff == 0 && mLockScrollView == false) { // 스크롤 bottom
-                            int length = position + 6;
-                            CallGridlayout callGl = new CallGridlayout(context);
-                            View childView = callGl.getChildView();
-                            SetFindViewById(childView);
-
-                            switch(idx){
-                                case 0 :
-                                    ivBanner.setImageResource(R.drawable.banner1);
-                                    idx += 1;
-                                    break;
-                                case 1:
-                                    ivBanner.setImageResource(R.drawable.banner2);
-                                    idx += 1;
-                                    break;
-                                case 2:
-                                    ivBanner.setImageResource(R.drawable.banner3);
-                                    idx = 0;
-                                    break;
-                            }
-                            for (int i = 0; position < length; i++, position++) {
-                                GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
-                                int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-                                grid_level[i].setImageResource(levelImg);
-                                grid_subtitle[i].setText(FullRecipeArrList.get(position).getSubtitle());
-                                grid_time[i].setText(FullRecipeArrList.get(position).getTime());
-                                grid_title[i].setText(FullRecipeArrList.get(position).getTitle());
-                                ll_gridlayout[i].setTag(position);
-                                ll_gridlayout[i].setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        int tag = (Integer) view.getTag();
-
-                                        Intent intent = new Intent(context, RecipeActivity_detail.class);
-                                        intent.putExtra("RecommandItem",FullRecipeArrList.get(tag));
-                                        context.startActivity(intent);
-                                    }
-                                });
-                            }
-                            LinearLayout con = view.findViewById(R.id.con);
-                            con.addView(callGl);
-                        }
-                    }
-                });
-            } else {
-                http2 = new RecipeActivityHttpConn2(context, "TodaySpecialPrice", fm, this.getFullRecipeArrList(), progressDialog, rootView, recipeScrollView);
-                http2.execute();
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -393,7 +343,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         //애니메이션 속도
         circleAnimIndicator.setAnimDuration(300);
         //indecator 생성
-        circleAnimIndicator.createDotPanel(RecommandaArrList.size(), R.drawable.dot_no, R.drawable.dot_color);
+        circleAnimIndicator.createDotPanel(TipArrList.size(), R.drawable.dot_no, R.drawable.dot_color);
     }
 
     private void SetFindViewById(View childView) {
