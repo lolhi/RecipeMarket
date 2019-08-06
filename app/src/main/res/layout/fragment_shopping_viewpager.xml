@@ -18,7 +18,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="380dp"
         android:layout_margin="5dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="10dp">
@@ -29,15 +29,15 @@
 
             <ImageView
                 android:id="@+id/iv_shopping_viewpager_funding_mark"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/search_failed"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/money"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tv_shopping_viewpager_funding_name"
-                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.059" />
+                app:layout_constraintVertical_bias="0.028" />
 
             <TextView
                 android:id="@+id/tv_shopping_viewpager_funding_name"
@@ -45,13 +45,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanum_bold"
                 android:text="금주의 맛성비 농산물 : 당근"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.066" />
+                app:layout_constraintVertical_bias="0.04" />
 
             <ImageView
                 android:id="@+id/iv_shopping_viewpager_product"
@@ -65,7 +65,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_funding_name"
-                app:layout_constraintVertical_bias="0.267" />
+                app:layout_constraintVertical_bias="0.2" />
 
             <TextView
                 android:id="@+id/tv_shopping_viewpager_product_name"
@@ -79,7 +79,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/iv_shopping_viewpager_product"
                 app:layout_constraintTop_toTopOf="@id/iv_shopping_viewpager_product"
-                app:layout_constraintVertical_bias="0.728" />
+                app:layout_constraintVertical_bias="0.7" />
 
             <TextView
                 android:id="@+id/tv_shopping_viewpager_product_subname"
@@ -90,10 +90,10 @@
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.03"
                 app:layout_constraintStart_toStartOf="@id/tv_shopping_viewpager_product_name"
                 app:layout_constraintTop_toTopOf="@id/tv_shopping_viewpager_product_name"
-                app:layout_constraintVertical_bias="0.3" />
+                app:layout_constraintVertical_bias="0.25" />
 
             <TextView
                 android:id="@+id/tv_shopping_viewpager_punding_percent"
@@ -103,7 +103,7 @@
                 android:fontFamily="@font/nanum_bold"
                 android:text="81%"
                 android:textColor="@color/color9"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 app:layout_constraintRight_toRightOf="@id/iv_shopping_viewpager_product"
                 app:layout_constraintTop_toBottomOf="@id/iv_shopping_viewpager_product" />
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="15dp"
                 android:progress="81"
                 android:progressBackgroundTint="@color/color10"
                 android:progressTint="@color/color9"

@@ -34,7 +34,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/fragment_shopping_viewpager"
             android:layout_width="match_parent"
-            android:layout_height="420dp"/>
+            android:layout_height="400dp"/>
 
         <TextView
             android:layout_width="match_parent"
