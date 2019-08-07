@@ -17,22 +17,25 @@ public class FundingActivity extends AppCompatActivity{
     ImageView fundingImage,fundingSearch;
     LinearLayout fundingBtn;
     ProgressBar progressBar;
+    int percent;
     TextView fundingDday, fundingPercent,fundingGoal,fundingPrecent,fundingUser;
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funding);
 
-        fundingImage = findViewById(R.id.fundingImage);
-        fundingDday = findViewById(R.id.fundingDday);
-        fundingPercent = findViewById(R.id.fundingPercent);
+        fundingImage = findViewById(R.id.fundingImage); //펀딩이미지
+        fundingDday = findViewById(R.id.fundingDday);   //펀딩디데이
+        fundingPercent = findViewById(R.id.fundingPercent); //펀딩 퍼센트
         fundingGoal = findViewById(R.id.fundingGoal);
         fundingPrecent = findViewById(R.id.fundingPresent);
         fundingUser = findViewById(R.id.fundingUser);
         fundingBtn = findViewById(R.id.fundingBtn);
         fundingSearch = findViewById(R.id.fundingSearch);
         progressBar = findViewById(R.id.fundingProgress);
-        progressBar.setProgress(51);
+
+        percent = 51;
+        progressBar.setProgress(percent);
         fundingBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
