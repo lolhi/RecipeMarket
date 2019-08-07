@@ -31,6 +31,11 @@ public class ShoppingActivity extends Fragment {
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
         viewPager.setAdapter(fragmentAdapter);
 
+        FundingItem[] fundingItem = new FundingItem[3];
+        fundingItem[0] = new FundingItem("금주의 맛성비 농산물 : 양파", "고혈압을 막아주는 유기농 함양양파", "양파의 황성분은 혈액을 희석해주어 고혈압을 방지합니다.", "목표 80만원", "현재 모금액 42만원", 51, R.drawable.money, R.drawable.onionshopping);
+        fundingItem[1] = new FundingItem("금주의 맛성비 농산물 : 무", "강원도 친환경 고랭지 무", "무의 전분분해 효소는 소화촉진과 해독기능이 있습니다.", "목표 70만원", "현재 모금액 50만원", 71, R.drawable.money, R.drawable.radish);
+        fundingItem[2] = new FundingItem("유기농 제철과일 : 복숭아", "달콤한 영천 복숭아", "복숭아는 식욕증진과 피로회복에 도움이 됩니다.", "목표 150만원", "현재 모금액 90만원", 60, R.drawable.organic, R.drawable.peach);
+
         viewPager.setClipToPadding(false);
         int dpValue = 25;
         float d = getResources().getDisplayMetrics().density;
@@ -40,9 +45,9 @@ public class ShoppingActivity extends Fragment {
 
         // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
         for (int i = 0; i < 3; i++) {
-            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product, getActivity());
+            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product, getActivity(), fundingItem[i]);
             Bundle bundle = new Bundle();
-            bundle.putInt("imgurl", R.drawable.banner1);
+            bundle.putInt("imgurl", fundingItem[i].getiProductImg());
             ViewPager.setArguments(bundle);
             fragmentAdapter.addItem(ViewPager);
         }
