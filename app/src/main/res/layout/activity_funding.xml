@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:background="@color/colorWhite"
     android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
@@ -15,6 +18,7 @@
     </LinearLayout>
     
     <ScrollView
+        android:layout_below="@id/fundingtop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -24,14 +28,15 @@
         android:layout_marginRight="10dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
-    <ImageView
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/fundingImage"
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/straw"/>
+
+        <ImageView
+            android:id="@+id/fundingImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/straw" />
 
            <LinearLayout
             android:layout_width="match_parent"
@@ -241,13 +246,31 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             app:srcCompat = "@drawable/line"/>
-
       </LinearLayout>
     </ScrollView>
-
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorOrange"
+    app:cardCornerRadius="15dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_alignParentBottom="true">
     <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/fundingBtn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="bottom"
-        android:background="@color/colorOrange"></LinearLayout>
+        android:background="@color/colorOrange">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:text="펀딩하기"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/nanum_bold"
+            android:textSize="25dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+</RelativeLayout>
 </LinearLayout>
