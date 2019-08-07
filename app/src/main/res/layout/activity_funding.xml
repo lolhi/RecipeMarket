@@ -10,38 +10,32 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/fundingtop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorOrange"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/fundingtop"
+        android:gravity="center">
 
 
-        <ImageView
-            android:layout_marginLeft="20dp"
-            android:layout_width="0dp"
-            android:layout_weight="2.5"
-            android:layout_marginTop="12dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/top_logo" />
+    <ImageView
+        android:id="@+id/fundingCat"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/money"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+      />
+    <TextView
+        android:id="@+id/fundingName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/nanum_bold"
+        android:text="금주의 맛성비 농산물 : 당근"
+        android:textSize="15dp"
+      />
 
-        <LinearLayout
-            android:layout_weight="2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent">
-
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/fundingSearch"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="25dp"
-            android:background="@color/colorOrange"
-            android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/search" />
     </LinearLayout>
-    
     <ScrollView
         android:layout_below="@id/fundingtop"
         android:layout_width="match_parent"
@@ -58,7 +52,7 @@
             android:id="@+id/fundingImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:layout_marginBottom="20dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/punding_onion" />
@@ -92,14 +86,14 @@
                    android:textSize="15dp"
                    android:layout_gravity="center"
                    android:gravity="center"
-                   android:text="D-46"/>
+                   android:text="D-5"/>
                </LinearLayout>
 
            </LinearLayout>
 
 
         <TextView
-
+            android:id="@+id/fundingSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="양파의 황성분은 혈액을 희석해주어 고혈압을 방지합니다."
@@ -133,16 +127,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/colorModernBlack"
-                    android:fontFamily="@font/nanum_normal"
-                    android:textSize="12dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="2dp"
-                    android:text="목표펀딩금액 : "/>
+
                     <TextView
                         android:id="@+id/fundingGoal"
                         android:layout_width="wrap_content"
@@ -154,32 +139,14 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="800000"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="@color/colorModernBlack"
-                        android:fontFamily="@font/nanum_normal"
-                        android:textSize="12dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="2dp"
-                        android:text="원"/>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="@color/colorModernBlack"
-                        android:fontFamily="@font/nanum_normal"
-                        android:textSize="12dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="2dp"
-                        android:text="현재 펀딩액 : "/>
+
                     <TextView
                         android:id="@+id/fundingPresent"
                         android:layout_width="wrap_content"
@@ -191,16 +158,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="420000"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:textColor="@color/colorModernBlack"
-                        android:fontFamily="@font/nanum_normal"
-                        android:textSize="12dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="2dp"
-                        android:text="원"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -225,7 +183,7 @@
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="2dp"
                         android:text="166"/>
@@ -236,7 +194,7 @@
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="명"/>
                 </LinearLayout>

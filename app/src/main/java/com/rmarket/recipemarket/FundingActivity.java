@@ -14,15 +14,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FundingActivity extends AppCompatActivity{
     Context mContext;
-    ImageView fundingImage,fundingSearch;
+    ImageView fundingImage,fundingSubImage;
     LinearLayout fundingBtn;
     ProgressBar progressBar;
     int percent;
-    TextView fundingDday, fundingPercent,fundingGoal,fundingPrecent,fundingUser;
+    TextView fundingDday, fundingName,fundingPercent,fundingGoal,fundingPrecent,fundingUser,fundingSubTitle;
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_funding);
+
+        Intent intent = getIntent();
+        FundingItem item = (FundingItem) intent.getSerializableExtra("fundingItem");
 
         fundingImage = findViewById(R.id.fundingImage); //펀딩이미지
         fundingDday = findViewById(R.id.fundingDday);   //펀딩디데이
@@ -31,23 +34,28 @@ public class FundingActivity extends AppCompatActivity{
         fundingPrecent = findViewById(R.id.fundingPresent);
         fundingUser = findViewById(R.id.fundingUser);
         fundingBtn = findViewById(R.id.fundingBtn);
-        fundingSearch = findViewById(R.id.fundingSearch);
         progressBar = findViewById(R.id.fundingProgress);
+        fundingSubTitle = findViewById(R.id.fundingSubTitle);
+        fundingName = findViewById(R.id.fundingName);
+        fundingSubImage = findViewById(R.id.fundingCat);
 
-        percent = 51;
-        progressBar.setProgress(percent);
+        progressBar.setProgress(item.getiFundingPercent());
+
+        fundingName.setText(item.getsFundingName());
+        fundingSubImage.setImageResource(item.getiFundingMark());
+        fundingImage.setImageResource(item.getiProductImg());
+        fundingGoal.setText(item.getsGoalAmount());
+        fundingPrecent.setText(""+item.getsPresentAmount());
+        fundingPercent.setText(""+item.getiFundingPercent());
+        fundingSubTitle.setText(item.getsProductSubName());
+
+
         fundingBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        fundingSearch.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, SearchRayout.class);
-                mContext.startActivity(intent);
-            }
-        });
     }
 }
 
