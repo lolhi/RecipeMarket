@@ -1,8 +1,8 @@
 package com.rmarket.recipemarket;
 
-import android.widget.TextView;
+import java.io.Serializable;
 
-public class FundingItem {
+public class FundingItem  implements Serializable {
     private String sFundingName;
     private String sProductName;
     private String sProductSubName;

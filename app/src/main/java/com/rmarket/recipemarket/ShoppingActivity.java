@@ -71,6 +71,7 @@ public class ShoppingActivity extends Fragment {
                         boolean sameY = pointY + tolerance > motionEvent.getY() && pointY - tolerance < motionEvent.getY();
                         if(sameX && sameY){
                             Intent intent = new Intent(getActivity(), FundingActivity.class);
+                            intent.putExtra("fundingItem", fundingItem[viewPager.getCurrentItem()]);
                             getActivity().startActivity(intent);
                         }
                 }
