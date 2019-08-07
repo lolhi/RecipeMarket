@@ -221,6 +221,7 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
     public void test(Ranking_Item buffer,int Num) {
         aniFlow = AnimationUtils.loadAnimation(context, R.anim.ani_flow);
         main_anim.setAnimation(aniFlow);
+        main_anim.startAnimation(aniFlow);
         main_title.setText(buffer.getMaterial());
         main_num.setText(""+(Num+1));
         main_reduce.setText(String.format("%.2f",buffer.getReduce())+"%");
