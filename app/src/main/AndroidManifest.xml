@@ -48,6 +48,7 @@
         <activity android:name=".ActivityComment"/>
         <activity android:name=".ActivityNotice"/>
         <activity android:name=".ActivityUserImport"/>
+        <activity android:name=".FundingActivity"/>
 
     </application>
 
