@@ -18,7 +18,7 @@ public class FundingActivity extends AppCompatActivity{
     LinearLayout fundingBtn;
     ProgressBar progressBar;
     int percent;
-    TextView fundingDday, fundingName,fundingPercent,fundingGoal,fundingPrecent,fundingUser,fundingSubTitle;
+    TextView fundingDday, fundingName,fundingPercent,fundingGoal,fundingPrecent,fundingUser,fundingSubTitle,fundingTitle;
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class FundingActivity extends AppCompatActivity{
         fundingSubTitle = findViewById(R.id.fundingSubTitle);
         fundingName = findViewById(R.id.fundingName);
         fundingSubImage = findViewById(R.id.fundingCat);
-
+        fundingTitle = findViewById(R.id.fundingTitle);
         progressBar.setProgress(item.getiFundingPercent());
 
         fundingName.setText(item.getsFundingName());
@@ -48,7 +48,7 @@ public class FundingActivity extends AppCompatActivity{
         fundingPrecent.setText(""+item.getsPresentAmount());
         fundingPercent.setText(""+item.getiFundingPercent());
         fundingSubTitle.setText(item.getsProductSubName());
-
+        fundingTitle.setText(item.getsProductName());
 
         fundingBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
