@@ -10,11 +10,36 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/fundingtop"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/colorOrange">
+        android:layout_height="50dp"
+        android:background="@color/colorOrange"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_marginLeft="20dp"
+            android:layout_width="0dp"
+            android:layout_weight="2.5"
+            android:layout_marginTop="12dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/top_logo" />
+
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/fundingSearch"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="25dp"
+            android:background="@color/colorOrange"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/search" />
     </LinearLayout>
     
     <ScrollView
@@ -24,8 +49,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_weight="1"
         android:layout_height="wrap_content">
 
@@ -34,9 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/straw" />
+            app:srcCompat="@drawable/punding_onion" />
 
            <LinearLayout
             android:layout_width="match_parent"
@@ -74,19 +99,27 @@
 
 
         <TextView
-            android:layout_marginTop="5dp"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="양파의 황성분은 혈액을 희석해주어 고혈압을 방지합니다."
-            android:textSize="12dp"
+            android:textSize="10dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/colorModernBlack"
             android:fontFamily="@font/nanum_normal"/>
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+
+        <ProgressBar
+            android:id="@+id/fundingProgress"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@color/colorOrange"></LinearLayout>
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:progress="81"
+            android:progressBackgroundTint="@color/color10"
+            android:progressTint="@color/color9" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,32 +136,32 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="10dp"
                     android:textColor="@color/colorModernBlack"
                     android:fontFamily="@font/nanum_normal"
                     android:textSize="12dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="2dp"
                     android:text="목표펀딩금액 : "/>
                     <TextView
                         android:id="@+id/fundingGoal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="800000"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="원"/>
                 </LinearLayout>
@@ -140,32 +173,32 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="현재 펀딩액 : "/>
                     <TextView
                         android:id="@+id/fundingPresent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="420000"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="원"/>
                 </LinearLayout>
@@ -177,28 +210,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="2dp"
                         android:text="현재 펀딩 이용자 : "/>
                     <TextView
                         android:id="@+id/fundingUser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
                         android:layout_marginTop="5dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="2dp"
                         android:text="166"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textColor="@color/colorModernBlack"
                         android:fontFamily="@font/nanum_normal"
                         android:textSize="12dp"
@@ -236,39 +270,41 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:textSize="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/nanum_normal"
-            android:text="*펀딩은 마감일까지 목표 금액이 모이지 않으면 결제가 진행되지 않습니다."/>
+            android:text="*마감일까지 목표 금액이 모이지 않으면 결제가 진행되지 않습니다."/>
+
         <ImageView
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="3dp"
             app:srcCompat = "@drawable/line"/>
+
       </LinearLayout>
     </ScrollView>
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:background="@color/colorOrange"
     app:cardCornerRadius="15dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginLeft="40dp"
     android:layout_alignParentBottom="true">
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/fundingBtn"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/colorOrange">
         <TextView
             android:gravity="center"
             android:layout_width="match_parent"
             android:text="펀딩하기"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/nanum_bold"
-            android:textSize="25dp"
+            android:fontFamily="@font/nanum_normal"
+            android:textSize="16dp"
             android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
