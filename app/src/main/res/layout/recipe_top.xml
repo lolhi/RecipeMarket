@@ -244,6 +244,7 @@
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/material_recycle"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:layout_height="wrap_content">
 </androidx.recyclerview.widget.RecyclerView>
 
