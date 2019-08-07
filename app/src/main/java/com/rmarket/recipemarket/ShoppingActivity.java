@@ -16,9 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 public class ShoppingActivity extends Fragment {
-
-    Context mContext;
-
        LinearLayout shopping1,shopping2,shopping3;
        ImageView userimport;
     public static ShoppingActivity newInstance() {
@@ -42,7 +39,7 @@ public class ShoppingActivity extends Fragment {
 
         // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
         for (int i = 0; i < 3; i++) {
-            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product);
+            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product, getActivity());
             Bundle bundle = new Bundle();
             bundle.putInt("imgurl", R.drawable.banner1);
             ViewPager.setArguments(bundle);
