@@ -51,7 +51,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mcontext);
         detail_recycle.setHasFixedSize(true);
         detail_recycle.setLayoutManager(layoutManager);
-        RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new AppCompatDialog(this));
+        RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new ArrayList<ProcessItem>(), new AppCompatDialog(this));
         httpConn.execute();
 
         scrap_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
