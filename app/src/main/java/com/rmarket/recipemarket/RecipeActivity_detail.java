@@ -54,6 +54,30 @@ public class RecipeActivity_detail extends AppCompatActivity {
         RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new ArrayList<ProcessItem>(), new AppCompatDialog(this));
         httpConn.execute();
 
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+                // 로그인 x
+                Log.e("onSessionClosed ::", errorResult.toString());
+                Toast.makeText(mcontext, "로그인 하지 않았습니다. 로그인 후 다시 시도해주세요", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                // 로그인 o
+                Log.e("onSuccess ::", "login");
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("ID",result.getId());
+                    jsonObject.put("RECIPE_ID", recommendItem.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                HttpConnection connPost = new HttpConnection(RecipeActivity_detail.this, "ConfirmClipping", jsonObject, scrap_image);
+                connPost.execute();
+            }
+        });
+
         scrap_image.setOnClickListener(new View.OnClickListener() { // 이미지 버튼 이벤트 정의
             @Override
             public void onClick(View v) { //클릭 했을경우
@@ -76,7 +100,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        HttpConnection connPost = new HttpConnection(RecipeActivity_detail.this, "AddClipping",jsonObject);
+                        HttpConnection connPost = new HttpConnection(RecipeActivity_detail.this, "AddClipping", jsonObject, scrap_image);
                         connPost.execute();
                     }
                 });

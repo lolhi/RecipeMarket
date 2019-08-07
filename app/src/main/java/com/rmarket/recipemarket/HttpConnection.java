@@ -3,6 +3,7 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -37,11 +38,19 @@ public class HttpConnection extends AsyncTask<String, String, String> {
     private String sUrl;
     private JSONObject jsonObj;
     private HttpURLConnection conn;
+    private ImageView scrap_image;
 
     public HttpConnection(Context mContext, String sUrl, JSONObject josnObj) {
         this.sUrl = sUrl;
         this.jsonObj = josnObj;
         this.mContext = mContext;
+    }
+
+    public HttpConnection(Context mContext, String sUrl, JSONObject josnObj, ImageView scrap_image) {
+        this.sUrl = sUrl;
+        this.jsonObj = josnObj;
+        this.mContext = mContext;
+        this.scrap_image = scrap_image;
     }
 
     @Override
@@ -111,9 +120,15 @@ public class HttpConnection extends AsyncTask<String, String, String> {
         }
         if(sUrl.equals("AddClipping")) {
             if (receiveMsg.equals("exist"))
-                publishProgress("이미 스크랩한 레시피 입니다.");
+                publishProgress("스크랩 취소 하였습니다.", "cancel", sUrl);
             else
-                publishProgress("스크랩 하였습니다.");
+                publishProgress("스크랩 하였습니다.", "add", sUrl);
+        }
+        else if(sUrl.equals("ConfirmClipping")) {
+            if (receiveMsg.equals("exist"))
+                publishProgress("", "cancel", sUrl);
+            else
+                publishProgress("", "add", sUrl);
         }
 
         return receiveMsg;
@@ -132,7 +147,19 @@ public class HttpConnection extends AsyncTask<String, String, String> {
     @Override
     protected void onProgressUpdate(String... values) {
         super.onProgressUpdate(values);
-        Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
+        if(values[2].equals("AddClipping")) {
+            Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
+            if (values[1].equals("cancel"))
+                scrap_image.setImageResource(R.drawable.scrap);
+            else
+                scrap_image.setImageResource(R.drawable.scrapcancel);
+        }
+        else if(values[2].equals("ConfirmClipping")) {
+            if (values[1].equals("cancel"))
+                scrap_image.setImageResource(R.drawable.scrapcancel);
+            else
+                scrap_image.setImageResource(R.drawable.scrap);
+        }
     }
 
     private static void trustAllHosts() {
