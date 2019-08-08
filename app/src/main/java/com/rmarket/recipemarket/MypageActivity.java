@@ -45,6 +45,7 @@ public class MypageActivity extends Fragment {
     FragmentAdapter fragmentAdapter;
     ImageView deliver;
     ImageView ivClippingFail;
+    private MypageActivityHttpConn http;
 
     public static MypageActivity newInstance() {
         return new MypageActivity();
@@ -72,7 +73,7 @@ public class MypageActivity extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
                 http.execute();
 
 
@@ -148,7 +149,7 @@ public class MypageActivity extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                MypageActivityHttpConn http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
                 http.execute();
 
                 ItemClickSupport.addTo(mypage_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
