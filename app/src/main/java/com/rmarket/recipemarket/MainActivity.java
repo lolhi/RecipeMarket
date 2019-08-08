@@ -15,6 +15,7 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout main_ranking,detail_ranking,main_anim;
     RecyclerView detail_recycle;
     private ImageView search_button;
+    private long mLastClickTime = SystemClock.elapsedRealtime();
 
    ArrayList rankingArrayList = new ArrayList<Ranking_Item> ();
 
@@ -61,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                return false;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     replaceFragment(HomeActivity.newInstance());
