@@ -158,7 +158,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                             jsonObj.getString("STEP_TIP")));
                 }
             }
-            else if (sUrl.contains("Getpopular")) {
+            else if (sUrl.contains("GetPriceInfo")) {
                 for (int i = 0; i < jsonArr.length(); i++) {
                     JSONObject jsonObj = jsonArr.getJSONObject(i);
 
@@ -174,7 +174,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
                 adapter.notifyDataSetChanged();
             }
             else if(MaterialArrList.size() != 0 && ProcessArrList.size() != 0){
-                httpConn = new RecipeActivity_detailHttpConn(context,"Getpopular" , detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
+                httpConn = new RecipeActivity_detailHttpConn(context,"GetPriceInfo" , detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
                 httpConn.execute();
             }
             else {
