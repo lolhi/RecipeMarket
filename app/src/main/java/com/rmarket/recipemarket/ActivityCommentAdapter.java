@@ -11,7 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,10 +28,12 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private ArrayList<Commetn_Item> arrList;
     private Context mContext;
+    private RecyclerView comment_recycle;
 
-    public ActivityCommentAdapter(Context mContext, ArrayList<Commetn_Item> arrList) {
+    public ActivityCommentAdapter(Context mContext, ArrayList<Commetn_Item> arrList, RecyclerView comment_recycle) {
         this.arrList = arrList;
         this.mContext = mContext;
+        this.comment_recycle = comment_recycle;
     }
 
     @NonNull
@@ -40,16 +51,42 @@ public class ActivityCommentAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         recyclerViewHolder.text.setText(item.getCommentText());
         recyclerViewHolder.time.setText(item.getCommetTime());
         recyclerViewHolder.name.setText(item.getCommentName());
+
         recyclerViewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(mContext, "position : "+position + " name : "+item.getCommentText(), Toast.LENGTH_SHORT).show();
-
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("WRITER", arrList.get(position).getCommentName());
+                    jsonObject.put("TIME", arrList.get(position).getCommetTime());
+                    jsonObject.put("COMM", arrList.get(position).getCommentText());
+                    jsonObject.put("RECIPE_ID", arrList.get(position).getsRecipeId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                HttpConnection connPost = new HttpConnection(mContext,"DeleteComment", jsonObject);
+                connPost.execute();
+                ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(mContext,"GetComment/", arrList.get(position).getsRecipeId(), comment_recycle, new AppCompatDialog(mContext));
+                httpConn.execute();
             }
         });
-        if(!item.getCommentProfile().equals("NoImg"))
+
+        if (!item.getCommentProfile().equals("NoImg"))
             GlideApp.with(mContext).load(item.getCommentProfile()).into(recyclerViewHolder.profile);
+
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                if(item.getCommentName().equals(result.getNickname())){
+                    recyclerViewHolder.del.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override

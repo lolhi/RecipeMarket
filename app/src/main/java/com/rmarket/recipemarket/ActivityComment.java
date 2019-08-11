@@ -49,7 +49,7 @@ public class ActivityComment extends AppCompatActivity {
         comment_recycle.setHasFixedSize(true);
         comment_recycle.setLayoutManager(layoutManager);
 
-        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/" + recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
+        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
         httpConn.execute();
 
         //댓글등록 버튼 클릭이벤트 구현...
@@ -57,7 +57,7 @@ public class ActivityComment extends AppCompatActivity {
             public void onClick(View v) {
                 long now = System.currentTimeMillis();
                 Date date = new Date(now);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                 String getTime = sdf.format(date);
                 UserManagement.getInstance().me(new MeV2ResponseCallback() {
@@ -83,7 +83,7 @@ public class ActivityComment extends AppCompatActivity {
                         }
                         HttpConnection connPost = new HttpConnection(mContext,"AddComment", jsonObject);
                         connPost.execute();
-                        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/" + recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
+                        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
                         httpConn.execute();
                         comment_edit.setText("");
                     }

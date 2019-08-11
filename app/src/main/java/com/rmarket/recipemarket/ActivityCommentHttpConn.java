@@ -48,10 +48,12 @@ public class ActivityCommentHttpConn extends AsyncTask<String, Void, String> {
     private RecyclerView comment_recycle;
     private JSONArray jsonArr;
     private HttpURLConnection conn;
+    private String sRecipeId;
 
-    public ActivityCommentHttpConn(Context context, String sUrl, RecyclerView comment_recycle, AppCompatDialog progressDialog) {
+    public ActivityCommentHttpConn(Context context, String sUrl, String sRecipeId, RecyclerView comment_recycle, AppCompatDialog progressDialog) {
         this.context = context;
         this.sUrl = sUrl;
+        this.sRecipeId = sRecipeId;
         this.comment_recycle = comment_recycle;
         this.progressDialog = progressDialog;
     }
@@ -70,7 +72,7 @@ public class ActivityCommentHttpConn extends AsyncTask<String, Void, String> {
         String str, receiveMsg = "";
         URL url = null;
         try {
-            url = new URL(UrlClass.Url + sUrl);
+            url = new URL(UrlClass.Url + sUrl + sRecipeId);
             trustAllHosts();
             HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
             httpsURLConnection.setHostnameVerifier(new HostnameVerifier() {
@@ -139,10 +141,11 @@ public class ActivityCommentHttpConn extends AsyncTask<String, Void, String> {
                 CommentArrList.add(new Commetn_Item(jsonObj.getString("PROFILE_IMG"),
                         jsonObj.getString("WRITER"),
                         jsonObj.getString("COMM"),
-                        jsonObj.getString("TIME")));
+                        jsonObj.getString("TIME"),
+                        sRecipeId));
             }
 
-            ActivityCommentAdapter adapter = new ActivityCommentAdapter(context, CommentArrList);
+            ActivityCommentAdapter adapter = new ActivityCommentAdapter(context, CommentArrList, comment_recycle);
             comment_recycle.setAdapter(adapter);
             comment_recycle.setItemAnimator(new DefaultItemAnimator());
             adapter.notifyDataSetChanged();

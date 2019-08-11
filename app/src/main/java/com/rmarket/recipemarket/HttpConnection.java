@@ -130,6 +130,11 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             else
                 publishProgress("", "add", sUrl);
         }
+        else if(sUrl.equals("DeleteComment")){
+            if(receiveMsg.equals("delete complete")){
+                publishProgress("댓글을 삭제하였습니다.", "", sUrl);
+            }
+        }
 
         return receiveMsg;
     }
@@ -159,6 +164,9 @@ public class HttpConnection extends AsyncTask<String, String, String> {
                 scrap_image.setImageResource(R.drawable.scrapcancel);
             else
                 scrap_image.setImageResource(R.drawable.scrap);
+        }
+        else if(values[2].equals("DeleteComment")) {
+            Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
         }
     }
 
