@@ -1,20 +1,13 @@
 package com.rmarket.recipemarket;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatDialog;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
@@ -54,6 +47,7 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
     private Animation aniFlow = null;
     private TextView main_reduce,main_title,main_num;
     private LinearLayout main_anim;
+    private boolean bAnimationFlag = false;
 
 
     public RankingRecyclerHttpConn(Context context, String sUrl,  RecyclerView detail_recycle, TextView main_reduce, TextView main_title, TextView main_num, LinearLayout main_anim) {
@@ -154,18 +148,12 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
             Thread th = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    int Num = -1;
+                    int Num = 0;
                     while (true) {
-                        if(Num<5) {
-                            Num++;
-                            Ranking_Item buffer = (Ranking_Item) RankingArrayList.get(Num);
-                            test(buffer,Num);
-                        }
-                        else {
-                            Num = 0;
-                            Ranking_Item buffer = (Ranking_Item) RankingArrayList.get(Num);
-                            test(buffer,Num);
-                        }
+                        Num = bAnimationFlag ? ( Num < 5 ? Num + 1 : 0)  : Num;
+                        Ranking_Item buffer = (Ranking_Item) RankingArrayList.get(Num);
+                        setAnimation(buffer,Num, bAnimationFlag ? R.anim.ani_flow_top_center : R.anim.ani_flow_center_bottom);
+                        bAnimationFlag = !bAnimationFlag;
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
@@ -218,12 +206,12 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
         }
     }
 
-    public void test(Ranking_Item buffer,int Num) {
-        aniFlow = AnimationUtils.loadAnimation(context, R.anim.ani_flow);
-        main_anim.setAnimation(aniFlow);
-        main_anim.startAnimation(aniFlow);
+    public void setAnimation(Ranking_Item buffer,int Num, int anim) {
         main_title.setText(buffer.getMaterial());
         main_num.setText(""+(Num+1));
         main_reduce.setText(String.format("%.2f",buffer.getReduce())+"%");
+        aniFlow = AnimationUtils.loadAnimation(context, anim);
+        main_anim.setAnimation(aniFlow);
+        main_anim.startAnimation(aniFlow);
     }
 }
