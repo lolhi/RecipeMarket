@@ -2,6 +2,7 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -48,6 +49,7 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
     private TextView main_reduce,main_title,main_num;
     private LinearLayout main_anim;
     private boolean bAnimationFlag = false;
+    Handler mHandler = new Handler();
 
 
     public RankingRecyclerHttpConn(Context context, String sUrl,  RecyclerView detail_recycle, TextView main_reduce, TextView main_title, TextView main_num, LinearLayout main_anim) {
@@ -152,8 +154,13 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
                     while (true) {
                         Num = bAnimationFlag ? ( Num < 5 ? Num + 1 : 0)  : Num;
                         Ranking_Item buffer = (Ranking_Item) RankingArrayList.get(Num);
-                        setAnimation(buffer,Num, bAnimationFlag ? R.anim.ani_flow_top_center : R.anim.ani_flow_center_bottom);
-                        bAnimationFlag = !bAnimationFlag;
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                setAnimation(buffer, RankingArrayList.indexOf(buffer), bAnimationFlag ? R.anim.ani_flow_top_center : R.anim.ani_flow_center_bottom);
+                                bAnimationFlag = !bAnimationFlag;
+                            }
+                        });
                         try {
                             Thread.sleep(3000);
                         } catch (InterruptedException e) {
