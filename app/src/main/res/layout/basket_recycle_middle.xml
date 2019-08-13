@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="20dp"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="판매처  |  "
+            android:textColor="@color/colorModernBlack"
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/basketRecycleShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="라니네 농수산물"
+            android:textColor="@color/colorModernBlack"
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical"
+           />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:srcCompat= "@drawable/line"/>
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:buttonTint="@color/colorOrange"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.5" />
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="110dp"
+            android:scaleType="fitXY"
+            android:layout_weight="2.5"
+            app:srcCompat="@drawable/straw" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/basketRecycleProductName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:textSize="15dp"
+                android:textColor="@color/colorModernBlack"
+                android:fontFamily="@font/nanum_normal"
+                android:layout_gravity="center_vertical"
+                android:text="보우짱 마시짱" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/basketdel" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="배송비 : " />
+
+                <TextView
+                    android:id="@+id/basketRecycleDeliverCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="2500" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text=" 원" />
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="상품가격 : " />
+
+                <TextView
+                    android:id="@+id/basketRecycleProductCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="12500" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text=" 원" />
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="수량 : " />
+
+                <TextView
+                    android:id="@+id/basketRecycleProductCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text="1" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:fontFamily="@font/nanum_normal"
+                    android:layout_gravity="center_vertical"
+                    android:text=" 개" />
+
+            </LinearLayout>
+
+     </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:srcCompat = "@drawable/line" />
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:textSize="15dp"
+            android:fontFamily="@font/nanum_normal"
+            android:text="상품 "
+            />
+
+        <TextView
+            android:id="@+id/basketRecycleProductCostUnder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12500"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:textSize="15dp"
+            android:fontFamily="@font/nanum_normal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 원"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorModernBlack"
+            android:textSize="15dp"
+            android:fontFamily="@font/nanum_normal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_gravity="center_vertical"
+            android:text="+ 배송비  " />
+
+        <TextView
+            android:id="@+id/basketRecycleDeliverCostUnder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:textColor="@color/colorModernBlack"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_gravity="center_vertical"
+            android:text="2500" />
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textColor="@color/colorModernBlack"
+        android:fontFamily="@font/nanum_normal"
+        android:layout_gravity="center_vertical"
+        android:text=" 원 =" />
+
+        <TextView
+            android:id="@+id/basketRecycleTotalCost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:gravity="right"
+            android:textColor="@color/colorOrange"
+            android:fontFamily="@font/nanum_normal"
+            android:layout_gravity="center_vertical"
+            android:text="2500 원" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:srcCompat = "@drawable/line"/>
+</LinearLayout>

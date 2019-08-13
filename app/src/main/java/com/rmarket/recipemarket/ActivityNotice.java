@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityNotice extends AppCompatActivity {
     Context mContext;
-    ImageView back;
+    ImageView back,noticeImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -18,6 +18,9 @@ public class ActivityNotice extends AppCompatActivity {
         mContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+
+        noticeImage = (ImageView)findViewById(R.id.noticeImage);
+        GlideApp.with(this).load(R.drawable.notice).into(noticeImage);
 
         back  =findViewById(R.id.notice_back);
         back.setOnClickListener(new View.OnClickListener() {

@@ -41,11 +41,28 @@
 
 
 
+
+    <LinearLayout
+        android:id="@+id/basket_emty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <ImageView
             android:layout_width="150dp"
             android:layout_height="match_parent"
-
              android:layout_gravity="center"
             app:srcCompat="@drawable/empty" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/basket_full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/basket_recycle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+          </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 
 </LinearLayout>
