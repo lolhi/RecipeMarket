@@ -79,6 +79,23 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
                     Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
                 }
             });
+
+            ((Basket_Recycle_Middle)viewHolder).productCheck.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Basket_Item item = BasketItem.get(position - 1);
+                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View v = inflater.inflate(R.layout.basket_recycle_bottom, null);
+
+                    TextView tvProductPrice = v.findViewById(R.id.tv_productprice_num);
+                    TextView tvDeliveryCost = v.findViewById(R.id.tv_delivery_cost_num);
+                    TextView tvAmountOfPayment = v.findViewById(R.id.tv_amount_of_payment_num);
+
+                    tvProductPrice.setText(Integer.parseInt(tvProductPrice.getText().toString()) + item.getProductCost());
+                    tvDeliveryCost.setText(Integer.parseInt(tvDeliveryCost.getText().toString()) + item.getDeliverCost());
+                    tvAmountOfPayment.setText(Integer.parseInt(tvProductPrice.getText().toString()) + Integer.parseInt(tvDeliveryCost.getText().toString()));
+                }
+            });
         }
     }
 
@@ -117,16 +134,19 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             productCount = itemView.findViewById(R.id.basketRecycleProductCount); //아이템 수량
             totalCost = itemView.findViewById(R.id.basketRecycleTotalCost);
             productCheck = itemView.findViewById(R.id.basketCheckbox);
-
         }
     }
 
     class Basket_Recycle_Bottom extends RecyclerView.ViewHolder {
-
+        TextView tvProductPrice;
+        TextView tvDeliveryCost;
+        TextView tvAmountOfPayment;
 
         public Basket_Recycle_Bottom(View itemView) {
             super(itemView);
-
+            tvProductPrice = itemView.findViewById(R.id.tv_productprice_num);
+            tvDeliveryCost = itemView.findViewById(R.id.tv_delivery_cost_num);
+            tvAmountOfPayment = itemView.findViewById(R.id.tv_amount_of_payment_num);
         }
     }
 }
