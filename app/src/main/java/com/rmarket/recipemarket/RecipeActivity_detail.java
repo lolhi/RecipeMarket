@@ -35,6 +35,19 @@ public class RecipeActivity_detail extends AppCompatActivity {
     RecyclerView detail_recycle;
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
+    }
+
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         mcontext = this;
         super.onCreate(savedInstanceState);
@@ -51,7 +64,7 @@ public class RecipeActivity_detail extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mcontext);
         detail_recycle.setHasFixedSize(true);
         detail_recycle.setLayoutManager(layoutManager);
-        RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new ArrayList<ProcessItem>(), new AppCompatDialog(this));
+        RecipeActivity_detailHttpConn httpConn = new RecipeActivity_detailHttpConn(this,"GetMaterial/" + recommendItem.getId(), detail_recycle,recommendItem,new ArrayList<Materialitem>(), new ArrayList<ProcessItem>(), new AppCompatDialog(this), GlideApp.with(this));
         httpConn.execute();
 
         UserManagement.getInstance().me(new MeV2ResponseCallback() {

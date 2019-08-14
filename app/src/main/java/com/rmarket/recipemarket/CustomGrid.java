@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 
 import androidx.appcompat.app.AppCompatDialog;
 
+import com.bumptech.glide.RequestManager;
+
 import java.util.ArrayList;
 
 public class CustomGrid extends BaseAdapter {
@@ -15,11 +17,13 @@ public class CustomGrid extends BaseAdapter {
     private Context mContext;
     private ArrayList<RecommendItem> arrList;
     private AppCompatDialog progressDialog;
+    private final RequestManager glide;
 
-    public CustomGrid(Context mContext, ArrayList<RecommendItem> arrList, AppCompatDialog progressDialog) {
+    public CustomGrid(Context mContext, ArrayList<RecommendItem> arrList, AppCompatDialog progressDialog, RequestManager glide) {
         this.mContext = mContext;
         this.arrList = arrList;
         this.progressDialog = progressDialog;
+        this.glide = glide;
     }
 
     @Override
@@ -49,7 +53,7 @@ public class CustomGrid extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = new GridItem(mContext, progressDialog);
+            convertView = new GridItem(mContext, progressDialog, glide);
         }
         ((GridItem) convertView).setData(arrList.get(position));
 

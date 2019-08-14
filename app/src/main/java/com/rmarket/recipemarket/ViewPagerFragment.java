@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -22,11 +23,13 @@ public class ViewPagerFragment extends Fragment {
     private int layoutValue;
     private int imgviewValue;
     private AppCompatDialog progressDialog;
+    private final RequestManager glide;
 
-    public ViewPagerFragment(int layoutValue, int imgviewValue, AppCompatDialog progressDialog) {
+    public ViewPagerFragment(int layoutValue, int imgviewValue, AppCompatDialog progressDialog, RequestManager glide) {
         this.layoutValue = layoutValue;
         this.imgviewValue = imgviewValue;
         this.progressDialog = progressDialog;
+        this.glide = glide;
     }
 
     @Nullable

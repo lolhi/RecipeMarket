@@ -39,30 +39,36 @@
 
     <LinearLayout
         android:background="@color/colorWhite"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/basketCheckbox"
-            android:buttonTint="@color/colorOrange"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:layout_weight="0.8" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
 
-        <ImageView
-            android:id="@+id/basketProductImage"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="110dp"
-            android:scaleType="fitXY"
-            android:layout_weight="2.5"
-            app:srcCompat="@drawable/straw" />
+            <CheckBox
+                android:id="@+id/basketCheckbox"
+                android:buttonTint="@color/colorOrange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/basketProductImage"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/straw" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -70,7 +76,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:orientation="vertical">
 
         <LinearLayout

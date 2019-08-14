@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,14 +53,16 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
     private FragmentAdapter fragmentAdapter;
     private JSONArray jsonArr;
     private HttpURLConnection conn;
+    private final RequestManager glide;
 
-    public HomeActivityHttpConn(Context context, String sUrl, FragmentManager fm, RecyclerView home_recycle, ArrayList<RecommendItem> RecommandaArrList, AppCompatDialog progressDialog) {
+    public HomeActivityHttpConn(Context context, String sUrl, FragmentManager fm, RecyclerView home_recycle, ArrayList<RecommendItem> RecommandaArrList, AppCompatDialog progressDialog, RequestManager glide) {
         this.context = context;
         this.sUrl = sUrl;
         this.fm = fm;
         this.home_recycle = home_recycle;
         this.RecommandaArrList = RecommandaArrList;
         this.progressDialog = progressDialog;
+        this.glide = glide;
     }
 
     public ArrayList<RecommendItem> getRecommandaArrList() {
@@ -171,13 +175,13 @@ public class HomeActivityHttpConn extends AsyncTask<String, Void, String> {
             }
 
             if (NoticeArrList.size() != 0 && RecommandaArrList.size() != 0) {
-                Home_recycle_Adapter adapter = new Home_recycle_Adapter(context, RecommandaArrList, NoticeArrList, fragmentAdapter, progressDialog);
+                Home_recycle_Adapter adapter = new Home_recycle_Adapter(context, RecommandaArrList, NoticeArrList, fragmentAdapter, progressDialog, glide);
                 home_recycle.setAdapter(adapter);
                 home_recycle.setItemAnimator(new DefaultItemAnimator());
                 adapter.notifyDataSetChanged();
 
             } else {
-                HomeActivityHttpConn http2 = new HomeActivityHttpConn(context, "GetNotice", fm, home_recycle, this.getRecommandaArrList(), progressDialog);
+                HomeActivityHttpConn http2 = new HomeActivityHttpConn(context, "GetNotice", fm, home_recycle, this.getRecommandaArrList(), progressDialog, glide);
                 http2.execute();
             }
         } catch (JSONException e) {

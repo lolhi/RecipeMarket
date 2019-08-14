@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -25,11 +26,13 @@ public class GridItem extends LinearLayout {
     private TextView time;
     private Context mContext;
     private AppCompatDialog progressDialog;
+    private final RequestManager glide;
 
-    public GridItem(Context context, AppCompatDialog progressDialog) {
+    public GridItem(Context context, AppCompatDialog progressDialog, RequestManager glide) {
         super(context);
         this.mContext = context;
         this.progressDialog = progressDialog;
+        this.glide = glide;
         init(context);
     }
 
@@ -52,9 +55,10 @@ public class GridItem extends LinearLayout {
     public void setData(RecommendItem item) {
         subtitle.setText(item.getSubtitle());
         int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-        level.setImageResource(levelImg);
+        //level.setImageResource(levelImg);
+        glide.load(levelImg).into(level);
         title.setText(item.getTitle());
-        GlideApp.with(mContext).load(item.getImage()).addListener(new RequestListener<Drawable>() {
+        glide.load(item.getImage()).addListener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 return false;

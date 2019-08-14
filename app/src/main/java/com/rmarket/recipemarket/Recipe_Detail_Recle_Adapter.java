@@ -16,13 +16,13 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 //여기 detail
@@ -38,13 +38,15 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
     private ArrayList<ProcessItem> ProcessArrList;
     private ArrayList<Ranking_Item> RankingArrList;
     private AppCompatDialog progressDialog;
+    private final RequestManager glide;
 
-    public Recipe_Detail_Recle_Adapter(Context mContext, RecommendItem recommendItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, ArrayList<Ranking_Item> RankingArrList, AppCompatDialog progressDialog) {
+    public Recipe_Detail_Recle_Adapter(Context mContext, RecommendItem recommendItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, ArrayList<Ranking_Item> RankingArrList, AppCompatDialog progressDialog, RequestManager glide) {
         this.mContext = mContext;
         this.recommendItem = recommendItem;
         this.MaterialArrList = MaterialArrList;
         this.ProcessArrList = ProcessArrList;
         this.RankingArrList = RankingArrList;
+        this.glide = glide;
         Collections.sort(ProcessArrList);
         this.progressDialog = progressDialog;
     }
@@ -92,7 +94,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
                 }
                 if(!(ProcessArrList.get(i).getProcessStepImg().equals(""))){
                     ((Recipe_Recycle_Middle) viewHolder).imgView[i].setVisibility(View.VISIBLE);
-                    GlideApp.with(mContext).load(ProcessArrList.get(i).getProcessStepImg()).into(((Recipe_Recycle_Middle) viewHolder).imgView[i]);
+                    glide.load(ProcessArrList.get(i).getProcessStepImg()).into(((Recipe_Recycle_Middle) viewHolder).imgView[i]);
                 }
             }
         }
@@ -104,7 +106,7 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
 */
 
         if (viewHolder instanceof Recipe_Detail_Recle_Adapter.Recipe_Recycle_Header) {
-            GlideApp.with(mContext).load(recommendItem.getImage()).addListener(new RequestListener<Drawable>() {
+            glide.load(recommendItem.getImage()).addListener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;
@@ -117,7 +119,8 @@ public class Recipe_Detail_Recle_Adapter extends RecyclerView.Adapter {
                 }
             }).into(((Recipe_Recycle_Header) viewHolder).image);
             int levelImg = recommendItem.getLevel().equals("초보환영") ? R.drawable.level_low : recommendItem.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            ((Recipe_Recycle_Header) viewHolder).level.setImageResource(levelImg);
+            //((Recipe_Recycle_Header) viewHolder).level.setImageResource(levelImg);
+            glide.load(levelImg).into(((Recipe_Recycle_Header) viewHolder).level);
             ((Recipe_Recycle_Header) viewHolder).title.setText(recommendItem.getTitle());
             ((Recipe_Recycle_Header) viewHolder).calorie.setText(recommendItem.getCal());
             ((Recipe_Recycle_Header) viewHolder).subtitle.setText(recommendItem.getSubtitle());

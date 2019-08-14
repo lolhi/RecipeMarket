@@ -41,6 +41,18 @@ public class SearchRayout extends AppCompatActivity {
     Context mContext;
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,14 +53,16 @@ public class MypageActivityHttpConn extends AsyncTask<String, Integer, String> {
     private HttpURLConnection conn;
     private JSONObject jsonObj;
     private ImageView ivClippingFail;
+    private final RequestManager glide;
 
-    public MypageActivityHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView mypage_recycle, JSONObject jsonObject, ImageView ivClippingFail) {
+    public MypageActivityHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView mypage_recycle, JSONObject jsonObject, ImageView ivClippingFail, RequestManager glide) {
         this.context = context;
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
         this.mypage_recycle = mypage_recycle;
         this.jsonObj = jsonObject;
         this.ivClippingFail = ivClippingFail;
+        this.glide = glide;
     }
 
     public ArrayList<RecommendItem> getClippingRecipeArrList() {
@@ -177,7 +181,7 @@ public class MypageActivityHttpConn extends AsyncTask<String, Integer, String> {
                         jsonObj.getString("CALORIE"),
                         jsonObj.getString("RECIPE_ID")));
             }
-            Mypage_Recycle_Adaper adapter = new Mypage_Recycle_Adaper(context, ClippingRecipeArrList, progressDialog);
+            Mypage_Recycle_Adaper adapter = new Mypage_Recycle_Adaper(context, ClippingRecipeArrList, progressDialog, glide);
             mypage_recycle.setAdapter(adapter);
             mypage_recycle.setItemAnimator(new DefaultItemAnimator());
             adapter.notifyDataSetChanged();

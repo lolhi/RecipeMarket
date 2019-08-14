@@ -3,9 +3,7 @@ package com.rmarket.recipemarket;
 import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
@@ -46,6 +45,7 @@ public class MypageActivity extends Fragment {
     ImageView deliver;
     ImageView ivClippingFail;
     private MypageActivityHttpConn http;
+    private RequestManager glide;
 
     public static MypageActivity newInstance() {
         return new MypageActivity();
@@ -73,7 +73,7 @@ public class MypageActivity extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail, glide);
                 http.execute();
 
 
@@ -83,7 +83,7 @@ public class MypageActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        glide = ((MainActivity)getActivity()).getGlide();
         View view = inflater.inflate(R.layout.fragment_mypage, container, false); // 여기서 UI를 생성해서 View를 return
         mypage_recycle = view.findViewById(R.id.mypage_recycle);
         basket = view.findViewById(R.id.mypage_basket);
@@ -149,7 +149,7 @@ public class MypageActivity extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail);
+                http = new MypageActivityHttpConn(getActivity(), "GetClipping", new AppCompatDialog(getActivity()), mypage_recycle, jsonObject, ivClippingFail, glide);
                 http.execute();
 
                 ItemClickSupport.addTo(mypage_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
