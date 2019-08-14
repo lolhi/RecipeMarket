@@ -74,7 +74,7 @@ public class ActivityBasket extends AppCompatActivity {
         basket_recycle.setHasFixedSize(true);
         basket_recycle.setLayoutManager(layoutManager);
         basket_recycle.setAdapter(adapter);
-        back  =findViewById(R.id.basket_back);
+        back = findViewById(R.id.basket_back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               finish();
