@@ -164,7 +164,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 */
 
         if (viewHolder instanceof Home_Recycle_Bottom) {
-            final RecommendItem item = arrList.get(position - 2);
+                final RecommendItem item = arrList.get(position - 2);
 
             glide.load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
             ((Home_Recycle_Bottom) viewHolder).title.setText(item.getTitle());

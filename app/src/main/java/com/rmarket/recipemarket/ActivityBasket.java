@@ -18,7 +18,7 @@ public class ActivityBasket extends AppCompatActivity {
     RecyclerView basket_recycle;
     LinearLayout basket_full,basket_emty;
     BasketRecyclerAdapter adapter;
-    ArrayList<Basket_Item> BasketItem;
+    ArrayList<Basket_Item> BasketItem = new ArrayList<>();
     ImageView back;
 
     @Override
@@ -40,16 +40,24 @@ public class ActivityBasket extends AppCompatActivity {
 
         BasketItem.add(new Basket_Item("라니네",
                 "맛있는 보우짱",
-                "2500",
-                "18000",
-                "1",R.drawable.profile_raninae));
+                2500,
+                18000,
+                1,
+                R.drawable.straw));
 
         BasketItem.add(new Basket_Item("기조네 자두농장",
                 "싱싱한 자두",
-                "2500",
-                "17000",
-                "2",
-                R.drawable.profile_raninae));
+                2500,
+                17000,
+                2,
+                R.drawable.honey));
+
+        BasketItem.add(new Basket_Item("라니네",
+                "맛있는 보우짱",
+                2500,
+                18000,
+                1,
+                R.drawable.straw));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
