@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ActivityBasket extends AppCompatActivity {
     Context mContext;
     RecyclerView basket_recycle;
-    LinearLayout basket_full,basket_emty;
+    LinearLayout basket_full,basket_emty,basket_Btn;
     BasketRecyclerAdapter adapter;
     ArrayList<Basket_Item> BasketItem = new ArrayList<>();
     ImageView back;
@@ -55,7 +55,7 @@ public class ActivityBasket extends AppCompatActivity {
         basket_emty.setVisibility(View.GONE);
 
         adapter = new BasketRecyclerAdapter(mContext,BasketItem);
-
+        basket_Btn = findViewById(R.id.basketBtn);
         basket_recycle = findViewById(R.id.basket_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         basket_recycle.setHasFixedSize(true);
@@ -67,5 +67,12 @@ public class ActivityBasket extends AppCompatActivity {
               finish();
             }
         });
+        basket_Btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ActivityPayment.class);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 }

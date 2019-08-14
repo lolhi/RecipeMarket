@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/paymentLinear"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/colorWhite">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/nanum_normal"
+                android:gravity="center_vertical"
+                android:text="결제"
+                android:textColor="@color/colorModernBlack"
+                android:textSize="20dp"
+
+                />
+
+            <ImageView
+                android:id="@+id/payment_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="9dp"
+                app:srcCompat="@drawable/back_arr" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:background="@color/gray"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@drawable/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/nanum_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="주문 고객 정보"
+                    android:textColor="@color/colorModernBlack"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    app:srcCompat="@drawable/line" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="주문자" />
+
+                    <EditText
+                        android:id="@+id/payment_Custumer"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:hint="이름을 입력하세요."
+                        android:paddingLeft="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="이메일" />
+
+                    <EditText
+                        android:id="@+id/payment_Email"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:hint="이메일을 입력하세요."
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="이메일"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/payment_PhoneNumber"
+                        android:layout_width="0dp"
+
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:hint="-를 제외하고 입력해주세요."
+
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    app:srcCompat="@drawable/line" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:srcCompat="@drawable/line" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/nanum_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/colorModernBlack"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    app:srcCompat="@drawable/line" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="받는분" />
+
+                    <EditText
+                        android:id="@+id/payment_Receiver_Name"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:paddingLeft="10dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="주소" />
+
+                    <EditText
+                        android:id="@+id/payment_Receiver_Phone"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="이메일"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/payment_Receiver_AddressBig"
+                        android:layout_width="0dp"
+
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:hint="-를 제외하고 입력해주세요."
+
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="상세주소"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/payment_Receiver_AddressSmall"
+                        android:layout_width="0dp"
+
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+                        android:hint="-를 제외하고 입력해주세요."
+
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/nanum_normal"
+                        android:paddingLeft="20dp"
+                        android:text="배송 메시지"
+                        android:textSize="15dp" />
+
+                    <EditText
+                        android:id="@+id/payment_Receiver_Message"
+                        android:layout_width="0dp"
+
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/edge"
+
+
+                        android:paddingLeft="10dp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2.5dp"
+                    app:srcCompat="@drawable/line" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:srcCompat= "@drawable/straw"
+                android:scaleType="fitXY"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorOrange"
+        android:id="@+id/paymentBtn"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/colorOrange">
+            <TextView
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:text="결제하기"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/nanum_normal"
+                android:textSize="20dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
