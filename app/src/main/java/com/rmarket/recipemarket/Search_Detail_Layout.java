@@ -24,6 +24,18 @@ public class Search_Detail_Layout extends AppCompatActivity {
     GridView grid;
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_detail);
@@ -46,9 +58,9 @@ public class Search_Detail_Layout extends AppCompatActivity {
         TextView tvSearchFail = (TextView) findViewById(R.id.tv_search_fail);
         Search_Detail_LayoutHttpConn httpconn;
         if(cateroty.equals(""))
-            httpconn= new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + search_text, new AppCompatDialog(mContext), grid, re, tvSearchFail);
+            httpconn= new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + search_text, new AppCompatDialog(mContext), grid, re, tvSearchFail, GlideApp.with(this));
         else
-            httpconn = new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + cateroty + "/" + search_text, new AppCompatDialog(mContext), grid, re,tvSearchFail);
+            httpconn = new Search_Detail_LayoutHttpConn(mContext, "SearchRecipe/" + cateroty + "/" + search_text, new AppCompatDialog(mContext), grid, re,tvSearchFail, GlideApp.with(this));
         httpconn.execute();
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

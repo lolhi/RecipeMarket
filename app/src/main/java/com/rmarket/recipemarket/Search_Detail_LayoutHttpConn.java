@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialog;
 
+import com.bumptech.glide.RequestManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,14 +55,16 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
     private RelativeLayout re;
     private TextView tvSearchFail;
     private HttpURLConnection conn;
+    private final RequestManager glide;
 
-    public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid, RelativeLayout re, TextView tvSearchFail) {
+    public Search_Detail_LayoutHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, GridView grid, RelativeLayout re, TextView tvSearchFail, RequestManager glide) {
         this.context = context;
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
         this.grid = grid;
         this.re = re;
         this.tvSearchFail = tvSearchFail;
+        this.glide = glide;
     }
 
     @Override
@@ -168,7 +172,7 @@ public class Search_Detail_LayoutHttpConn extends AsyncTask<String, Integer , St
                         jsonObj.getString("RECIPE_ID")));
             }
 
-            CustomGrid adapter = new CustomGrid(context, CategoryArrList, progressDialog);
+            CustomGrid adapter = new CustomGrid(context, CategoryArrList, progressDialog, glide);
             grid.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

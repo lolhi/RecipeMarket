@@ -3,8 +3,6 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
@@ -28,12 +26,14 @@ public class ViewPagerFragment1 extends Fragment {
     private int imgviewValue;
     private Context mContext;
     private FundingItem fundingItem;
+    private final RequestManager glide;
 
-    public ViewPagerFragment1(int layoutValue, int imgviewValue, Context mContext, FundingItem fundingItem) {
+    public ViewPagerFragment1(int layoutValue, int imgviewValue, Context mContext, FundingItem fundingItem, RequestManager glide) {
         this.layoutValue = layoutValue;
         this.imgviewValue = imgviewValue;
         this.mContext = mContext;
         this.fundingItem = fundingItem;
+        this.glide = glide;
     }
 
     @Nullable
@@ -59,14 +59,14 @@ public class ViewPagerFragment1 extends Fragment {
         tvGoalAmount.setText(fundingItem.getsGoalAmount());
         tvPresentAmount.setText(fundingItem.getsPresentAmount());
         tvFundingPercent.setText(fundingItem.getiFundingPercent() + "%");
-        GlideApp.with(mContext).load(fundingItem.getiFundingMark()).into(ivFundingMark);
+        glide.load(fundingItem.getiFundingMark()).into(ivFundingMark);
         pbPercent.setProgress(fundingItem.getiFundingPercent());
 
         if (getArguments() != null) {
             Bundle args = getArguments();
             // MainActivity에서 받아온 Resource를 ImageView에 셋팅
 
-            GlideApp.with(this).load(args.getInt("imgurl")).addListener(new RequestListener<Drawable>() {
+            glide.load(args.getInt("imgurl")).addListener(new RequestListener<Drawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                     return false;

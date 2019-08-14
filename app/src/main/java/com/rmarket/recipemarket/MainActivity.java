@@ -38,6 +38,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
@@ -55,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView detail_recycle;
     private ImageView search_button;
     private long mLastClickTime = SystemClock.elapsedRealtime();
+
+    RequestManager getGlide(){
+        return GlideApp.with(this);
+    }
 
    ArrayList rankingArrayList = new ArrayList<Ranking_Item> ();
 
@@ -104,6 +109,18 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
     }
 
     @Override

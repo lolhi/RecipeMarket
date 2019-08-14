@@ -8,18 +8,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.RequestManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,6 +70,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
     private int position = 6;
     private int idx = 1;
     private HttpURLConnection conn;
+    private final RequestManager glide;
 
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -91,7 +90,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
 
     };
 
-    public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView, CustomScrollView recipeScrollView) {
+    public RecipeActivityHttpConn2(Context context, String sUrl, FragmentManager fm, ArrayList<RecommendItem> FullRecipeArrList, AppCompatDialog progressDialog, View rootView, CustomScrollView recipeScrollView, RequestManager glide) {
         this.context = context;
         this.sUrl = sUrl;
         this.fm = fm;
@@ -99,6 +98,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
         this.progressDialog = progressDialog;
         this.rootView = rootView;
         this.recipeScrollView = recipeScrollView;
+        this.glide = glide;
     }
 
     public void setsUrl(String sUrl) {
@@ -208,7 +208,7 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
             this.initIndicaotor();
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < TipArrList.size(); i++) {
-                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview, progressDialog);
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_recipe_viewpager_image, R.id.recipe_viewpager_imageview, progressDialog, glide);
                 Bundle bundle = new Bundle();
                 bundle.putString("imgurl", TipArrList.get(i));
                 ViewPager.setArguments(bundle);
@@ -220,9 +220,10 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
             View childView = callGl.getChildView();
             SetFindViewById(childView);
             for (int i = 0; i < 6; i++) {
-                GlideApp.with(context).load(FullRecipeArrList.get(i).getImage()).into(grid_image[i]);
+                glide.load(FullRecipeArrList.get(i).getImage()).into(grid_image[i]);
                 int levelImg = FullRecipeArrList.get(i).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(i).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-                grid_level[i].setImageResource(levelImg);
+                //grid_level[i].setImageResource(levelImg);
+                glide.load(levelImg).into(grid_level[i]);
                 grid_subtitle[i].setText(FullRecipeArrList.get(i).getSubtitle());
                 grid_time[i].setText(FullRecipeArrList.get(i).getTime());
                 grid_title[i].setText(FullRecipeArrList.get(i).getTitle());
@@ -257,22 +258,26 @@ public class RecipeActivityHttpConn2 extends AsyncTask<String, String, String> {
 
                         switch (idx) {
                             case 0:
-                                ivBanner.setImageResource(R.drawable.banner1);
+                                //ivBanner.setImageResource(R.drawable.banner1);
+                                glide.load(R.drawable.banner1).into(ivBanner);
                                 idx += 1;
                                 break;
                             case 1:
-                                ivBanner.setImageResource(R.drawable.banner2);
+                                //ivBanner.setImageResource(R.drawable.banner2);
+                                glide.load(R.drawable.banner2).into(ivBanner);
                                 idx += 1;
                                 break;
                             case 2:
-                                ivBanner.setImageResource(R.drawable.banner3);
+                                //ivBanner.setImageResource(R.drawable.banner3);
+                                glide.load(R.drawable.banner3).into(ivBanner);
                                 idx = 0;
                                 break;
                         }
                         for (int i = 0; position < length; i++, position++) {
-                            GlideApp.with(context).load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
+                            glide.load(FullRecipeArrList.get(position).getImage()).into(grid_image[i]);
                             int levelImg = FullRecipeArrList.get(position).getLevel().equals("초보환영") ? R.drawable.level_low : FullRecipeArrList.get(position).getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-                            grid_level[i].setImageResource(levelImg);
+                            //grid_level[i].setImageResource(levelImg);
+                            glide.load(levelImg).into(grid_level[i]);
                             grid_subtitle[i].setText(FullRecipeArrList.get(position).getSubtitle());
                             grid_time[i].setText(FullRecipeArrList.get(position).getTime());
                             grid_title[i].setText(FullRecipeArrList.get(position).getTitle());

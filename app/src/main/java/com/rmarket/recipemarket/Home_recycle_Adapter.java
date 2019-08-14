@@ -14,23 +14,20 @@ package com.rmarket.recipemarket;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 
@@ -46,6 +43,8 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
     private AppCompatDialog progressDialog;
     private CircleAnimIndicator circleAnimIndicator;
     private int flag = 0;
+    private final RequestManager glide;
+
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -62,12 +61,13 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         }
     };
 
-    public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, ArrayList<NoticeItem> NoticeArrList, FragmentAdapter fragmentAdapter, AppCompatDialog progressDialog) {
+    public Home_recycle_Adapter(Context mContext, ArrayList<RecommendItem> arrList, ArrayList<NoticeItem> NoticeArrList, FragmentAdapter fragmentAdapter, AppCompatDialog progressDialog, RequestManager glide) {
         this.mContext = mContext;
         this.arrList = arrList;
         this.NoticeArrList = NoticeArrList;
         this.fragmentAdapter = fragmentAdapter;
         this.progressDialog = progressDialog;
+        this.glide = glide;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 
             // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
             for (int i = 0; i < NoticeArrList.size(); i++) {
-                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_image, R.id.imageView, progressDialog);
+                ViewPagerFragment ViewPager = new ViewPagerFragment(R.layout.fragment_image, R.id.imageView, progressDialog, glide);
                 Bundle bundle = new Bundle();
 
                 bundle.putString("imgurl", NoticeArrList.get(i).getImg());
@@ -166,10 +166,10 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
         if (viewHolder instanceof Home_Recycle_Bottom) {
             final RecommendItem item = arrList.get(position - 2);
 
-            GlideApp.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
+            glide.load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
             ((Home_Recycle_Bottom) viewHolder).title.setText(item.getTitle());
             int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            GlideApp.with(mContext).load(levelImg).into(((Home_Recycle_Bottom) viewHolder).level);
+            glide.load(levelImg).into(((Home_Recycle_Bottom) viewHolder).level);
             ((Home_Recycle_Bottom) viewHolder).subtitle.setText(item.getSubtitle());
             ((Home_Recycle_Bottom) viewHolder).time.setText(item.getTime());
         }

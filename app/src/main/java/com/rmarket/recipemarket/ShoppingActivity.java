@@ -1,8 +1,6 @@
 package com.rmarket.recipemarket;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -12,19 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.RequestManager;
 
 public class ShoppingActivity extends Fragment {
        LinearLayout shopping1,shopping2,shopping3;
        ImageView userimport;
+       private RequestManager glide;
     public static ShoppingActivity newInstance() {
         return new ShoppingActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        glide = ((MainActivity)getActivity()).getGlide();
         View view = inflater.inflate(R.layout.fragment_shopping, container, false); // 여기서 UI를 생성해서 View를 return
 
         ViewPager viewPager = view.findViewById(R.id.fragment_shopping_viewpager);
@@ -45,7 +46,7 @@ public class ShoppingActivity extends Fragment {
 
         // FragmentAdapter에 Fragment 추가, Image 개수만큼 추가
         for (int i = 0; i < 3; i++) {
-            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product, getActivity(), fundingItem[i]);
+            ViewPagerFragment1 ViewPager = new ViewPagerFragment1(R.layout.fragment_shopping_viewpager, R.id.iv_shopping_viewpager_product, getActivity(), fundingItem[i], glide);
             Bundle bundle = new Bundle();
             bundle.putInt("imgurl", fundingItem[i].getiProductImg());
             ViewPager.setArguments(bundle);

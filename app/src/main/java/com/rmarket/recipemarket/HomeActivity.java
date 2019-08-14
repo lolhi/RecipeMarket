@@ -12,12 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
+
 import java.util.ArrayList;
 
 
 public class HomeActivity extends Fragment {
     private RecyclerView home_recycle;
     private HomeActivityHttpConn http;
+    private RequestManager glide;
 
     public static HomeActivity newInstance() {
         return new HomeActivity();
@@ -30,14 +33,14 @@ public class HomeActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        glide = ((MainActivity)getActivity()).getGlide();
         View view = inflater.inflate(R.layout.fragment_home, container, false); // 여기서 UI를 생성해서 View를 return
 
         home_recycle = view.findViewById(R.id.home_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         home_recycle.setHasFixedSize(true);
         home_recycle.setLayoutManager(layoutManager);
-        http = new HomeActivityHttpConn(getActivity(), "TodaySpecialPrice", getChildFragmentManager(), home_recycle, new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()));
+        http = new HomeActivityHttpConn(getActivity(), "TodaySpecialPrice", getChildFragmentManager(), home_recycle, new ArrayList<RecommendItem>(), new AppCompatDialog(getActivity()), glide);
         http.execute();
 
         ItemClickSupport.addTo(home_recycle, R.id.home_recycle).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

@@ -9,9 +9,10 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.RequestManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,8 +53,9 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
     private JSONArray jsonArr;
     private RecipeActivity_detailHttpConn httpConn;
     private HttpURLConnection conn;
+    private final RequestManager glide;
 
-    public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem,ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, AppCompatDialog progressDialog) {
+    public RecipeActivity_detailHttpConn(Context context, String sUrl, RecyclerView detail_recycle, RecommendItem recommandItem, ArrayList<Materialitem> MaterialArrList, ArrayList<ProcessItem> ProcessArrList, AppCompatDialog progressDialog, RequestManager glide) {
         this.context = context;
         this.sUrl = sUrl;
         this.detail_recycle = detail_recycle;
@@ -61,6 +63,7 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
         this.MaterialArrList = MaterialArrList;
         this.ProcessArrList = ProcessArrList;
         this.progressDialog = progressDialog;
+        this.glide = glide;
     }
 
     @Override
@@ -168,17 +171,17 @@ public class RecipeActivity_detailHttpConn extends AsyncTask<String, Void, Strin
             }
 
             if (MaterialArrList.size() != 0 && ProcessArrList.size() != 0 && RankingArrList.size() != 0) {
-                Recipe_Detail_Recle_Adapter adapter = new Recipe_Detail_Recle_Adapter(context, recommandItem, MaterialArrList, ProcessArrList, RankingArrList,  progressDialog);
+                Recipe_Detail_Recle_Adapter adapter = new Recipe_Detail_Recle_Adapter(context, recommandItem, MaterialArrList, ProcessArrList, RankingArrList,  progressDialog, glide);
                 detail_recycle.setAdapter(adapter);
                 detail_recycle.setItemAnimator(new DefaultItemAnimator());
                 adapter.notifyDataSetChanged();
             }
             else if(MaterialArrList.size() != 0 && ProcessArrList.size() != 0){
-                httpConn = new RecipeActivity_detailHttpConn(context,"GetPriceInfo" , detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
+                httpConn = new RecipeActivity_detailHttpConn(context,"GetPriceInfo" , detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog, glide);
                 httpConn.execute();
             }
             else {
-                httpConn = new RecipeActivity_detailHttpConn(context,"GetProcess/" + recommandItem.getId(), detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog);
+                httpConn = new RecipeActivity_detailHttpConn(context,"GetProcess/" + recommandItem.getId(), detail_recycle, recommandItem, MaterialArrList, ProcessArrList, progressDialog, glide);
                 httpConn.execute();
             }
         } catch (JSONException e) {

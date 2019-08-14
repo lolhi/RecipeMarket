@@ -20,6 +20,19 @@ public class ActivityBasket extends AppCompatActivity {
     BasketRecyclerAdapter adapter;
     ArrayList<Basket_Item> BasketItem;
     ImageView back;
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
