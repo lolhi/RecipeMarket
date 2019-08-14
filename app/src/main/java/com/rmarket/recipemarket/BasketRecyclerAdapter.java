@@ -5,8 +5,10 @@ import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +38,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             return HEADER;
 
         else
-            return END;
+            return MIDDLE;
     }
 
     @NonNull
@@ -52,7 +54,35 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+
+
+        if(viewHolder instanceof  Basket_Recycle_Header)
+        {
+           ((Basket_Recycle_Header) viewHolder).productTotalCount.setText(""+BasketItem.size());
+        }
+
+      else  if (viewHolder instanceof Basket_Recycle_Middle) {
+
+            Basket_Item item  = BasketItem.get(position - 1);
+            ((Basket_Recycle_Middle) viewHolder).productTitle.setText(item.getProductName());
+            ((Basket_Recycle_Middle) viewHolder).productImage.setImageResource(item.getProductImage());
+            ((Basket_Recycle_Middle) viewHolder).productCost.setText(""+item.getProductCost());
+            ((Basket_Recycle_Middle) viewHolder).productCostUnder.setText(""+(item.getProductCost()*item.getProductCount()));
+            ((Basket_Recycle_Middle) viewHolder).deliveryCost.setText(""+item.getDeliverCost());
+            ((Basket_Recycle_Middle) viewHolder).deliveryCostUnder.setText(""+item.getDeliverCost());
+            ((Basket_Recycle_Middle) viewHolder).productCount.setText(""+item.getProductCount());
+            ((Basket_Recycle_Middle) viewHolder).totalCost.setText(""+((item.getProductCost()*item.getProductCount())+item.getDeliverCost()));
+
+            ((Basket_Recycle_Middle) viewHolder).productDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "position"+position, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
 
     }
 
@@ -63,27 +93,35 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
 
     class Basket_Recycle_Header extends RecyclerView.ViewHolder {
 
+        TextView productTotalCount;
         public Basket_Recycle_Header(View itemView) {
             super(itemView);
-
+                productTotalCount = itemView.findViewById(R.id.basketTotalProduct);
         }
     }
 
     class Basket_Recycle_Middle extends RecyclerView.ViewHolder {
 
-        ImageView image, level;
-        TextView title, subtitle, time;
-
+        TextView  productCount,deliveryCost,productCost,productCostUnder,deliveryCostUnder,shopName,totalCost,productTitle;
+        ImageView productImage,productDel;
+        CheckBox productCheck;
         public Basket_Recycle_Middle(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.recommend_image);
+            productTitle = itemView.findViewById(R.id.basketRecycleProductName);
+            shopName = itemView.findViewById(R.id.basketRecycleShopName); // 판매처이름
+            productImage = itemView.findViewById(R.id.basketProductImage);  //상품 이미지
             GradientDrawable drawable=(GradientDrawable) mContext.getDrawable(R.drawable.background_rounding);
-            image.setBackground(drawable);
-            image.setClipToOutline(true);
-            level = itemView.findViewById(R.id.recommend_level);
-            title = itemView.findViewById(R.id.recommend_title);
-            subtitle = itemView.findViewById(R.id.recommend_subtitle);
-            time = itemView.findViewById(R.id.recommend_time);
+            productImage.setBackground(drawable);               //이미지 라운드처리
+            productImage.setClipToOutline(true);
+            productDel = itemView.findViewById(R.id.basketRecycleDel);      //상품삭제이미지
+            productCost = itemView.findViewById(R.id.basketRecycleProductCost); // 상품가격
+            productCostUnder = itemView.findViewById(R.id.basketRecycleProductCostUnder); // 하단에 나올 상품 가격
+            deliveryCost = itemView.findViewById(R.id.basketRecycleDeliverCost); //배달비
+            deliveryCostUnder = itemView.findViewById(R.id.basketRecycleDeliverCostUnder); //하단에 나올 배달비
+            productCount = itemView.findViewById(R.id.basketRecycleProductCount); //아이템 수량
+            totalCost = itemView.findViewById(R.id.basketRecycleTotalCost);
+            productCheck = itemView.findViewById(R.id.basketCheckbox);
+
         }
     }
 }

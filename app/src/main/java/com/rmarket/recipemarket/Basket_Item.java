@@ -4,11 +4,11 @@ public class Basket_Item {
     private int productImage;
     private String shopName;
     private String productName;
-    private String deliverCost;
-    private String productCost;
-    private String productCount;
+    private int deliverCost;
+    private int productCost;
+    private int productCount;
 
-    Basket_Item(String shopName, String productName, String deliverCost, String productCost, String productCount, int productImage)
+    Basket_Item(String shopName, String productName, int deliverCost, int productCost, int productCount, int productImage)
     {
         this.productImage =productImage;
         this.shopName = shopName;
@@ -33,15 +33,15 @@ public class Basket_Item {
         return productName;
     }
 
-    public String getDeliverCost() {
+    public int getDeliverCost() {
         return deliverCost;
     }
 
-    public String getProductCost() {
+    public int getProductCost() {
         return productCost;
     }
 
-    public String getProductCount() {
+    public int getProductCount() {
         return productCount;
     }
 }

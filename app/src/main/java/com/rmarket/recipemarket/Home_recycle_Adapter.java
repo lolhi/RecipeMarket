@@ -164,12 +164,12 @@ public class Home_recycle_Adapter extends RecyclerView.Adapter {
 */
 
         if (viewHolder instanceof Home_Recycle_Bottom) {
-            final RecommendItem item = arrList.get(position - 2);
+                final RecommendItem item = arrList.get(position - 2);
 
-            GlideApp.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
-            ((Home_Recycle_Bottom) viewHolder).title.setText(item.getTitle());
-            int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
-            GlideApp.with(mContext).load(levelImg).into(((Home_Recycle_Bottom) viewHolder).level);
+                GlideApp.with(mContext).load(item.getImage()).into(((Home_Recycle_Bottom) viewHolder).image);
+                ((Home_Recycle_Bottom) viewHolder).title.setText(item.getTitle());
+                int levelImg = item.getLevel().equals("초보환영") ? R.drawable.level_low : item.getLevel().equals("보통") ? R.drawable.level_middle : R.drawable.level_hight;
+                GlideApp.with(mContext).load(levelImg).into(((Home_Recycle_Bottom) viewHolder).level);
             ((Home_Recycle_Bottom) viewHolder).subtitle.setText(item.getSubtitle());
             ((Home_Recycle_Bottom) viewHolder).time.setText(item.getTime());
         }
