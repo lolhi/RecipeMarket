@@ -8,11 +8,12 @@ public class FundingItem  implements Serializable {
     private String sProductSubName;
     private String sGoalAmount;
     private String sPresentAmount;
+    private int iFundingDetail;
     private int iFundingPercent;
     private int iFundingMark;
     private int iProductImg;
 
-    public FundingItem(String sFundingName, String sProductName, String sProductSubName, String sGoalAmount, String sPresentAmount, int iFundingPercent, int iFundingMark, int iProductImg) {
+    public FundingItem(String sFundingName, String sProductName, String sProductSubName, String sGoalAmount, String sPresentAmount, int iFundingPercent, int iFundingMark, int iProductImg,int iFundingDetail) {
         this.sFundingName = sFundingName;
         this.sProductName = sProductName;
         this.sProductSubName = sProductSubName;
@@ -21,7 +22,11 @@ public class FundingItem  implements Serializable {
         this.iFundingPercent = iFundingPercent;
         this.iFundingMark = iFundingMark;
         this.iProductImg = iProductImg;
+        this.iFundingDetail = iFundingDetail;
     }
+
+    public int getiFundingDetail() {
+        return iFundingDetail; }
 
     public int getiProductImg() {
         return iProductImg;

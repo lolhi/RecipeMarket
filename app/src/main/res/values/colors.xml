@@ -8,10 +8,11 @@
     <color name="colorOrange">#E78430</color>
     <color name="trans_blue">#443f51B5</color>
     <color name="black">#000000</color>
-    <color name="gray">#F7F6F5</color>
+    <color name="gray">#EAEAEA</color>
     <color name="colorDarkgray">#4c4c4c</color>
     <color name="colorModernBlack">#353535</color>
     <color name="colorLightOrange">#FBE4C1</color>
+    <color name="transparent">#1A000000</color>
     <!-- NEW DISIGN -->
     <color name="color1">#404040</color>
     <color name="color2">#B2B2B2</color>
