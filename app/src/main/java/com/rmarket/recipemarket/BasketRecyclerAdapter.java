@@ -15,19 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BasketRecyclerAdapter extends RecyclerView.Adapter{
     private Context mContext;
     ArrayList<Basket_Item> BasketItem;
+    boolean[] bCheckbox;
 
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
-    public BasketRecyclerAdapter(Context mContext,ArrayList<Basket_Item> BasketItem)
-    {
+    public BasketRecyclerAdapter(Context mContext,ArrayList<Basket_Item> BasketItem) {
         this.mContext = mContext;
         this.BasketItem = BasketItem;
+        bCheckbox = new boolean[BasketItem.size()];
+        Arrays.fill(bCheckbox, false);
     }
 
     @Override
@@ -58,8 +61,6 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-
-
         if (viewHolder instanceof Basket_Recycle_Header) {
             ((Basket_Recycle_Header) viewHolder).productTotalCount.setText("" + BasketItem.size());
         } else if (viewHolder instanceof Basket_Recycle_Middle) {
@@ -80,22 +81,31 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
                 }
             });
 
+            if(((Basket_Recycle_Middle)viewHolder).productCheck.isChecked()){
+                bCheckbox[position - 1] = true;
+            }
+            else{
+                bCheckbox[position - 1] = false;
+            }
+
             ((Basket_Recycle_Middle)viewHolder).productCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Basket_Item item = BasketItem.get(position - 1);
-                    LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View v = inflater.inflate(R.layout.basket_recycle_bottom, null);
-
-                    TextView tvProductPrice = v.findViewById(R.id.tv_productprice_num);
-                    TextView tvDeliveryCost = v.findViewById(R.id.tv_delivery_cost_num);
-                    TextView tvAmountOfPayment = v.findViewById(R.id.tv_amount_of_payment_num);
-
-                    tvProductPrice.setText(Integer.parseInt(tvProductPrice.getText().toString()) + item.getProductCost());
-                    tvDeliveryCost.setText(Integer.parseInt(tvDeliveryCost.getText().toString()) + item.getDeliverCost());
-                    tvAmountOfPayment.setText(Integer.parseInt(tvProductPrice.getText().toString()) + Integer.parseInt(tvDeliveryCost.getText().toString()));
+                    notifyDataSetChanged();
                 }
             });
+        } else {
+            ((Basket_Recycle_Bottom) viewHolder).tvProductPrice.setText("0");
+            ((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.setText("0");
+            ((Basket_Recycle_Bottom) viewHolder).tvAmountOfPayment.setText("0");
+            for (int idx = 0; idx < BasketItem.size(); idx++) {
+                if (bCheckbox[idx]) {
+                    Basket_Item item = BasketItem.get(idx);
+                    ((Basket_Recycle_Bottom) viewHolder).tvProductPrice.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvProductPrice.getText().toString()) + item.getProductCost()));
+                    ((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.getText().toString()) + item.getDeliverCost()));
+                    ((Basket_Recycle_Bottom) viewHolder).tvAmountOfPayment.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvProductPrice.getText().toString()) + Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.getText().toString())));
+                }
+            }
         }
     }
 

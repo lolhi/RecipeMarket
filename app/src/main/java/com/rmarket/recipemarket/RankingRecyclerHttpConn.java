@@ -49,7 +49,7 @@ public class RankingRecyclerHttpConn extends AsyncTask<String, Void, String> {
     private TextView main_reduce,main_title,main_num;
     private LinearLayout main_anim;
     private boolean bAnimationFlag = false;
-    Handler mHandler = new Handler();
+    private Handler mHandler = new Handler();
 
 
     public RankingRecyclerHttpConn(Context context, String sUrl,  RecyclerView detail_recycle, TextView main_reduce, TextView main_title, TextView main_num, LinearLayout main_anim) {
