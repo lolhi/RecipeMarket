@@ -21,6 +21,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ActivityPayment extends AppCompatActivity {
     CardView payment_Btn;
     EditText editCustomerName,editCustomerEmail,editCustomerPhone,editReceiverName,editReceiverAddressBig,editReceiverAdressSmall,editReceiverComment,editReceiverPhone;
@@ -105,7 +108,20 @@ public class ActivityPayment extends AppCompatActivity {
                        }
                        else
                        {
+                           // 서버 연동
                            Toast.makeText(ActivityPayment.this, "결제를 진행합니다.", Toast.LENGTH_SHORT).show();
+
+                           JSONObject jsonObject = new JSONObject();
+                           try {
+                               jsonObject.put("id", "123");
+                               jsonObject.put("product_name", "맛있는 보우짱");
+                               jsonObject.put("quantity", 1);
+                               jsonObject.put("total_amount", 30000);
+                           } catch (JSONException e) {
+                               e.printStackTrace();
+                           }
+                           HttpConnection httpConn = new HttpConnection(ActivityPayment.this, "payment", jsonObject);
+                           httpConn.execute();
                        }
                     }
                 }

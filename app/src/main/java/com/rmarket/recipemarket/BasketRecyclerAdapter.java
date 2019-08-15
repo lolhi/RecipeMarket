@@ -101,7 +101,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             for (int idx = 0; idx < BasketItem.size(); idx++) {
                 if (bCheckbox[idx]) {
                     Basket_Item item = BasketItem.get(idx);
-                    ((Basket_Recycle_Bottom) viewHolder).tvProductPrice.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvProductPrice.getText().toString()) + item.getProductCost()));
+                    ((Basket_Recycle_Bottom) viewHolder).tvProductPrice.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvProductPrice.getText().toString())  + item.getProductCost() * item.getProductCount()));
                     ((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.getText().toString()) + item.getDeliverCost()));
                     ((Basket_Recycle_Bottom) viewHolder).tvAmountOfPayment.setText("" + (Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvProductPrice.getText().toString()) + Integer.parseInt(((Basket_Recycle_Bottom) viewHolder).tvDeliveryCost.getText().toString())));
                 }

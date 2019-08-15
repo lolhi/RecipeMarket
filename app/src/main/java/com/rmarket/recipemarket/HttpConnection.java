@@ -1,11 +1,13 @@
 package com.rmarket.recipemarket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -146,6 +148,17 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             ExceptionHandling exceptHandling = new ExceptionHandling(e, mContext,"인터넷 연결이 불안정 합니다. \n인터넷 연결 상태를 확인 후 어플리케이션을 재실행 하십시오.");
             exceptHandling.StartingExceptionDialog();
             return;
+        }
+        if(sUrl.equals("payment")){
+            JSONObject jsonObject;
+            Intent intent = new Intent(mContext, ActivityPaymentWebView.class);
+            try {
+                jsonObject = new JSONObject(s);
+                intent.putExtra("sUrl", jsonObject.getString("next_redirect_app_url"));
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+            mContext.startActivity(intent);
         }
     }
 
