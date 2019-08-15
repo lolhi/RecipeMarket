@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FundingActivity extends AppCompatActivity{
     Context mContext;
-    ImageView fundingImage,fundingSubImage;
+    ImageView fundingImage,fundingSubImage,fundingDetail;
     LinearLayout fundingBtn;
     ProgressBar progressBar;
     int percent;
@@ -39,6 +39,7 @@ public class FundingActivity extends AppCompatActivity{
         fundingName = findViewById(R.id.fundingName);
         fundingSubImage = findViewById(R.id.fundingCat);
         fundingTitle = findViewById(R.id.fundingTitle);
+        fundingDetail = findViewById(R.id.fundingDetail);
         progressBar.setProgress(item.getiFundingPercent());
 
         fundingName.setText(item.getsFundingName());
@@ -49,6 +50,8 @@ public class FundingActivity extends AppCompatActivity{
         fundingPercent.setText(""+item.getiFundingPercent());
         fundingSubTitle.setText(item.getsProductSubName());
         fundingTitle.setText(item.getsProductName());
+
+        GlideApp.with(this).load(item.getiFundingDetail()).into(fundingDetail);
 
         fundingBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

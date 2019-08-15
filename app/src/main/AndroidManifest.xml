@@ -51,6 +51,8 @@
         <activity android:name=".FundingActivity"/>
         <activity android:name=".ActivityPayment"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ActivityShopItem"/>
+
     </application>
 
 </manifest>
