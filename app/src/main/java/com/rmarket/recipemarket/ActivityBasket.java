@@ -75,11 +75,13 @@ public class ActivityBasket extends AppCompatActivity {
         basket_recycle.setLayoutManager(layoutManager);
         basket_recycle.setAdapter(adapter);
         back = findViewById(R.id.basket_back);
+
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
               finish();
             }
         });
+
         basket_Btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ActivityPayment.class);

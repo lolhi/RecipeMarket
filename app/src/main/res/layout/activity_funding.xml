@@ -252,15 +252,157 @@
             app:srcCompat="@drawable/moo22"/>
       </LinearLayout>
     </ScrollView>
+
+
+    <!--Final-->
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:id="@+id/fundingFinal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/fundingDownDraw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat= "@drawable/mytop"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@color/gray"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/funding_title3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="춘천감자"
+                android:textSize="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/colorModernBlack"/>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginBottom="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@color/colorWhite"
+                    >
+                    <TextView
+                        android:paddingLeft="7dp"
+                        android:id="@+id/funding_Minus"
+                        android:layout_width="0dp"
+                        android:gravity="left"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="ㅡ"/>
+
+                    <TextView
+
+                        android:id="@+id/fundingCountStatus"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_height="wrap_content"
+
+                        android:text="1"/>
+                    <TextView
+                        android:paddingRight="10dp"
+                        android:gravity="right"
+                    android:id="@+id/fundingPlus"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="+"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                    android:layout_weight="1"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:gravity="right"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총 상품금액"/>
+                    <TextView
+                        android:id="@+id/fundingTotalCost"
+                        android:layout_marginLeft="12dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/nanum_bold"
+                        android:textColor="@color/colorOrange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="36000"/>
+                    <TextView
+                        android:layout_marginLeft="3dp"
+                        android:textSize="18dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_bold"
+                        android:textColor="@color/colorOrange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원"/>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fundingGoPayment"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="펀딩하기"
+                android:textSize="16dp"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorOrange"
+                android:fontFamily="@font/nanum_normal"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
 <androidx.cardview.widget.CardView
 
+    android:id="@+id/fundingBtn"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@color/colorOrange"
     android:layout_alignParentBottom="true">
     <LinearLayout
         android:orientation="vertical"
-        android:id="@+id/fundingBtn"
+
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorOrange">

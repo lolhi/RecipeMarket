@@ -11,14 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class FundingActivity extends AppCompatActivity{
     Context mContext;
-    ImageView fundingImage,fundingSubImage,fundingDetail;
-    LinearLayout fundingBtn;
+    ImageView fundingImage,fundingSubImage,fundingDetail,fundingDownDraw;
+    CardView fundingBtn;
+    LinearLayout fundingFinal,fundingGoPayment;
     ProgressBar progressBar;
     int percent;
-    TextView fundingDday, fundingName,fundingPercent,fundingGoal,fundingPrecent,fundingUser,fundingSubTitle,fundingTitle;
+    int countStatus = 1;
+    TextView fundingDday, fundingName,fundingPercent,fundingGoal,fundingPrecent,fundingUser,fundingSubTitle,fundingTitle,fundingTitle3,fundingMinus,fundingPlus,fundingTotalCost,fundingCountStatus;
     protected void onCreate(Bundle savedInstanceState) {
         mContext = this;
         super.onCreate(savedInstanceState);
@@ -26,6 +29,16 @@ public class FundingActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         FundingItem item = (FundingItem) intent.getSerializableExtra("fundingItem");
+
+        fundingGoPayment = findViewById(R.id.fundingGoPayment);
+        fundingTitle3 = findViewById(R.id.funding_title3);
+        fundingMinus = findViewById(R.id.funding_Minus);
+        fundingPlus = findViewById(R.id.fundingPlus);
+        fundingCountStatus = findViewById(R.id.fundingCountStatus);
+        fundingTotalCost = findViewById(R.id.fundingTotalCost);
+        fundingFinal = findViewById(R.id.fundingFinal);
+        fundingDownDraw = findViewById(R.id.fundingDownDraw);
+
 
         fundingImage = findViewById(R.id.fundingImage); //펀딩이미지
         fundingDday = findViewById(R.id.fundingDday);   //펀딩디데이
@@ -42,6 +55,11 @@ public class FundingActivity extends AppCompatActivity{
         fundingDetail = findViewById(R.id.fundingDetail);
         progressBar.setProgress(item.getiFundingPercent());
 
+        fundingTitle3.setText(item.getsProductName());
+        fundingCountStatus.setText(""+countStatus);
+        fundingTotalCost.setText(""+(item.getiProductCost()*countStatus));
+
+
         fundingName.setText(item.getsFundingName());
         fundingSubImage.setImageResource(item.getiFundingMark());
         fundingImage.setImageResource(item.getiProductImg());
@@ -53,11 +71,51 @@ public class FundingActivity extends AppCompatActivity{
 
         GlideApp.with(this).load(item.getiFundingDetail()).into(fundingDetail);
 
-        fundingBtn.setOnClickListener(new View.OnClickListener() {
+        fundingPlus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "준비중입니다.", Toast.LENGTH_SHORT).show();
+                countStatus++;
+                fundingCountStatus.setText(""+countStatus);
+                fundingTotalCost.setText(""+(item.getiProductCost()*countStatus));
             }
         });
+
+        fundingMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(countStatus == 1) {
+                    Toast.makeText(mContext, "더이상 수량을 줄일 수 없어요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    countStatus--;
+                    fundingCountStatus.setText(""+countStatus);
+                    fundingTotalCost.setText(""+(item.getiProductCost()*countStatus));
+                }
+            }
+        });
+
+        fundingDownDraw.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fundingFinal.setVisibility(View.GONE);
+                fundingBtn.setVisibility(View.VISIBLE);
+            }
+        });
+
+        fundingBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                fundingBtn.setVisibility(View.GONE);
+                fundingFinal.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+        fundingGoPayment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(mContext, "결제하기 창으로 이동", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+            fundingFinal.setVisibility(View.GONE);
 
     }
 }
