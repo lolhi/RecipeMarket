@@ -17,17 +17,14 @@ public class ActivityShopItem extends AppCompatActivity {
     TextView shopItemTitle1,shopItemTitle2,shopItemTitle3,shopItemCost,shopItemDeliveryCost,shopItemMinus,shopItemPlus,shopItemCountStatus,shopItemTotalCost;
     ImageView back,basket,shopItemImage,shopItemDetail,shopItemDownDraw,shopItemGoPayment,shopItemGobasket;
     CardView ShopItemBtn;
-<<<<<<< HEAD
+    LinearLayout shopItemFinal;
+    int countStatus = 1;
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
         GlideApp.get(this).clearMemory();
     }
-=======
-    LinearLayout shopItemFinal;
-    int countStatus = 1;
->>>>>>> c376eb30beacdbc31f57849e0b6efc9687180dd8
 
     @Override
     public void onTrimMemory(int level) {
