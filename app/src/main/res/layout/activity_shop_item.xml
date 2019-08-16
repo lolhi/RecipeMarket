@@ -214,6 +214,7 @@
         >
 
        <ImageView
+           android:id="@+id/shopItem_DownDraw"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            app:srcCompat= "@drawable/mytop"
@@ -239,10 +240,12 @@
 
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:layout_marginBottom="15dp"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -278,8 +281,65 @@
                         android:layout_height="wrap_content"
                         android:text="+"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:gravity="right"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:textSize="12dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="총 상품금액"/>
+                    <TextView
+                        android:id="@+id/shopItem_TotalCost"
+                        android:layout_marginLeft="12dp"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/nanum_bold"
+                        android:textColor="@color/colorOrange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="36000"/>
+                    <TextView
+                        android:layout_marginLeft="3dp"
+                        android:textSize="18dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="@font/nanum_bold"
+                        android:textColor="@color/colorOrange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="원"/>
+
+
+                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:orientation="horizontal"
+           android:layout_marginBottom="10dp"
+           android:layout_marginLeft="10dp"
+           android:layout_marginRight="10dp"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:id="@+id/shopItem_goBasket"
+               android:layout_width="0dp"
+               app:srcCompat = "@drawable/mybogooni"
+               android:layout_height="50dp"
+               android:layout_weight="1"/>
+           <ImageView
+               android:id="@+id/shopItem_goPayment"
+               android:layout_width="0dp"
+               app:srcCompat = "@drawable/myperchase"
+               android:layout_height="50dp"
+               android:layout_weight="1"/>
+       </LinearLayout>
     </LinearLayout>
 
 
@@ -287,6 +347,7 @@
         android:id="@+id/shopItem_Btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+
         android:background="@color/colorOrange"
         android:layout_alignParentBottom="true">
         <LinearLayout

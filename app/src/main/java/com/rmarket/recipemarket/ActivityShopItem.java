@@ -14,10 +14,11 @@ import androidx.cardview.widget.CardView;
 
 public class ActivityShopItem extends AppCompatActivity {
     Context mContext;
-    TextView shopItemTitle1,shopItemTitle2,shopItemCost,shopItemDeliveryCost;
-    ImageView back,basket,shopItemImage,shopItemDetail;
+    TextView shopItemTitle1,shopItemTitle2,shopItemTitle3,shopItemCost,shopItemDeliveryCost,shopItemMinus,shopItemPlus,shopItemCountStatus,shopItemTotalCost;
+    ImageView back,basket,shopItemImage,shopItemDetail,shopItemDownDraw,shopItemGoPayment,shopItemGobasket;
     CardView ShopItemBtn;
-
+    LinearLayout shopItemFinal;
+    int countStatus = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,17 @@ public class ActivityShopItem extends AppCompatActivity {
         Intent intent = getIntent();
         ShopItem buffer = (ShopItem) intent.getSerializableExtra("Item");
 
+        shopItemGobasket = findViewById(R.id.shopItem_goBasket);
+        shopItemGoPayment = findViewById(R.id.shopItem_goPayment);
+        shopItemTotalCost = findViewById(R.id.shopItem_TotalCost);
+        shopItemTotalCost.setText(""+(buffer.getProductCost()*countStatus));
+        shopItemPlus = findViewById(R.id.shopItem_Plus);
+        shopItemMinus = findViewById(R.id.shopItem_Minus);
+        shopItemCountStatus = findViewById(R.id.shopItem_CountStatus);
+        shopItemCountStatus.setText(""+countStatus);
         shopItemTitle1 = findViewById(R.id.shopItem_title1);
         shopItemTitle2 = findViewById(R.id.shopItem_title2);
+        shopItemTitle3 = findViewById(R.id.shopItem_title3);
         shopItemCost = findViewById(R.id.shopItem_Cost);
         shopItemDeliveryCost = findViewById(R.id.shopItem_DeliveryCost);
         shopItemImage = findViewById(R.id.shopItem_Image);
@@ -39,18 +49,55 @@ public class ActivityShopItem extends AppCompatActivity {
         ShopItemBtn = findViewById(R.id.shopItem_Btn);
         shopItemTitle1.setText(""+buffer.getProductName());
         shopItemTitle2.setText(""+buffer.getProductName());
+        shopItemTitle3.setText(""+buffer.getProductName());
         shopItemCost.setText(""+buffer.getProductCost());
 //        shopItemDeliveryCost.setText(""+buffer.getDeliverCost());
         shopItemImage.setImageResource(buffer.getProductImage());
         shopItemDetail.setImageResource(buffer.getProductDetail());
+        shopItemFinal = findViewById(R.id.shopItem_Final);
+
+
+        shopItemPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                countStatus++;
+                shopItemCountStatus.setText(""+countStatus);
+                shopItemTotalCost.setText(""+(buffer.getProductCost()*countStatus));
+            }
+        });
+
+        shopItemMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(countStatus == 1) {
+                    Toast.makeText(mContext, "더이상 수량을 줄일 수 없어요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    countStatus--;
+                    shopItemCountStatus.setText(""+countStatus);
+                    shopItemTotalCost.setText(""+(buffer.getProductCost()*countStatus));
+                }
+            }
+        });
+
+        shopItemDownDraw = findViewById(R.id.shopItem_DownDraw);
+        shopItemDownDraw.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               shopItemFinal.setVisibility(View.GONE);
+               ShopItemBtn.setVisibility(View.VISIBLE);
+            }
+        });
 
 
         ShopItemBtn = findViewById(R.id.shopItem_Btn);
         ShopItemBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "결제하기", Toast.LENGTH_SHORT).show();
+                ShopItemBtn.setVisibility(View.GONE);
+                shopItemFinal.setVisibility(View.VISIBLE);
+
+
             }
         });
+
 
         basket = findViewById(R.id.shopItem_basket);
         basket.setOnClickListener(new View.OnClickListener() {
@@ -67,5 +114,19 @@ public class ActivityShopItem extends AppCompatActivity {
                 finish();
             }
         });
+
+        shopItemGobasket.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(mContext, "GoBasket", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        shopItemGoPayment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(mContext, "GoPasket", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        shopItemFinal.setVisibility(View.GONE);
     }
 }
