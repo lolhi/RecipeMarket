@@ -3,15 +3,15 @@ package com.rmarket.recipemarket;
 import java.io.Serializable;
 
 public class ShopItem implements Serializable {
-    private int productImage;
+    private String productImage;
     private String shopName;
     private String productName;
     private int deliverCost;
     private int productCost;
     private int productCount;
-    private int productDetail;
+    private String productDetail;
 
-   ShopItem(String shopName, String productName, int deliverCost, int productCost, int productCount, int productImage,int productDetail)
+   ShopItem(String shopName, String productName, int deliverCost, int productCost, int productCount, String productImage, String productDetail)
     {
         this.productImage = productImage;
         this.shopName = shopName;
@@ -19,17 +19,12 @@ public class ShopItem implements Serializable {
         this.deliverCost = deliverCost;
         this.productCost = productCost;
         this.productCount = productCount;
-        this.productDetail =productDetail;
+        this.productDetail = productDetail;
     }
 
-    public int getProductDetail() {
-        return productDetail;
-    }
-
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
-
 
     public String getShopName() {
         return shopName;
@@ -49,5 +44,9 @@ public class ShopItem implements Serializable {
 
     public int getProductCount() {
         return productCount;
+    }
+
+    public String getProductDetail() {
+        return productDetail;
     }
 }

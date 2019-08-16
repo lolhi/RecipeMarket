@@ -18,10 +18,21 @@ public class ActivityShopItem extends AppCompatActivity {
     ImageView back,basket,shopItemImage,shopItemDetail;
     CardView ShopItemBtn;
 
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        GlideApp.get(this).clearMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        GlideApp.get(this).trimMemory(level);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         mContext = this;
         super.onCreate(savedInstanceState);
@@ -40,10 +51,8 @@ public class ActivityShopItem extends AppCompatActivity {
         shopItemTitle1.setText(""+buffer.getProductName());
         shopItemTitle2.setText(""+buffer.getProductName());
         shopItemCost.setText(""+buffer.getProductCost());
-//        shopItemDeliveryCost.setText(""+buffer.getDeliverCost());
-        shopItemImage.setImageResource(buffer.getProductImage());
-        shopItemDetail.setImageResource(buffer.getProductDetail());
-
+        GlideApp.with(mContext).load(buffer.getProductImage()).into(shopItemImage);
+        GlideApp.with(mContext).load(buffer.getProductDetail()).into(shopItemDetail);
 
         ShopItemBtn = findViewById(R.id.shopItem_Btn);
         ShopItemBtn.setOnClickListener(new View.OnClickListener() {
