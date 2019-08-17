@@ -137,6 +137,11 @@ public class HttpConnection extends AsyncTask<String, String, String> {
                 publishProgress("댓글을 삭제하였습니다.", "", sUrl);
             }
         }
+        else if(sUrl.equals("AddBasket")){
+            if(receiveMsg.equals("add basket complete")){
+                publishProgress("장바구니에 추가하였습니다.", "", sUrl);
+            }
+        }
 
         return receiveMsg;
     }
@@ -178,7 +183,7 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             else
                 scrap_image.setImageResource(R.drawable.scrap);
         }
-        else if(values[2].equals("DeleteComment")) {
+        else if(values[2].equals("DeleteComment") || values[2].equals("AddBasket")) {
             Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
         }
     }
