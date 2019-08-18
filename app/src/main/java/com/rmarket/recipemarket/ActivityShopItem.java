@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,19 @@ public class ActivityShopItem extends AppCompatActivity {
         setContentView(R.layout.activity_shop_item);
         Intent intent = getIntent();
         ShopItem buffer = (ShopItem) intent.getSerializableExtra("Item");
+
+        final TabHost tabHost1 = (TabHost) findViewById(R.id.shopItem_tabHost1);
+        tabHost1.setup();
+
+        TabHost.TabSpec ts1 = tabHost1.newTabSpec("Tab Spec 1");
+        ts1.setContent(R.id.shopItem_Content1);
+        ts1.setIndicator("상세정보");
+        tabHost1.addTab(ts1);
+
+        TabHost.TabSpec ts2 = tabHost1.newTabSpec("Tab Spec 2");
+        ts2.setContent(R.id.shopItem_Content2);
+        ts2.setIndicator("배송정보");
+        tabHost1.addTab(ts2);
 
         shopItemGobasket = findViewById(R.id.shopItem_goBasket);
         shopItemGoPayment = findViewById(R.id.shopItem_goPayment);

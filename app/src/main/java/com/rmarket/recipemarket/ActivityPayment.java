@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ public class ActivityPayment extends AppCompatActivity {
     CardView payment_Btn;
     EditText editCustomerName,editCustomerEmail,editCustomerPhone,editReceiverName,editReceiverAddressBig,editReceiverAdressSmall,editReceiverComment,editReceiverPhone;
     LinearLayout paymentLinear;
+    ImageView payment_Back;
     TextView kakaoPay,mutongPay;
     SoftKeyboard softKeyboard;
     CheckBox payAgree;
@@ -37,6 +40,9 @@ public class ActivityPayment extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+
+
 
         payment_Btn = findViewById(R.id.paymentBtn); //결제하기 버튼
 
@@ -50,6 +56,14 @@ public class ActivityPayment extends AppCompatActivity {
         editReceiverAddressBig = findViewById(R.id.payment_Receiver_AddressBig);    //큰주소
         editReceiverAdressSmall = findViewById(R.id.payment_Receiver_AddressSmall); //상세주소
         editReceiverComment = findViewById(R.id.payment_Receiver_Message);  //배송 메시지
+
+        payment_Back = findViewById(R.id.payment_back);
+        payment_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         kakaoPay = findViewById(R.id.payment_Kakao); //카카오결제 사용
         mutongPay = findViewById(R.id.payment_Mutong); // 무동장입급 사용
