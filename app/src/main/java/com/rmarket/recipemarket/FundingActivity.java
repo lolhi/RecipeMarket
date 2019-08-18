@@ -111,8 +111,11 @@ public class FundingActivity extends AppCompatActivity{
 
         fundingGoPayment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "결제하기 창으로 이동", Toast.LENGTH_SHORT).show();
-
+                PaymentItem mPaymentItem = new PaymentItem(item.getsProductName(), Integer.parseInt(fundingTotalCost.getText().toString()), 2500, Integer.parseInt(fundingCountStatus.getText().toString()));
+                Intent intent = new Intent(mContext, ActivityPayment.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.putExtra("paymentitem",mPaymentItem);
+                startActivity(intent);
             }
         });
             fundingFinal.setVisibility(View.GONE);

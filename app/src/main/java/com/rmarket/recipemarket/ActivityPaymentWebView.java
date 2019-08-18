@@ -1,15 +1,13 @@
 package com.rmarket.recipemarket;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.net.URISyntaxException;
 
@@ -60,6 +58,11 @@ public class ActivityPaymentWebView extends AppCompatActivity {
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
+            }
+            else if (url != null && url.contains(UrlClass.Url + "readysuccess")){
+                Intent intent = new Intent(ActivityPaymentWebView.this, ActivityPaymentComplete.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                ActivityPaymentWebView.this.startActivity(intent);
             }
             view.loadUrl(url);
             return false;

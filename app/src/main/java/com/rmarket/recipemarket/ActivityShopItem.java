@@ -175,6 +175,7 @@ public class ActivityShopItem extends AppCompatActivity {
                     public void onSuccess(MeV2Response result) {
                         PaymentItem mPaymentItem = new PaymentItem(buffer.getProductName(), Integer.parseInt(shopItemTotalCost.getText().toString()), 2500, Integer.parseInt(shopItemCountStatus.getText().toString()));
                         Intent intent = new Intent(mContext, ActivityPayment.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         intent.putExtra("paymentitem",mPaymentItem);
                         startActivity(intent);
                     }

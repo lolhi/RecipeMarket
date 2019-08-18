@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityPaymentComplete">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_payment_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/title" />
+
+
+        <ImageView
+            android:id="@+id/iv_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_payment_complete"
+            app:srcCompat="@drawable/table" />
+
+        <TextView
+            android:id="@+id/tv_order"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:fontFamily="@font/nanum_normal"
+            app:layout_constraintEnd_toEndOf="@+id/iv_table"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/iv_table"
+            app:layout_constraintTop_toTopOf="@+id/iv_table" />
+
+        <TextView
+            android:id="@+id/tv_payment"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:gravity="center"
+            android:text="200,000원"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:fontFamily="@font/nanum_normal"
+            app:layout_constraintEnd_toEndOf="@+id/iv_table"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/iv_table"
+            app:layout_constraintTop_toTopOf="@+id/iv_table" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:gravity="center"
+            android:text="강원도 원주시 세동길 51 원주매지청솔아파트 104동 1001호"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            app:fontFamily="@font/nanum_normal"
+            app:layout_constraintEnd_toEndOf="@+id/iv_table"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/iv_table"
+            app:layout_constraintTop_toTopOf="@+id/iv_table" />
+
+        <ImageView
+            android:id="@+id/iv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_table"
+            app:srcCompat="@drawable/message" />
+
+        <ImageView
+            android:id="@+id/iv_goshop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_message"
+            app:srcCompat="@drawable/continueshop" />
+
+        <ImageView
+            android:id="@+id/iv_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_goshop"
+            app:srcCompat="@drawable/gumaehyunhwang" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,8 @@ package com.rmarket.recipemarket;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -71,6 +69,7 @@ public class ShoppingDetail extends AppCompatActivity {
                 if(ShoppingItemArrList.size() == 0)
                     ShoppingItemArrList = httpConn.getShoppingItemArrList();
                 Intent intent = new Intent(mContext, ActivityShopItem.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("Item", ShoppingItemArrList.get(0));
                 mContext.startActivity(intent);
             }
@@ -81,6 +80,7 @@ public class ShoppingDetail extends AppCompatActivity {
                 if(ShoppingItemArrList.size() == 0)
                     ShoppingItemArrList = httpConn.getShoppingItemArrList();
                 Intent intent = new Intent(mContext, ActivityShopItem.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("Item", ShoppingItemArrList.get(2));
                 mContext.startActivity(intent);
             }
@@ -91,6 +91,7 @@ public class ShoppingDetail extends AppCompatActivity {
                 if(ShoppingItemArrList.size() == 0)
                     ShoppingItemArrList = httpConn.getShoppingItemArrList();
                 Intent intent = new Intent(mContext, ActivityShopItem.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.putExtra("Item", ShoppingItemArrList.get(1));
                 mContext.startActivity(intent);
             }

@@ -11,13 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -157,6 +155,7 @@ public class HttpConnection extends AsyncTask<String, String, String> {
         if(sUrl.equals("payment")){
             JSONObject jsonObject;
             Intent intent = new Intent(mContext, ActivityPaymentWebView.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             try {
                 jsonObject = new JSONObject(s);
                 intent.putExtra("sUrl", jsonObject.getString("next_redirect_app_url"));

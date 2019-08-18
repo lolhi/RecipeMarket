@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ActivityPaymentWebView"></activity>
+        <activity android:name=".ActivityPaymentComplete"></activity>
+        <activity android:name=".ActivityPaymentWebView" />
         <activity
             android:name=".SplashActivity"
             android:noHistory="true">
@@ -39,21 +40,22 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name="com.rmarket.recipemarket.RecipeActivity_detail"/>
-        <activity android:name="com.rmarket.recipemarket.SearchRayout"/>
-        <activity android:name="com.rmarket.recipemarket.Search_Detail_Layout"/>
-        <activity android:name=".ShoppingDetail"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ActivityBasket"/>
-        <activity android:name=".ActivityAcoount"/>
-        <activity android:name=".shopping_detail2"/>
-        <activity android:name=".ActivityComment"/>
-        <activity android:name=".ActivityNotice"/>
-        <activity android:name=".ActivityUserImport"/>
-        <activity android:name=".FundingActivity"/>
-        <activity android:name=".ActivityPayment"
-            android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ActivityShopItem"/>
+        <activity android:name=".RecipeActivity_detail" />
+        <activity android:name=".SearchRayout" />
+        <activity android:name=".Search_Detail_Layout" />
+        <activity android:name=".ShoppingDetail" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ActivityBasket" />
+        <activity android:name=".ActivityAcoount" />
+        <activity android:name=".shopping_detail2" />
+        <activity android:name=".ActivityComment" />
+        <activity android:name=".ActivityNotice" />
+        <activity android:name=".ActivityUserImport" />
+        <activity android:name=".FundingActivity" />
+        <activity
+            android:name=".ActivityPayment"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ActivityShopItem" />
     </application>
 
 </manifest>
