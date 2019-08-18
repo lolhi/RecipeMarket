@@ -12,24 +12,27 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BasketRecyclerAdapter extends RecyclerView.Adapter{
     private Context mContext;
-    ArrayList<Basket_Item> BasketItem;
-    boolean[] bCheckbox;
+    private ArrayList<Basket_Item> BasketItem;
+    private boolean[] bCheckbox;
+    private final RequestManager glide;
 
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
-    public BasketRecyclerAdapter(Context mContext,ArrayList<Basket_Item> BasketItem) {
+    public BasketRecyclerAdapter(Context mContext, ArrayList<Basket_Item> BasketItem, RequestManager glide) {
         this.mContext = mContext;
         this.BasketItem = BasketItem;
         bCheckbox = new boolean[BasketItem.size()];
+        this.glide = glide;
         Arrays.fill(bCheckbox, false);
     }
 
@@ -66,7 +69,8 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
         } else if (viewHolder instanceof Basket_Recycle_Middle) {
             Basket_Item item = BasketItem.get(position - 1);
             ((Basket_Recycle_Middle) viewHolder).productTitle.setText(item.getProductName());
-            ((Basket_Recycle_Middle) viewHolder).productImage.setImageResource(item.getProductImage());
+            //((Basket_Recycle_Middle) viewHolder).productImage.setImageResource(item.getProductImage());
+            glide.load(item.getProductImage()).into((((Basket_Recycle_Middle) viewHolder).productImage));
             ((Basket_Recycle_Middle) viewHolder).productCost.setText("" + item.getProductCost());
             ((Basket_Recycle_Middle) viewHolder).productCostUnder.setText("" + (item.getProductCost() * item.getProductCount()));
             ((Basket_Recycle_Middle) viewHolder).deliveryCost.setText("" + item.getDeliverCost());

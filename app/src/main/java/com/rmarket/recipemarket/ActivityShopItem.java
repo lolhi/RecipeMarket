@@ -146,9 +146,13 @@ public class ActivityShopItem extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject();
                         try {
                             jsonObject.put("id", result.getId());
+                            jsonObject.put("shop_name", buffer.getShopName());
                             jsonObject.put("product_name", buffer.getProductName());
+                            jsonObject.put("product_cost", buffer.getProductCost());
+                            jsonObject.put("deliver_cost",buffer.getDeliverCost());
                             jsonObject.put("quantity", Integer.parseInt(shopItemCountStatus.getText().toString()));
                             jsonObject.put("total_amount", Integer.parseInt(shopItemTotalCost.getText().toString()));
+                            jsonObject.put("img", buffer.getProductImage());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -161,7 +165,20 @@ public class ActivityShopItem extends AppCompatActivity {
 
         shopItemGoPayment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Toast.makeText(mContext, "로그인 되지 않았습니다. 로그인 후 다시 시도해주십시오.", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onSuccess(MeV2Response result) {
+                        PaymentItem mPaymentItem = new PaymentItem(buffer.getProductName(), Integer.parseInt(shopItemCountStatus.getText().toString()), Integer.parseInt(shopItemTotalCost.getText().toString()));
+                        Intent intent = new Intent(mContext, ActivityPayment.class);
+                        intent.putExtra("paymentitem",mPaymentItem);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 

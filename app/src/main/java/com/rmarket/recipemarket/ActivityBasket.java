@@ -8,10 +8,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import static com.airbnb.lottie.network.FileExtension.JSON;
 
 public class ActivityBasket extends AppCompatActivity {
     Context mContext;
@@ -19,7 +30,7 @@ public class ActivityBasket extends AppCompatActivity {
     LinearLayout basket_full,basket_emty,basket_Btn;
     BasketRecyclerAdapter adapter;
     ArrayList<Basket_Item> BasketItem = new ArrayList<>();
-    ImageView back;
+    ImageView back, ivBasketEmpty;
 
     @Override
     public void onLowMemory() {
@@ -35,30 +46,6 @@ public class ActivityBasket extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
-        BasketItem.add(new Basket_Item("라니네",
-                "맛있는 보우짱",
-                2500,
-                18000,
-                1,
-                R.drawable.straw));
-
-        BasketItem.add(new Basket_Item("기조네 자두농장",
-                "싱싱한 자두",
-                2500,
-                17000,
-                2,
-                R.drawable.honey));
-
-        BasketItem.add(new Basket_Item("라니네",
-                "맛있는 보우짱",
-                2500,
-                18000,
-                1,
-                R.drawable.straw));
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
         mContext = this;
@@ -66,15 +53,28 @@ public class ActivityBasket extends AppCompatActivity {
         basket_full = findViewById(R.id.basket_full);
         basket_emty = findViewById(R.id.basket_emty);
         basket_emty.setVisibility(View.GONE);
-
-        adapter = new BasketRecyclerAdapter(mContext,BasketItem);
         basket_Btn = findViewById(R.id.basketBtn);
         basket_recycle = findViewById(R.id.basket_recycle);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        basket_recycle.setHasFixedSize(true);
-        basket_recycle.setLayoutManager(layoutManager);
-        basket_recycle.setAdapter(adapter);
         back = findViewById(R.id.basket_back);
+
+        UserManagement.getInstance().me(new MeV2ResponseCallback() {
+            @Override
+            public void onSessionClosed(ErrorResult errorResult) {
+
+            }
+
+            @Override
+            public void onSuccess(MeV2Response result) {
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("id", result.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ActivityBasketHttpConn httpConn = new ActivityBasketHttpConn(mContext,"GetBasket", new AppCompatDialog(mContext), basket_recycle, jsonObject, GlideApp.with(mContext), basket_emty);
+                httpConn.execute();
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

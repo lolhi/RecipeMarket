@@ -21,6 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,8 +43,9 @@ public class ActivityPayment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        payment_Btn = findViewById(R.id.paymentBtn); //결제하기 버튼
+        PaymentItem mPaymentItem = (PaymentItem)getIntent().getSerializableExtra("paymentitem");
 
+        payment_Btn = findViewById(R.id.paymentBtn); //결제하기 버튼
 
         editCustomerName = findViewById(R.id.payment_Custumer); // 소비자 이름
         editCustomerEmail = findViewById(R.id.payment_Email); //소비자 이메일
@@ -106,22 +112,37 @@ public class ActivityPayment extends AppCompatActivity {
                        {
                            Toast.makeText(ActivityPayment.this, "결제 방법을 선택해 주세요", Toast.LENGTH_SHORT).show();
                        }
-                       else
-                       {
+                       else {
                            // 서버 연동
                            Toast.makeText(ActivityPayment.this, "결제를 진행합니다.", Toast.LENGTH_SHORT).show();
 
-                           JSONObject jsonObject = new JSONObject();
-                           try {
-                               jsonObject.put("id", "123");
-                               jsonObject.put("product_name", "맛있는 보우짱");
-                               jsonObject.put("quantity", 1);
-                               jsonObject.put("total_amount", 30000);
-                           } catch (JSONException e) {
-                               e.printStackTrace();
+                           if (payMethod.equals("Kakao")) {
+                               UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                                   @Override
+                                   public void onSessionClosed(ErrorResult errorResult) {
+
+                                   }
+
+                                   @Override
+                                   public void onSuccess(MeV2Response result) {
+                                       JSONObject jsonObject = new JSONObject();
+                                       try {
+                                           jsonObject.put("id", result.getId());
+                                           jsonObject.put("product_name", mPaymentItem.getsProductName());
+                                           jsonObject.put("quantity", mPaymentItem.getiQuantity());
+                                           jsonObject.put("total_amount", mPaymentItem.getiTotalAmount());
+                                       } catch (JSONException e) {
+                                           e.printStackTrace();
+                                       }
+                                       HttpConnection httpConn = new HttpConnection(ActivityPayment.this, "payment", jsonObject);
+                                       httpConn.execute();
+                                   }
+                               });
                            }
-                           HttpConnection httpConn = new HttpConnection(ActivityPayment.this, "payment", jsonObject);
-                           httpConn.execute();
+                           else{
+                               //무통장
+
+                           }
                        }
                     }
                 }
