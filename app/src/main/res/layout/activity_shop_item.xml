@@ -192,6 +192,10 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray"></LinearLayout>
 
         <TabHost
             android:id="@+id/shopItem_tabHost1"

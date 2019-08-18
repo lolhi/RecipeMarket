@@ -21,6 +21,7 @@ import com.kakao.usermgmt.response.MeV2Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,14 +43,14 @@ public class ActivityComment extends AppCompatActivity {
         mContext = this;
 
         comment_btn = findViewById(R.id.comment_button);
-        comment_edit= findViewById(R.id.comment_edit);
+        comment_edit = findViewById(R.id.comment_edit);
 
         comment_recycle = findViewById(R.id.comment_recycle);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         comment_recycle.setHasFixedSize(true);
         comment_recycle.setLayoutManager(layoutManager);
 
-        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
+        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this, "GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
         httpConn.execute();
 
         //댓글등록 버튼 클릭이벤트 구현...
@@ -70,9 +71,9 @@ public class ActivityComment extends AppCompatActivity {
                     public void onSuccess(MeV2Response result) {
                         JSONObject jsonObject = new JSONObject();
                         try {
-                            jsonObject.put("RECIPE_ID",recommendItem.getId());
+                            jsonObject.put("RECIPE_ID", recommendItem.getId());
                             jsonObject.put("WRITER", result.getNickname());
-                            if(result.getProfileImagePath() == null)
+                            if (result.getProfileImagePath() == null)
                                 jsonObject.put("PROFILE_IMG", "NoImg");
                             else
                                 jsonObject.put("PROFILE_IMG", result.getProfileImagePath());
@@ -81,9 +82,9 @@ public class ActivityComment extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        HttpConnection connPost = new HttpConnection(mContext,"AddComment", jsonObject);
+                        HttpConnection connPost = new HttpConnection(mContext, "AddComment", jsonObject);
                         connPost.execute();
-                        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this,"GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
+                        ActivityCommentHttpConn httpConn = new ActivityCommentHttpConn(ActivityComment.this, "GetComment/", recommendItem.getId(), comment_recycle, new AppCompatDialog(ActivityComment.this));
                         httpConn.execute();
                         comment_edit.setText("");
                     }

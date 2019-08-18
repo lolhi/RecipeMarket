@@ -1,23 +1,35 @@
 package com.rmarket.recipemarket;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.RequestManager;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -27,32 +39,50 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * HttpConnection.java
+ * ActivityBasketHttpConn.java
  *
  * @author Yongju Jang
  * @version 1.0.0
  * @since 2019-07-05
  **/
 
-public class HttpConnection extends AsyncTask<String, String, String> {
-    private Context mContext;
+public class ActivityBasketHttpConn extends AsyncTask<String, Integer, String> {
+    private Context context;
     private Exception e;
+    private AppCompatDialog progressDialog;
     private String sUrl;
-    private JSONObject jsonObj;
+    private ArrayList<Basket_Item> BasketItemArrList = new ArrayList<>();
+    private JSONArray jsonArr;
+    private RecyclerView basket_recycle;
+    private RelativeLayout basket_emty;
     private HttpURLConnection conn;
-    private ImageView scrap_image;
+    private JSONObject jsonObj;
+    private final RequestManager glide;
+    private CardView cvBuy;
+    private BasketRecyclerAdapter adapter;
 
-    public HttpConnection(Context mContext, String sUrl, JSONObject josnObj) {
-        this.sUrl = sUrl;
-        this.jsonObj = josnObj;
-        this.mContext = mContext;
+    public boolean[] getbCheckbox() {
+        return adapter.getbCheckbox();
     }
 
-    public HttpConnection(Context mContext, String sUrl, JSONObject josnObj, ImageView scrap_image) {
+    public ArrayList<Basket_Item> getBasketItemArrList() {
+        return BasketItemArrList;
+    }
+
+    public ActivityBasketHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView basket_recycle, JSONObject jsonObject, RequestManager glide, RelativeLayout basket_emty, CardView cvBuy) {
+        this.context = context;
         this.sUrl = sUrl;
-        this.jsonObj = josnObj;
-        this.mContext = mContext;
-        this.scrap_image = scrap_image;
+        this.progressDialog = progressDialog;
+        this.basket_recycle = basket_recycle;
+        this.jsonObj = jsonObject;
+        this.glide = glide;
+        this.basket_emty = basket_emty;
+        this.cvBuy = cvBuy;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        progressON(context);
     }
 
     @Override
@@ -120,74 +150,87 @@ public class HttpConnection extends AsyncTask<String, String, String> {
             if(conn != null)
                 conn.disconnect();
         }
-        if(sUrl.equals("AddClipping")) {
-            if (receiveMsg.equals("exist"))
-                publishProgress("스크랩 취소 하였습니다.", "cancel", sUrl);
-            else
-                publishProgress("스크랩 하였습니다.", "add", sUrl);
-        }
-        else if(sUrl.equals("ConfirmClipping")) {
-            if (receiveMsg.equals("exist"))
-                publishProgress("", "cancel", sUrl);
-            else
-                publishProgress("", "add", sUrl);
-        }
-        else if(sUrl.equals("DeleteComment")){
-            if(receiveMsg.equals("delete complete")){
-                publishProgress("댓글을 삭제하였습니다.", "", sUrl);
-            }
-        }
-        else if(sUrl.equals("AddBasket")){
-            if(receiveMsg.equals("add basket complete")){
-                publishProgress("장바구니에 추가하였습니다.", "", sUrl);
-            }
-        }
 
+        if(receiveMsg.equals(""))
+            publishProgress(View.GONE, View.VISIBLE);
+        else
+            publishProgress(View.VISIBLE, View.GONE);
         return receiveMsg;
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        if(e != null){
-            ExceptionHandling exceptHandling = new ExceptionHandling(e, mContext,"인터넷 연결이 불안정 합니다. \n인터넷 연결 상태를 확인 후 어플리케이션을 재실행 하십시오.");
-            exceptHandling.StartingExceptionDialog();
-            return;
-        }
-        if(sUrl.equals("payment")){
-            JSONObject jsonObject;
-            Intent intent = new Intent(mContext, ActivityPaymentWebView.class);
-            try {
-                jsonObject = new JSONObject(s);
-                intent.putExtra("sUrl", jsonObject.getString("next_redirect_app_url"));
-            } catch (JSONException e1) {
-                e1.printStackTrace();
-            }
-            mContext.startActivity(intent);
-        }
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        basket_recycle.setVisibility(values[0]);
+        basket_emty.setVisibility(values[1]);
+        cvBuy.setVisibility(values[0]);
     }
 
     @Override
-    protected void onProgressUpdate(String... values) {
-        super.onProgressUpdate(values);
-        if(values[2].equals("AddClipping")) {
-            Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
-            if (values[1].equals("cancel"))
-                scrap_image.setImageResource(R.drawable.scrap);
-            else
-                scrap_image.setImageResource(R.drawable.scrapcancel);
+    protected void onPostExecute(String jsonData) {
+
+        if(e != null){
+            ExceptionHandling exceptHandling = new ExceptionHandling(e,context,"인터넷 연결이 불안정 합니다. \n인터넷 연결 상태를 확인 후 어플리케이션을 재실행 하십시오.");
+            exceptHandling.StartingExceptionDialog();
+            return;
         }
-        else if(values[2].equals("ConfirmClipping")) {
-            if (values[1].equals("cancel"))
-                scrap_image.setImageResource(R.drawable.scrapcancel);
-            else
-                scrap_image.setImageResource(R.drawable.scrap);
+
+        try {
+            if(jsonData.equals("")) {
+                progressOFF();
+                return;
+            }
+            jsonArr = new JSONArray(jsonData);
+
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject jsonObj = jsonArr.getJSONObject(i);
+
+                BasketItemArrList.add(new Basket_Item(jsonObj.getString("SHOP_NM"),
+                        jsonObj.getString("PRODUCT_NM"),
+                        jsonObj.getInt("DELIVER_COST"),
+                        jsonObj.getInt("PRODUCT_COST"),
+                        jsonObj.getInt("QUANTITY"),
+                        jsonObj.getString("IMG")));
+            }
+            adapter = new BasketRecyclerAdapter(context, BasketItemArrList, glide, progressDialog, basket_recycle, basket_emty, cvBuy);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            basket_recycle.setHasFixedSize(true);
+            basket_recycle.setLayoutManager(layoutManager);
+            basket_recycle.setAdapter(adapter);
+            basket_recycle.setItemAnimator(new DefaultItemAnimator());
+            adapter.notifyDataSetChanged();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        else if(values[2].equals("DeleteComment") || values[2].equals("AddBasket")) {
-            Toast.makeText(mContext, values[0], Toast.LENGTH_SHORT).show();
-        }
+        super.onPostExecute(jsonData);
     }
 
+    public void progressON(Context mContext) {
+        if (((Activity) mContext).isFinishing()) {
+            return;
+        }
+
+        progressDialog.setCancelable(false);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        progressDialog.setContentView(R.layout.dialog_layout);
+        progressDialog.show();
+
+        final ImageView img_loading_frame = (ImageView) progressDialog.findViewById(R.id.iv_frame_loading);
+        final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
+        img_loading_frame.post(new Runnable() {
+            @Override
+            public void run() {
+                frameAnimation.start();
+            }
+        });
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
     private static void trustAllHosts() {
         // Create a trust manager that does not validate certificate chains
         TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {

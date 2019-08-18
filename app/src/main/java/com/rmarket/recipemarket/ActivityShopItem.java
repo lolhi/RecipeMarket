@@ -13,6 +13,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ActivityShopItem extends AppCompatActivity {
     Context mContext;
     TextView shopItemTitle1,shopItemTitle2,shopItemTitle3,shopItemCost,shopItemDeliveryCost,shopItemMinus,shopItemPlus,shopItemCountStatus,shopItemTotalCost;
@@ -141,13 +149,50 @@ public class ActivityShopItem extends AppCompatActivity {
 
         shopItemGobasket.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "GoBasket", Toast.LENGTH_SHORT).show();
+                UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Toast.makeText(mContext, "로그인 되지 않았습니다. 로그인 후 다시 시도해주십시오.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(MeV2Response result) {
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("id", result.getId());
+                            jsonObject.put("shop_name", buffer.getShopName());
+                            jsonObject.put("product_name", buffer.getProductName());
+                            jsonObject.put("product_cost", buffer.getProductCost());
+                            jsonObject.put("deliver_cost",buffer.getDeliverCost());
+                            jsonObject.put("quantity", Integer.parseInt(shopItemCountStatus.getText().toString()));
+                            jsonObject.put("total_amount", Integer.parseInt(shopItemTotalCost.getText().toString()));
+                            jsonObject.put("img", buffer.getProductImage());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        HttpConnection httpConn = new HttpConnection(ActivityShopItem.this, "AddBasket", jsonObject);
+                        httpConn.execute();
+                    }
+                });
             }
         });
 
         shopItemGoPayment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(mContext, "GoPasket", Toast.LENGTH_SHORT).show();
+                UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                    @Override
+                    public void onSessionClosed(ErrorResult errorResult) {
+                        Toast.makeText(mContext, "로그인 되지 않았습니다. 로그인 후 다시 시도해주십시오.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(MeV2Response result) {
+                        PaymentItem mPaymentItem = new PaymentItem(buffer.getProductName(), Integer.parseInt(shopItemTotalCost.getText().toString()), 2500, Integer.parseInt(shopItemCountStatus.getText().toString()));
+                        Intent intent = new Intent(mContext, ActivityPayment.class);
+                        intent.putExtra("paymentitem",mPaymentItem);
+                        startActivity(intent);
+                    }
+                });
             }
         });
 
