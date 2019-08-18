@@ -127,6 +127,7 @@
 
     <!--ranking_detial-->
     <LinearLayout
+        android:background="@color/colorWhite"
         android:id="@+id/detail_ranking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,6 +140,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:background="@color/colorWhite"
                 android:layout_width="0dp"
                 android:layout_height="22dp"
                 android:layout_gravity="center_vertical"
@@ -164,6 +166,7 @@
             </LinearLayout>
 
             <ImageView
+                android:background="@color/colorWhite"
                 android:id="@+id/ranking_detail_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
