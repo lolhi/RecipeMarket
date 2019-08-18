@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,12 +54,22 @@ public class ActivityBasketHttpConn extends AsyncTask<String, Integer, String> {
     private ArrayList<Basket_Item> BasketItemArrList = new ArrayList<>();
     private JSONArray jsonArr;
     private RecyclerView basket_recycle;
-    private LinearLayout basket_emty;
+    private RelativeLayout basket_emty;
     private HttpURLConnection conn;
     private JSONObject jsonObj;
     private final RequestManager glide;
+    private CardView cvBuy;
+    private BasketRecyclerAdapter adapter;
 
-    public ActivityBasketHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView basket_recycle, JSONObject jsonObject, RequestManager glide, LinearLayout basket_emty) {
+    public boolean[] getbCheckbox() {
+        return adapter.getbCheckbox();
+    }
+
+    public ArrayList<Basket_Item> getBasketItemArrList() {
+        return BasketItemArrList;
+    }
+
+    public ActivityBasketHttpConn(Context context, String sUrl, AppCompatDialog progressDialog, RecyclerView basket_recycle, JSONObject jsonObject, RequestManager glide, RelativeLayout basket_emty, CardView cvBuy) {
         this.context = context;
         this.sUrl = sUrl;
         this.progressDialog = progressDialog;
@@ -65,6 +77,7 @@ public class ActivityBasketHttpConn extends AsyncTask<String, Integer, String> {
         this.jsonObj = jsonObject;
         this.glide = glide;
         this.basket_emty = basket_emty;
+        this.cvBuy = cvBuy;
     }
 
     @Override
@@ -150,6 +163,7 @@ public class ActivityBasketHttpConn extends AsyncTask<String, Integer, String> {
         super.onProgressUpdate(values);
         basket_recycle.setVisibility(values[0]);
         basket_emty.setVisibility(values[1]);
+        cvBuy.setVisibility(values[0]);
     }
 
     @Override
@@ -176,9 +190,9 @@ public class ActivityBasketHttpConn extends AsyncTask<String, Integer, String> {
                         jsonObj.getInt("DELIVER_COST"),
                         jsonObj.getInt("PRODUCT_COST"),
                         jsonObj.getInt("QUANTITY"),
-                        jsonObj.getString("PRODUCT_NM")));
+                        jsonObj.getString("IMG")));
             }
-            BasketRecyclerAdapter adapter = new BasketRecyclerAdapter(context, BasketItemArrList, glide);
+            adapter = new BasketRecyclerAdapter(context, BasketItemArrList, glide, progressDialog, basket_recycle, basket_emty, cvBuy);
             LinearLayoutManager layoutManager = new LinearLayoutManager(context);
             basket_recycle.setHasFixedSize(true);
             basket_recycle.setLayoutManager(layoutManager);

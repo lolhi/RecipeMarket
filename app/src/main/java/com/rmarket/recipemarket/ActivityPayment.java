@@ -33,7 +33,7 @@ public class ActivityPayment extends AppCompatActivity {
     CardView payment_Btn;
     EditText editCustomerName,editCustomerEmail,editCustomerPhone,editReceiverName,editReceiverAddressBig,editReceiverAdressSmall,editReceiverComment,editReceiverPhone;
     LinearLayout paymentLinear;
-    TextView kakaoPay,mutongPay;
+    TextView kakaoPay,mutongPay, tvProductName, tvProductPrice, tvDeliveryCost, tvAmountOfPayment;
     SoftKeyboard softKeyboard;
     CheckBox payAgree;
     String payMethod = ""; // 페이방법 선택시 스트링으로 저장
@@ -61,6 +61,16 @@ public class ActivityPayment extends AppCompatActivity {
         mutongPay = findViewById(R.id.payment_Mutong); // 무동장입급 사용
 
         payAgree = findViewById(R.id.payment_Checkbox); //결제 동의 체크 박스
+
+        tvProductName = findViewById(R.id.tv_product_name);
+        tvProductPrice = findViewById(R.id.tv_productprice_num);
+        tvDeliveryCost = findViewById(R.id.tv_delivery_cost_num);
+        tvAmountOfPayment = findViewById(R.id.tv_amount_of_payment_num);
+
+        tvProductName.setText(mPaymentItem.getsProductName());
+        tvProductPrice.setText("" + mPaymentItem.getiProductPrice());
+        tvDeliveryCost.setText("" + mPaymentItem.getiDeliveryCost());
+        tvAmountOfPayment.setText("" + (mPaymentItem.getiProductPrice() + mPaymentItem.getiDeliveryCost()));
 
         kakaoPay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +140,7 @@ public class ActivityPayment extends AppCompatActivity {
                                            jsonObject.put("id", result.getId());
                                            jsonObject.put("product_name", mPaymentItem.getsProductName());
                                            jsonObject.put("quantity", mPaymentItem.getiQuantity());
-                                           jsonObject.put("total_amount", mPaymentItem.getiTotalAmount());
+                                           jsonObject.put("total_amount", mPaymentItem.getiProductPrice() + mPaymentItem.getiDeliveryCost());
                                        } catch (JSONException e) {
                                            e.printStackTrace();
                                        }

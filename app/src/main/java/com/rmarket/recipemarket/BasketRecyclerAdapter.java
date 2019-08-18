@@ -1,20 +1,37 @@
 package com.rmarket.recipemarket;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,16 +40,29 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
     private ArrayList<Basket_Item> BasketItem;
     private boolean[] bCheckbox;
     private final RequestManager glide;
+    private AppCompatDialog progressDialog;
+    private RecyclerView basket_recycle;
+    private RelativeLayout basket_emty;
+    private CardView cvBuy;
+    private ActivityBasketHttpConn httpConn;
 
     private final int HEADER = 0;
     private final int MIDDLE = 1;
     private final int BOTTOM = 2;
 
-    public BasketRecyclerAdapter(Context mContext, ArrayList<Basket_Item> BasketItem, RequestManager glide) {
+    public boolean[] getbCheckbox() {
+        return bCheckbox;
+    }
+
+    public BasketRecyclerAdapter(Context mContext, ArrayList<Basket_Item> BasketItem, RequestManager glide, AppCompatDialog progressDialog, RecyclerView basket_recycle, RelativeLayout basket_emty, CardView cvBuy) {
         this.mContext = mContext;
         this.BasketItem = BasketItem;
         bCheckbox = new boolean[BasketItem.size()];
         this.glide = glide;
+        this.progressDialog = progressDialog;
+        this.basket_recycle = basket_recycle;
+        this.basket_emty = basket_emty;
+        this.cvBuy = cvBuy;
         Arrays.fill(bCheckbox, false);
     }
 
@@ -70,7 +100,18 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             Basket_Item item = BasketItem.get(position - 1);
             ((Basket_Recycle_Middle) viewHolder).productTitle.setText(item.getProductName());
             //((Basket_Recycle_Middle) viewHolder).productImage.setImageResource(item.getProductImage());
-            glide.load(item.getProductImage()).into((((Basket_Recycle_Middle) viewHolder).productImage));
+            glide.load(item.getProductImage()).addListener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    progressOFF();
+                    return false;
+                }
+            }).into((((Basket_Recycle_Middle) viewHolder).productImage));
             ((Basket_Recycle_Middle) viewHolder).productCost.setText("" + item.getProductCost());
             ((Basket_Recycle_Middle) viewHolder).productCostUnder.setText("" + (item.getProductCost() * item.getProductCount()));
             ((Basket_Recycle_Middle) viewHolder).deliveryCost.setText("" + item.getDeliverCost());
@@ -81,7 +122,25 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             ((Basket_Recycle_Middle) viewHolder).productDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+                    UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                        @Override
+                        public void onSessionClosed(ErrorResult errorResult) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(MeV2Response result) {
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("id", result.getId());
+                                jsonObject.put("product_name",  BasketItem.get(position - 1).getProductName());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            httpConn = new ActivityBasketHttpConn(mContext,"DeleteBasket", new AppCompatDialog(mContext), basket_recycle, jsonObject, glide, basket_emty, cvBuy);
+                            httpConn.execute();
+                        }
+                    });
                 }
             });
 
@@ -161,6 +220,12 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter{
             tvProductPrice = itemView.findViewById(R.id.tv_productprice_num);
             tvDeliveryCost = itemView.findViewById(R.id.tv_delivery_cost_num);
             tvAmountOfPayment = itemView.findViewById(R.id.tv_amount_of_payment_num);
+        }
+    }
+
+    public void progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 }

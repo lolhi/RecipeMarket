@@ -4,24 +4,30 @@ import java.io.Serializable;
 
 public class PaymentItem implements Serializable {
     private String sProductName;
+    private int iProductPrice;
+    private int iDeliveryCost;
     private int iQuantity;
-    private int iTotalAmount;
 
-    public PaymentItem(String sProductName, int iQuantity, int iTotalAmount) {
+    public PaymentItem(String sProductName, int iProductPrice, int iDeliveryCost, int iQuantity) {
         this.sProductName = sProductName;
+        this.iProductPrice = iProductPrice;
+        this.iDeliveryCost = iDeliveryCost;
         this.iQuantity = iQuantity;
-        this.iTotalAmount = iTotalAmount;
     }
 
     public String getsProductName() {
         return sProductName;
     }
 
-    public int getiQuantity() {
-        return iQuantity;
+    public int getiProductPrice() {
+        return iProductPrice;
     }
 
-    public int getiTotalAmount() {
-        return iTotalAmount;
+    public int getiDeliveryCost() {
+        return iDeliveryCost;
+    }
+
+    public int getiQuantity() {
+        return iQuantity;
     }
 }
